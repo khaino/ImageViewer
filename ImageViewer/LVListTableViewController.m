@@ -9,14 +9,16 @@
 #import "LVListTableViewController.h"
 
 @interface LVListTableViewController ()
-
+@property (strong, nonatomic) NSURLSession *session;
+@property (strong, nonatomic) NSURLSessionDataTask *dataTask;
+@property (strong, nonatomic) NSMutableArray *podcasts;
 @end
 
 @implementation LVListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self performSearch];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -32,32 +34,41 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return self.podcasts ? 1 : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return self.podcasts ? self.podcasts.count : 0;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    // Fetch Podcast
+    NSDictionary *podcast = [self.podcasts objectAtIndex:indexPath.row];
     
     // Configure the cell...
+    NSURL *url = [NSURL URLWithString:[podcast objectForKey:@"artworkUrl60"]];
     
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    UIImage *tmpImage = [[UIImage alloc] initWithData:data];
+    
+    cell.imageView.image = tmpImage;
+
+    [cell.textLabel setText:[podcast objectForKey:@"collectionName"]];
+    [cell.detailTextLabel setText:[podcast objectForKey:@"artistName"]];
     return cell;
 }
-*/
 
-/*
+
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
-*/
 
 /*
 // Override to support editing the table view.
@@ -77,13 +88,13 @@
 }
 */
 
-/*
+
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    return NO;
 }
-*/
+
 
 /*
 #pragma mark - Navigation
@@ -94,5 +105,81 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+//
+// Configuration and initializing session
+//
+- (NSURLSession *)session {
+    if (!_session) {
+        // Initialize Session Configuration
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        
+        // Configure Session Configuration
+        [sessionConfiguration setHTTPAdditionalHeaders:@{ @"Accept" : @"application/json" }];
+        
+        // Initialize Session
+        _session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    }
+    
+    return _session;
+}
+
+//
+// Searching the data base on query
+//
+- (void)performSearch {
+    NSString *query = @"Pop culture";
+    
+    if (self.dataTask) {
+        [self.dataTask cancel];
+    }
+    
+    self.dataTask = [self.session dataTaskWithURL:[self urlForQuery:query] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            if (error.code != -999) {
+                NSLog(@"%@", error);
+            }
+            
+        } else {
+            NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSArray *results = [result objectForKey:@"results"];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (results) {
+                    [self processResults:results];
+                }
+            });
+        }
+    }];
+    
+    if (self.dataTask) {
+        [self.dataTask resume];
+    }
+}
+
+//
+// Desination for search
+//
+- (NSURL *)urlForQuery:(NSString *)query {
+    query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?media=podcast&entity=podcast&term=%@", query]];
+}
+
+//
+// Inserting search results to podcasts array
+//
+- (void)processResults:(NSArray *)results {
+    if (!self.podcasts) {
+        self.podcasts = [NSMutableArray array];
+    }
+    
+    // Update Data Source
+    [self.podcasts removeAllObjects];
+    [self.podcasts addObjectsFromArray:results];
+    
+    // Update Table View
+    [self.tableView reloadData];
+}
 
 @end
