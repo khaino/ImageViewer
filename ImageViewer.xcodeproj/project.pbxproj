@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2209BDE81CE2E13B001FBAC7 /* IVGrid.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */; };
+		2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */; };
+		2209BDEF1CE2F137001FBAC7 /* GridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2209BDED1CE2F137001FBAC7 /* GridCell.m */; };
+		2209BDF01CE2F137001FBAC7 /* GridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2209BDEE1CE2F137001FBAC7 /* GridCell.xib */; };
+		2209BDF31CE2FACE001FBAC7 /* IVImageDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */; };
 		223709BF1CE2CCF600A54881 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 223709BE1CE2CCF600A54881 /* main.m */; };
 		223709C21CE2CCF600A54881 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 223709C11CE2CCF600A54881 /* AppDelegate.m */; };
 		223709C51CE2CCF600A54881 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223709C41CE2CCF600A54881 /* ViewController.m */; };
@@ -16,6 +21,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVGrid.storyboard; sourceTree = "<group>"; };
+		2209BDE91CE2E16E001FBAC7 /* IVGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVGridViewController.h; sourceTree = "<group>"; };
+		2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVGridViewController.m; sourceTree = "<group>"; };
+		2209BDEC1CE2F137001FBAC7 /* GridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCell.h; sourceTree = "<group>"; };
+		2209BDED1CE2F137001FBAC7 /* GridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCell.m; sourceTree = "<group>"; };
+		2209BDEE1CE2F137001FBAC7 /* GridCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridCell.xib; sourceTree = "<group>"; };
+		2209BDF11CE2FACE001FBAC7 /* IVImageDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVImageDownload.h; sourceTree = "<group>"; };
+		2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVImageDownload.m; sourceTree = "<group>"; };
 		223709BA1CE2CCF600A54881 /* ImageViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		223709BE1CE2CCF600A54881 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		223709C01CE2CCF600A54881 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -67,6 +80,14 @@
 				223709CB1CE2CCF600A54881 /* LaunchScreen.storyboard */,
 				223709CE1CE2CCF600A54881 /* Info.plist */,
 				223709BD1CE2CCF600A54881 /* Supporting Files */,
+				2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */,
+				2209BDE91CE2E16E001FBAC7 /* IVGridViewController.h */,
+				2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */,
+				2209BDEC1CE2F137001FBAC7 /* GridCell.h */,
+				2209BDED1CE2F137001FBAC7 /* GridCell.m */,
+				2209BDEE1CE2F137001FBAC7 /* GridCell.xib */,
+				2209BDF11CE2FACE001FBAC7 /* IVImageDownload.h */,
+				2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */,
 			);
 			path = ImageViewer;
 			sourceTree = "<group>";
@@ -137,6 +158,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				223709CD1CE2CCF600A54881 /* LaunchScreen.storyboard in Resources */,
+				2209BDF01CE2F137001FBAC7 /* GridCell.xib in Resources */,
+				2209BDE81CE2E13B001FBAC7 /* IVGrid.storyboard in Resources */,
 				223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */,
 				223709C81CE2CCF600A54881 /* Main.storyboard in Resources */,
 			);
@@ -150,7 +173,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				223709C51CE2CCF600A54881 /* ViewController.m in Sources */,
+				2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */,
+				2209BDF31CE2FACE001FBAC7 /* IVImageDownload.m in Sources */,
 				223709C21CE2CCF600A54881 /* AppDelegate.m in Sources */,
+				2209BDEF1CE2F137001FBAC7 /* GridCell.m in Sources */,
 				223709BF1CE2CCF600A54881 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +326,7 @@
 				223709D31CE2CCF600A54881 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

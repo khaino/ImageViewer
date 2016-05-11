@@ -10,6 +10,10 @@
 
 @interface IVGridViewController ()
 
+@property (strong, nonatomic) NSURLSession *session;
+@property (strong, nonatomic) NSURLSessionDataTask *dataTask;
+@property (strong, nonatomic) NSMutableArray *imageList;
+
 @end
 
 @implementation IVGridViewController
@@ -20,7 +24,8 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
+     self.clearsSelectionOnViewWillAppear = NO;
+    
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
@@ -28,9 +33,72 @@ static NSString * const reuseIdentifier = @"Cell";
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma setter
+
+- (NSURLSession *)session {
+    if (!_session) {
+        // Initialize Session Configuration
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        
+        // Configure Session Configuration
+        [sessionConfiguration setHTTPAdditionalHeaders:@{ @"Accept" : @"application/json" }];
+        
+        // Initialize Session
+        _session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    }
+    
+    return _session;
+}
+
+#pragma private methods
+- (void)getQueryResult {
+    
+    if (self.dataTask) {
+        [self.dataTask cancel];
+    }
+    
+    self.dataTask = [self.session dataTaskWithURL:[self urlForQuery:@"Justin"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            if (error.code != -999) {
+                NSLog(@"%@", error);
+            }
+            
+        } else {
+            NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSArray *results = [result objectForKey:@"results"];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (results) {
+                    [self processResults:results];
+                }
+            });
+        }
+    }];
+    
+    if (self.dataTask) {
+        [self.dataTask resume];
+    }
+
+}
+
+- (NSURL *)urlForQuery:(NSString *)query {
+    query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?media=podcast&entity=podcast&term=%@", query]];
+    return url;
+}
+
+- (void)processResults:(NSArray *)results {
+    if (!self.imageList) {
+        self.imageList = [NSMutableArray array];
+    }
+    
+    // Update Data Source
+    [self.imageList removeAllObjects];
+    [self.imageList addObjectsFromArray:results];
+    
+    // Update Table View
+    //[self.tableView reloadData];
 }
 
 /*
@@ -46,20 +114,21 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
+
+    return 12;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
+    cell.backgroundColor = [UIColor blueColor];
     
     return cell;
 }

@@ -26,8 +26,16 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IVList" bundle:nil];
-    UINavigationController *nc = (UINavigationController *)[storyboard instantiateInitialViewController];
-    [self presentViewController:nc animated:YES completion:NULL];
+
+    [super viewDidAppear:animated];
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"IVGrid" bundle:nil];
+    
+    UINavigationController *navigationController = (UINavigationController *)[storyBoard instantiateInitialViewController];
+    
+    
+    
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
+
 @end
