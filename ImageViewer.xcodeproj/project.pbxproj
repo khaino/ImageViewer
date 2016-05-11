@@ -18,6 +18,11 @@
 		223709C81CE2CCF600A54881 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223709C61CE2CCF600A54881 /* Main.storyboard */; };
 		223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223709C91CE2CCF600A54881 /* Assets.xcassets */; };
 		223709CD1CE2CCF600A54881 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223709CB1CE2CCF600A54881 /* LaunchScreen.storyboard */; };
+		CE4939361CE33A730096AC44 /* PodcastDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4939351CE33A730096AC44 /* PodcastDAO.m */; };
+		CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4939381CE33A860096AC44 /* IVListTableViewController.m */; };
+		CE49393C1CE33A860096AC44 /* Podcast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE49393A1CE33A860096AC44 /* Podcast.m */; };
+		CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */; };
+		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +44,14 @@
 		223709C91CE2CCF600A54881 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		223709CC1CE2CCF600A54881 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		223709CE1CE2CCF600A54881 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE4939341CE33A730096AC44 /* PodcastDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PodcastDAO.h; path = ../../../ImageViewer/PodcastDAO.h; sourceTree = "<group>"; };
+		CE4939351CE33A730096AC44 /* PodcastDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PodcastDAO.m; path = ../../../ImageViewer/PodcastDAO.m; sourceTree = "<group>"; };
+		CE4939371CE33A860096AC44 /* IVListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVListTableViewController.h; sourceTree = "<group>"; };
+		CE4939381CE33A860096AC44 /* IVListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVListTableViewController.m; sourceTree = "<group>"; };
+		CE4939391CE33A860096AC44 /* Podcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Podcast.h; sourceTree = "<group>"; };
+		CE49393A1CE33A860096AC44 /* Podcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Podcast.m; sourceTree = "<group>"; };
+		CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CE49393F1CE33B4E0096AC44 /* IVList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVList.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +69,7 @@
 		223709B11CE2CCF600A54881 = {
 			isa = PBXGroup;
 			children = (
+				CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */,
 				223709BC1CE2CCF600A54881 /* ImageViewer */,
 				223709BB1CE2CCF600A54881 /* Products */,
 			);
@@ -77,6 +92,13 @@
 				223709C41CE2CCF600A54881 /* ViewController.m */,
 				223709C61CE2CCF600A54881 /* Main.storyboard */,
 				223709C91CE2CCF600A54881 /* Assets.xcassets */,
+				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
+				CE4939381CE33A860096AC44 /* IVListTableViewController.m */,
+				CE49393F1CE33B4E0096AC44 /* IVList.storyboard */,
+				CE4939391CE33A860096AC44 /* Podcast.h */,
+				CE49393A1CE33A860096AC44 /* Podcast.m */,
+				CE4939341CE33A730096AC44 /* PodcastDAO.h */,
+				CE4939351CE33A730096AC44 /* PodcastDAO.m */,
 				223709CB1CE2CCF600A54881 /* LaunchScreen.storyboard */,
 				223709CE1CE2CCF600A54881 /* Info.plist */,
 				223709BD1CE2CCF600A54881 /* Supporting Files */,
@@ -162,6 +184,7 @@
 				2209BDE81CE2E13B001FBAC7 /* IVGrid.storyboard in Resources */,
 				223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */,
 				223709C81CE2CCF600A54881 /* Main.storyboard in Resources */,
+				CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,9 +195,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */,
 				223709C51CE2CCF600A54881 /* ViewController.m in Sources */,
 				2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */,
+				CE49393C1CE33A860096AC44 /* Podcast.m in Sources */,
 				2209BDF31CE2FACE001FBAC7 /* IVImageDownload.m in Sources */,
+				CE4939361CE33A730096AC44 /* PodcastDAO.m in Sources */,
 				223709C21CE2CCF600A54881 /* AppDelegate.m in Sources */,
 				2209BDEF1CE2F137001FBAC7 /* GridCell.m in Sources */,
 				223709BF1CE2CCF600A54881 /* main.m in Sources */,

@@ -53,6 +53,7 @@
     NSURL *url = [NSURL URLWithString:[podcast objectForKey:@"artworkUrl60"]];
     NSData *data = [NSData dataWithContentsOfURL:url];
     UIImage *artwork = [[UIImage alloc] initWithData:data];
+    
     [cell.imageView setImage:artwork];
     [cell.textLabel setText:[podcast objectForKey:@"collectionName"]];
     [cell.detailTextLabel setText:[podcast objectForKey:@"artistName"]];
