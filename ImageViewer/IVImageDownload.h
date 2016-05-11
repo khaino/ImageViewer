@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface IVImageDownload : NSObject
-
+typedef void(^myCompletion)(NSURL*);
+- (void)downloadImage:(NSURL*)url trackId:(NSString*)trackId completionHandler:(myCompletion)completion;
 @end

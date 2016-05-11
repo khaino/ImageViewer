@@ -9,11 +9,9 @@
 #import "IVImageDownload.h"
 @interface IVImageDownload()<NSURLSessionDelegate, NSURLSessionDownloadDelegate>
 
-typedef NSURL*(^myCompletion)(void);
-
 @property (strong, nonatomic) NSURLSession *session;
-@property (strong, nonatomic) NSMutableDictionary *downLoadDic;
 @property (nonatomic) myCompletion completionHandler;
+@property (strong, nonatomic) NSString *trackId;
 
 @end
 
@@ -26,17 +24,9 @@ typedef NSURL*(^myCompletion)(void);
 
 - (void)downloadImage:(NSURL*)url trackId:(NSString*)trackId completionHandler:(myCompletion)completion{
     
+    self.trackId = trackId;
     self.completionHandler = completion;
     [[self.session downloadTaskWithURL:url] resume];
-    [self.downLoadDic setObject:trackId forKey:[url description]];
-    
-}
-
-- (NSMutableDictionary*)downLoadDic {
-    if (_downLoadDic) {
-        _downLoadDic = [NSMutableDictionary dictionary];
-    }
-    return _downLoadDic;
 }
 
 - (NSURLSession*)session {
@@ -58,22 +48,24 @@ typedef NSURL*(^myCompletion)(void);
     NSString *fileName = [url lastPathComponent];
     
 
-    NSURL *localDir = [self imageDirectoryForTrackId:[self.downLoadDic objectForKey:[url description]]];
-    NSURL *localUrl = [localDir URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
+    NSURL *localUrl = [self imageDirectoryForTrackId:self.trackId];
+    NSURL *fileUrl = [localUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
     
     NSFileManager *fm = [NSFileManager defaultManager];
     
     if ([fm fileExistsAtPath:[tempUrl path]]) {
         NSError *error = nil;
-        [fm moveItemAtURL:tempUrl toURL:localUrl error:&error];
+        [fm moveItemAtURL:tempUrl toURL:fileUrl error:&error];
         
         if (error) {
             NSLog(@"Unable to move temporary file to destination. %@, %@", error, error.userInfo);
+        } else {
+            if (self.completionHandler) {
+                self.completionHandler(fileUrl);
+            }
         }
     }
 }
-
-
 
 - (NSURL *)imageDirectoryForTrackId:(NSString *)trackId{
     
@@ -103,28 +95,6 @@ typedef NSURL*(^myCompletion)(void);
     [self moveFileWithURL:location downloadTask:downloadTask];
     
 }
-
-//- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
-////    // Calculate Progress
-////    double progress = (double)totalBytesWritten / (double)totalBytesExpectedToWrite;
-////    
-////    // Update Progress Buffer
-////    NSURL *URL = [[downloadTask originalRequest] URL];
-////    [self.progressBuffer setObject:@(progress) forKey:[URL absoluteString]];
-////    
-////    // Update Table View Cell
-////    MTEpisodeCell *cell = [self cellForForDownloadTask:downloadTask];
-////    
-////    dispatch_async(dispatch_get_main_queue(), ^{
-////        [cell setProgress:progress];
-////    });
-//}
-
-
-
-//- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//}
 
 
 @end
