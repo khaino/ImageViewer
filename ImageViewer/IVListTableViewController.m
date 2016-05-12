@@ -50,11 +50,14 @@
     NSDictionary *podcast = [self.podcasts objectAtIndex:indexPath.row];
     
     // Configure the cell...
-    NSURL *url = [NSURL URLWithString:[podcast objectForKey:@"artworkUrl60"]];
+    NSURL *url = [NSURL URLWithString:[podcast objectForKey:@"artworkUl60"]];
     NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *artwork = [[UIImage alloc] initWithData:data];
-    
-    [cell.imageView setImage:artwork];
+    UIImage *image = [[UIImage alloc] initWithData:data];
+    if (image==nil) {
+        image = [UIImage animatedImageNamed:@"spinner_" duration:1.0f];
+        [cell.imageView setImage:image];
+    }
+    [cell.imageView setImage:image];
     [cell.textLabel setText:[podcast objectForKey:@"collectionName"]];
     [cell.detailTextLabel setText:[podcast objectForKey:@"artistName"]];
     return cell;
