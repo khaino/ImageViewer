@@ -26,20 +26,52 @@
     
     self.trackId = trackId;
     self.completionHandler = completion;
-    [[self.session downloadTaskWithURL:url] resume];
+    
+//            NSURL *url = [[downloadTask originalRequest] URL];
+            NSString *fileName = [url lastPathComponent];
+            
+            
+            NSURL *localUrl = [self imageDirectoryForTrackId:self.trackId];
+            NSURL *fileUrl = [localUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
+            NSFileManager *fm = [NSFileManager defaultManager];
+            
+            if ([fm fileExistsAtPath:[fileUrl path]]) {
+                self.completionHandler(fileUrl);
+            } else {
+                 [[self.session downloadTaskWithURL:url] resume];
+            }
+    
+    
 }
 
 - (NSURLSession*)session {
     
-    static NSURLSession *session = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // Session Configuration
-        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        // Initialize Session
-        session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
-    });
-    return session;
+//    static NSURLSession *session = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        // Session Configuration
+//        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//        // Initialize Session
+//        session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
+//    });
+    
+
+        
+        if(!_session) {
+            NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            _session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
+        }
+        
+        return _session;
+   
+}
+
+- (BOOL)hasDownloaded:(NSString*)trackId {
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSURL *url = [self imageDirectoryForTrackId:trackId];
+    
+    return [fm fileExistsAtPath:[url path]];
 }
 
 - (void)moveFileWithURL:(NSURL *)tempUrl downloadTask:(NSURLSessionDownloadTask *)downloadTask {
@@ -55,6 +87,12 @@
     
     if ([fm fileExistsAtPath:[tempUrl path]]) {
         NSError *error = nil;
+        
+        if ([fm fileExistsAtPath:[fileUrl path]]) {
+            NSLog(@"file already exist : %@", fileUrl);
+        } else {
+        
+        }
         [fm moveItemAtURL:tempUrl toURL:fileUrl error:&error];
         
         if (error) {
