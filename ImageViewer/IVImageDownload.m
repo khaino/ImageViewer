@@ -38,14 +38,17 @@
 
 #pragma public method implementation
 
-- (void)downloadImage:(NSURL*)url trackId:(NSString*)trackId completionHandler:(myCompletion)completion{
+- (void)downloadImage:(NSURL*)url
+              trackId:(NSString*)trackId
+            imageType:(ImageType)imageType
+    completionHandler:(myCompletion)completion {
     
     self.trackId = trackId;
     self.completionHandler = completion;
     
     IVCacheManager *cacheManager = [IVCacheManager defaultManager];
-    if ([cacheManager isImageCached:trackId imageType:k60]) {
-        NSURL *imgUrl = [cacheManager imageDirForTrackId:trackId imageType:k60];
+    if ([cacheManager isImageCached:trackId imageType:imageType]) {
+        NSURL *imgUrl = [cacheManager imageDirForTrackId:trackId imageType:imageType];
         self.completionHandler(imgUrl);
     } else {
         NSLog(@"Download image no : %@",trackId);

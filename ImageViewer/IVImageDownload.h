@@ -18,9 +18,10 @@
  * @brief Download image at give url
  * @param url url for image
  * @param trackId Podcast image track id.
+ * @param imageType image type.
  * @param completionHandler completion handler.
  * @return none.
  */
-- (void)downloadImage:(NSURL*)url trackId:(NSString*)trackId completionHandler:(myCompletion)completion;
+- (void)downloadImage:(NSURL*)url trackId:(NSString*)trackId imageType:(ImageType)imageType completionHandler:(myCompletion)completion;
 
 @end
