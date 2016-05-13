@@ -7,8 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IVCacheManager.h"
 
+/**
+ *This class is to manage image download
+ */
 @interface IVImageDownload : NSObject
-typedef void(^myCompletion)(NSURL*);
+
+/*
+ * @brief Download image at give url
+ * @param url url for image
+ * @param trackId Podcast image track id.
+ * @param completionHandler completion handler.
+ * @return none.
+ */
 - (void)downloadImage:(NSURL*)url trackId:(NSString*)trackId completionHandler:(myCompletion)completion;
+
 @end

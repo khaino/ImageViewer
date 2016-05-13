@@ -7,11 +7,14 @@
 //
 
 #import "IVImageDownload.h"
-#import "IVCacheManager.h"
+
 @interface IVImageDownload()<NSURLSessionDelegate, NSURLSessionDownloadDelegate>
 
+/** session for download. */
 @property (strong, nonatomic) NSURLSession *session;
+/** completion handler for callback. */
 @property (nonatomic) myCompletion completionHandler;
+/** track number to download. */
 @property (strong, nonatomic) NSString *trackId;
 
 @end
@@ -20,6 +23,10 @@
 
 #pragma setter
 
+/*
+ * @brief Setter for session property.
+ * @return NSURLSession.
+ */
 - (NSURLSession*)session {
     
     if(!_session) {
@@ -29,7 +36,7 @@
     return _session;
 }
 
-#pragma private methods
+#pragma public method implementation
 
 - (void)downloadImage:(NSURL*)url trackId:(NSString*)trackId completionHandler:(myCompletion)completion{
     
@@ -46,6 +53,14 @@
     }
 }
 
+#pragma private methods
+
+/*
+ * @brief Get image dir for given track id.
+ * @param trackId Podcast image track id.
+ * @param completionHandler completion handler.
+ * @return NSURL url for image dir.
+ */
 - (NSURL *)imageDirectoryForTrackId:(NSString *)trackId{
     
     NSURL *documents = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
@@ -68,7 +83,13 @@
 
 #pragma delegate methods
 
-
+/*
+ * @brief Callback when download completed.
+ * @param session nsurl sesson.
+ * @param downloadTask download task.
+ * @param location location for temp file.
+ * @return none.
+ */
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
 
     [[IVCacheManager defaultManager] cacheImageWithTractId:self.trackId imageType:k60 tempLoc:location completion:^(NSURL *url) {

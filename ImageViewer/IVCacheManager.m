@@ -65,11 +65,26 @@
     return ret;
 }
 
+- (NSURL*)imageDirForTrackId:(NSString*)trackId
+       imageType:(ImageType)imageType {
+    
+    // Get image url
+    NSURL *trackUrl = [[self cacheBaseDir] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", trackId]];
+    NSURL *imageUrl = [trackUrl URLByAppendingPathComponent:[self imageNameForType:imageType]];
+    
+    return imageUrl;
+}
+
+/*
+ * @brief Create dir in cache for given track.
+ * @param trackId Podcast image track id.
+ * @return Return url of newly created dir for given track id.
+ */
 - (NSURL *)createDirForTrackId:(NSString *)trackId{
     
     NSURL *url = [[self cacheBaseDir] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", trackId]];
     
-    NSFileManager *fm = [NSFileManager defaultManager];    
+    NSFileManager *fm = [NSFileManager defaultManager];
     if (![fm fileExistsAtPath:[url path]]) {
         NSError *error = nil;
         [fm createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:&error];
@@ -81,16 +96,11 @@
     return url;
 }
 
-- (NSURL*)imageDirForTrackId:(NSString*)trackId
-       imageType:(ImageType)imageType {
-    
-    // Get image url
-    NSURL *trackUrl = [[self cacheBaseDir] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", trackId]];
-    NSURL *imageUrl = [trackUrl URLByAppendingPathComponent:[self imageNameForType:imageType]];
-    
-    return imageUrl;
-}
-
+/*
+ * @brief Get image name for given image type.
+ * @param imageType image type.
+ * @return Return image name.
+ */
 - (NSString*)imageNameForType:(ImageType)imageType {
     
     // Get image name depends on image type
@@ -101,6 +111,10 @@
     }
 }
 
+/*
+ * @brief Get base dir for image cache.
+ * @return url for base dir.
+ */
 - (NSURL*)cacheBaseDir {
     
     // Get cache base directory
