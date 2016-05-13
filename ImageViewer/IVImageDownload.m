@@ -7,6 +7,7 @@
 //
 
 #import "IVImageDownload.h"
+#import "IVCacheManager.h"
 @interface IVImageDownload()<NSURLSessionDelegate, NSURLSessionDownloadDelegate>
 
 @property (strong, nonatomic) NSURLSession *session;
@@ -17,8 +18,16 @@
 
 @implementation IVImageDownload
 
+#pragma setter
 
-
+- (NSURLSession*)session {
+    
+    if(!_session) {
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        _session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
+    }
+    return _session;
+}
 
 #pragma private methods
 
@@ -27,81 +36,13 @@
     self.trackId = trackId;
     self.completionHandler = completion;
     
-//            NSURL *url = [[downloadTask originalRequest] URL];
-            NSString *fileName = [url lastPathComponent];
-            
-            
-            NSURL *localUrl = [self imageDirectoryForTrackId:self.trackId];
-            NSURL *fileUrl = [localUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
-            NSFileManager *fm = [NSFileManager defaultManager];
-            
-            if ([fm fileExistsAtPath:[fileUrl path]]) {
-                self.completionHandler(fileUrl);
-            } else {
-                 [[self.session downloadTaskWithURL:url] resume];
-            }
-    
-    
-}
-
-- (NSURLSession*)session {
-    
-//    static NSURLSession *session = nil;
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        // Session Configuration
-//        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//        // Initialize Session
-//        session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
-//    });
-    
-
-        
-        if(!_session) {
-            NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-            _session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
-        }
-        
-        return _session;
-   
-}
-
-- (BOOL)hasDownloaded:(NSString*)trackId {
-    
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSURL *url = [self imageDirectoryForTrackId:trackId];
-    
-    return [fm fileExistsAtPath:[url path]];
-}
-
-- (void)moveFileWithURL:(NSURL *)tempUrl downloadTask:(NSURLSessionDownloadTask *)downloadTask {
-
-    NSURL *url = [[downloadTask originalRequest] URL];
-    NSString *fileName = [url lastPathComponent];
-    
-
-    NSURL *localUrl = [self imageDirectoryForTrackId:self.trackId];
-    NSURL *fileUrl = [localUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
-    
-    NSFileManager *fm = [NSFileManager defaultManager];
-    
-    if ([fm fileExistsAtPath:[tempUrl path]]) {
-        NSError *error = nil;
-        
-        if ([fm fileExistsAtPath:[fileUrl path]]) {
-            NSLog(@"file already exist : %@", fileUrl);
-        } else {
-        
-        }
-        [fm moveItemAtURL:tempUrl toURL:fileUrl error:&error];
-        
-        if (error) {
-            NSLog(@"Unable to move temporary file to destination. %@, %@", error, error.userInfo);
-        } else {
-            if (self.completionHandler) {
-                self.completionHandler(fileUrl);
-            }
-        }
+    IVCacheManager *cacheManager = [IVCacheManager defaultManager];
+    if ([cacheManager isImageCached:trackId imageType:k60]) {
+        NSURL *imgUrl = [cacheManager imageDirForTrackId:trackId imageType:k60];
+        self.completionHandler(imgUrl);
+    } else {
+        NSLog(@"Download image no : %@",trackId);
+        [[self.session downloadTaskWithURL:url] resume];
     }
 }
 
@@ -129,9 +70,11 @@
 
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
-    // Write File to Disk
-    [self moveFileWithURL:location downloadTask:downloadTask];
-    
+
+    [[IVCacheManager defaultManager] cacheImageWithTractId:self.trackId imageType:k60 tempLoc:location completion:^(NSURL *url) {
+        self.completionHandler(url);
+    }];
+    [self.session invalidateAndCancel];
 }
 
 
