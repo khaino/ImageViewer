@@ -8,23 +8,41 @@
 
 #import "IVListTableViewController.h"
 #import "Podcast.h"
+#import "PodcastDBManager.h"
+#import "DownloadJSON.h"
+#import "IVLargeViewController.h"
+#import "RootViewController.h"
 
 @interface IVListTableViewController ()
 @property (strong, nonatomic) NSURLSession *session;
 @property (strong, nonatomic) NSURLSessionDataTask *dataTask;
 @property (strong, nonatomic) NSMutableArray *podcasts;
+@property (strong, nonatomic) UIImage *thumbnail;
 @end
 
 @implementation IVListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self performSearch];
+    self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
+    DownloadJSON *downloader = [[DownloadJSON alloc]init];
+    [downloader performSearch:@"pop culture"];
+    [self.tableView reloadData];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // Create page view controller
+    
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+-(void) updateTable {
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,22 +62,28 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
-    // Fetch Podcast
-    NSDictionary *podcast = [self.podcasts objectAtIndex:indexPath.row];
-    
-    // Configure the cell...
-    NSURL *url = [NSURL URLWithString:[podcast objectForKey:@"artworkUl60"]];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [[UIImage alloc] initWithData:data];
-    if (image==nil) {
-        image = [UIImage animatedImageNamed:@"spinner_" duration:1.0f];
-        [cell.imageView setImage:image];
-    }
-    [cell.imageView setImage:image];
-    [cell.textLabel setText:[podcast objectForKey:@"collectionName"]];
-    [cell.detailTextLabel setText:[podcast objectForKey:@"artistName"]];
+    Podcast *podcast = [self.podcasts objectAtIndex:(indexPath.row)];
+    self.thumbnail = [UIImage animatedImageNamed:@"spinner_" duration:1.0f];
+    [cell.imageView setImage:self.thumbnail];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL *imageURL = [NSURL URLWithString:podcast.smallImage];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        
+        // Completion handler
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            // If self.image is atomic (not declared with nonatomic)
+            // you could have set it directly above
+            self.thumbnail = [UIImage imageWithData:imageData];
+            
+            // This needs to be set here now that the image is downloaded and you are back on the main thread
+            cell.imageView.image = self.thumbnail;
+        });
+    });
+    cell.textLabel.text = podcast.collectionName;
+    cell.detailTextLabel.text = podcast.artistName;
     return cell;
 }
 
@@ -97,90 +121,40 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-//
-// Configuration and initializing session
-//
-- (NSURLSession *)session {
-    if (!_session) {
-        // Initialize Session Configuration
-        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        
-        // Configure Session Configuration
-        [sessionConfiguration setHTTPAdditionalHeaders:@{ @"Accept" : @"application/json" }];
-        
-        // Initialize Session
-        _session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    
+    // Get current table row
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    
+    // Get current object from table row
+    Podcast *touchedPodcast = [self.podcasts objectAtIndex:indexPath.row];
+    
+    // Add current image to first item of array
+    NSMutableArray * imageList = [[NSMutableArray alloc]init];
+    [imageList addObject:touchedPodcast.largeImage];
+    
+    // Add next images from array to end
+    for (int i=indexPath.row+1; i<self.podcasts.count; i++) {
+        [imageList addObject:[[self.podcasts objectAtIndex:i]largeImage]];
     }
     
-    return _session;
-}
-
-//
-// Searching the data with keyword
-//
-- (void)performSearch {
-    NSString *keyword = @"Pop culture";
-    
-    if (self.dataTask) {
-        [self.dataTask cancel];
-    }
-    
-    self.dataTask = [self.session dataTaskWithURL:[self urlForQuery:keyword] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error) {
-            if (error.code != -999) {
-                NSLog(@"%@", error);
-            }
-            
-        } else {
-            NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            NSArray *results = [result objectForKey:@"results"];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (results) {
-                    [self processResults:results];
-                }
-            });
+    // Add first image to current indexpath
+    if (indexPath.row!=0) {
+        for (int i=0; i<indexPath.row; i++) {
+            [imageList addObject:[[self.podcasts objectAtIndex:i]largeImage]];
         }
-    }];
-    
-    if (self.dataTask) {
-        [self.dataTask resume];
-    }
-}
-
-//
-// Desination for search
-//
-- (NSURL *)urlForQuery:(NSString *)query {
-    query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?media=podcast&entity=podcast&term=%@", query]];
-}
-
-//
-// Inserting search results to podcasts array
-//
-- (void)processResults:(NSArray *)results {
-    if (!self.podcasts) {
-        self.podcasts = [NSMutableArray array];
     }
     
-    // Update Data Source
-    [self.podcasts removeAllObjects];
-    [self.podcasts addObjectsFromArray:results];
-    
-    // Update Table View
-    [self.tableView reloadData];
+
+    // Get the new view controller using [segue destinationViewController].
+    RootViewController *rvc = [segue destinationViewController];
+    // Pass the selected object to the new view controller.
+    rvc.pageImages = imageList;
 }
+
 
 @end
