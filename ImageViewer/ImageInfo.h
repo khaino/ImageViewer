@@ -10,4 +10,17 @@
 
 @interface ImageInfo : NSObject
 
+@property(strong, nonatomic)NSString *imageId;
+@property(nonatomic)BOOL isThumpnail;
+@property(nonatomic)BOOL downloadCompleted;
+@property(strong, nonatomic)NSURL *locUrl;
+@property(strong, nonatomic)NSString *lastAccess;
+
+
+- (instancetype)initWithTrackId:(NSString*)imageId
+                    isThumpnail:(BOOL)isThumpnail
+              downloadCompleted:(BOOL)completed
+                         locUrl:(NSURL*)locUrl
+                      lassAcess:(NSString*) lastAcess;
+
 @end

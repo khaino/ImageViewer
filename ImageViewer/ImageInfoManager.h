@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ImageInfo.h"
 
 @interface ImageInfoManager : NSObject
+
++ (instancetype)defaultManager;
+- (NSArray*)getAllImageInfo;
+- (NSArray*)getImageInfo:(NSString*)imageId;
+- (BOOL)insertImageInfo:(ImageInfo*)imageInfo;
+- (BOOL)updateImageInfo:(ImageInfo*)imageInfo;
 
 @end

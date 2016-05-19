@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ImageInfo.h"
 
 @interface ImageDatabase : NSObject
+
++ (BOOL) createDB;
++ (NSMutableDictionary*)getAllPersonInfo;
++ (BOOL)insertOrUpdateImageInfo:(ImageInfo*) imageInfo;
 
 @end
