@@ -29,7 +29,7 @@
 
     [super viewDidAppear:animated];
     
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"IVGrid" bundle:nil];
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"IVList" bundle:nil];
     
     UINavigationController *navigationController = (UINavigationController *)[storyBoard instantiateInitialViewController];
     

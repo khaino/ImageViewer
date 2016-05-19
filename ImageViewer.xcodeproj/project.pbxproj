@@ -18,7 +18,17 @@
 		223709C81CE2CCF600A54881 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223709C61CE2CCF600A54881 /* Main.storyboard */; };
 		223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223709C91CE2CCF600A54881 /* Assets.xcassets */; };
 		223709CD1CE2CCF600A54881 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223709CB1CE2CCF600A54881 /* LaunchScreen.storyboard */; };
-		CE4939361CE33A730096AC44 /* PodcastDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4939351CE33A730096AC44 /* PodcastDAO.m */; };
+		22C1C0061CED81EE00288149 /* DownloadJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF11CED81EE00288149 /* DownloadJSON.m */; };
+		22C1C0071CED81EE00288149 /* ImageDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF31CED81EE00288149 /* ImageDatabase.m */; };
+		22C1C0081CED81EE00288149 /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF51CED81EE00288149 /* ImageInfo.m */; };
+		22C1C0091CED81EE00288149 /* ImageInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF71CED81EE00288149 /* ImageInfoManager.m */; };
+		22C1C00A1CED81EE00288149 /* IVCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF91CED81EE00288149 /* IVCacheManager.m */; };
+		22C1C00B1CED81EE00288149 /* IVPageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */; };
+		22C1C00C1CED81EE00288149 /* IVPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFFD1CED81EE00288149 /* IVPageViewController.m */; };
+		22C1C00D1CED81EE00288149 /* LVListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFFF1CED81EE00288149 /* LVListTableViewController.m */; };
+		22C1C00E1CED81EE00288149 /* PodcastDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0011CED81EE00288149 /* PodcastDAO.m */; };
+		22C1C00F1CED81EE00288149 /* PodcastDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0031CED81EE00288149 /* PodcastDBManager.m */; };
+		22C1C0101CED81EE00288149 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0051CED81EE00288149 /* RootViewController.m */; };
 		CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4939381CE33A860096AC44 /* IVListTableViewController.m */; };
 		CE49393C1CE33A860096AC44 /* Podcast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE49393A1CE33A860096AC44 /* Podcast.m */; };
 		CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */; };
@@ -44,8 +54,28 @@
 		223709C91CE2CCF600A54881 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		223709CC1CE2CCF600A54881 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		223709CE1CE2CCF600A54881 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE4939341CE33A730096AC44 /* PodcastDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PodcastDAO.h; path = ../../../ImageViewer/PodcastDAO.h; sourceTree = "<group>"; };
-		CE4939351CE33A730096AC44 /* PodcastDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PodcastDAO.m; path = ../../../ImageViewer/PodcastDAO.m; sourceTree = "<group>"; };
+		22C1BFF01CED81EE00288149 /* DownloadJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadJSON.h; sourceTree = "<group>"; };
+		22C1BFF11CED81EE00288149 /* DownloadJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadJSON.m; sourceTree = "<group>"; };
+		22C1BFF21CED81EE00288149 /* ImageDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDatabase.h; sourceTree = "<group>"; };
+		22C1BFF31CED81EE00288149 /* ImageDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDatabase.m; sourceTree = "<group>"; };
+		22C1BFF41CED81EE00288149 /* ImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInfo.h; sourceTree = "<group>"; };
+		22C1BFF51CED81EE00288149 /* ImageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInfo.m; sourceTree = "<group>"; };
+		22C1BFF61CED81EE00288149 /* ImageInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInfoManager.h; sourceTree = "<group>"; };
+		22C1BFF71CED81EE00288149 /* ImageInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInfoManager.m; sourceTree = "<group>"; };
+		22C1BFF81CED81EE00288149 /* IVCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCacheManager.h; sourceTree = "<group>"; };
+		22C1BFF91CED81EE00288149 /* IVCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCacheManager.m; sourceTree = "<group>"; };
+		22C1BFFA1CED81EE00288149 /* IVPageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVPageContentViewController.h; sourceTree = "<group>"; };
+		22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVPageContentViewController.m; sourceTree = "<group>"; };
+		22C1BFFC1CED81EE00288149 /* IVPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVPageViewController.h; sourceTree = "<group>"; };
+		22C1BFFD1CED81EE00288149 /* IVPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVPageViewController.m; sourceTree = "<group>"; };
+		22C1BFFE1CED81EE00288149 /* LVListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVListTableViewController.h; sourceTree = "<group>"; };
+		22C1BFFF1CED81EE00288149 /* LVListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVListTableViewController.m; sourceTree = "<group>"; };
+		22C1C0001CED81EE00288149 /* PodcastDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastDAO.h; sourceTree = "<group>"; };
+		22C1C0011CED81EE00288149 /* PodcastDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastDAO.m; sourceTree = "<group>"; };
+		22C1C0021CED81EE00288149 /* PodcastDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastDBManager.h; sourceTree = "<group>"; };
+		22C1C0031CED81EE00288149 /* PodcastDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastDBManager.m; sourceTree = "<group>"; };
+		22C1C0041CED81EE00288149 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		22C1C0051CED81EE00288149 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		CE4939371CE33A860096AC44 /* IVListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVListTableViewController.h; sourceTree = "<group>"; };
 		CE4939381CE33A860096AC44 /* IVListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVListTableViewController.m; sourceTree = "<group>"; };
 		CE4939391CE33A860096AC44 /* Podcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Podcast.h; sourceTree = "<group>"; };
@@ -86,30 +116,16 @@
 		223709BC1CE2CCF600A54881 /* ImageViewer */ = {
 			isa = PBXGroup;
 			children = (
-				223709C01CE2CCF600A54881 /* AppDelegate.h */,
-				223709C11CE2CCF600A54881 /* AppDelegate.m */,
-				223709C31CE2CCF600A54881 /* ViewController.h */,
-				223709C41CE2CCF600A54881 /* ViewController.m */,
-				223709C61CE2CCF600A54881 /* Main.storyboard */,
+				22C1C0111CED843F00288149 /* ImageDatabase */,
+				22C1C0161CED853600288149 /* Utility */,
+				22C1C0131CED84A300288149 /* List */,
+				22C1C0121CED845700288149 /* PodcastDatabase */,
+				22C1C0151CED851500288149 /* App */,
 				223709C91CE2CCF600A54881 /* Assets.xcassets */,
-				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
-				CE4939381CE33A860096AC44 /* IVListTableViewController.m */,
-				CE49393F1CE33B4E0096AC44 /* IVList.storyboard */,
-				CE4939391CE33A860096AC44 /* Podcast.h */,
-				CE49393A1CE33A860096AC44 /* Podcast.m */,
-				CE4939341CE33A730096AC44 /* PodcastDAO.h */,
-				CE4939351CE33A730096AC44 /* PodcastDAO.m */,
 				223709CB1CE2CCF600A54881 /* LaunchScreen.storyboard */,
 				223709CE1CE2CCF600A54881 /* Info.plist */,
 				223709BD1CE2CCF600A54881 /* Supporting Files */,
-				2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */,
-				2209BDE91CE2E16E001FBAC7 /* IVGridViewController.h */,
-				2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */,
-				2209BDEC1CE2F137001FBAC7 /* GridCell.h */,
-				2209BDED1CE2F137001FBAC7 /* GridCell.m */,
-				2209BDEE1CE2F137001FBAC7 /* GridCell.xib */,
-				2209BDF11CE2FACE001FBAC7 /* IVImageDownload.h */,
-				2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */,
+				22C1C0141CED84ED00288149 /* Grid */,
 			);
 			path = ImageViewer;
 			sourceTree = "<group>";
@@ -120,6 +136,88 @@
 				223709BE1CE2CCF600A54881 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		22C1C0111CED843F00288149 /* ImageDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				22C1BFF21CED81EE00288149 /* ImageDatabase.h */,
+				22C1BFF31CED81EE00288149 /* ImageDatabase.m */,
+				22C1BFF41CED81EE00288149 /* ImageInfo.h */,
+				22C1BFF51CED81EE00288149 /* ImageInfo.m */,
+				22C1BFF61CED81EE00288149 /* ImageInfoManager.h */,
+				22C1BFF71CED81EE00288149 /* ImageInfoManager.m */,
+			);
+			name = ImageDatabase;
+			sourceTree = "<group>";
+		};
+		22C1C0121CED845700288149 /* PodcastDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				22C1C0001CED81EE00288149 /* PodcastDAO.h */,
+				22C1C0011CED81EE00288149 /* PodcastDAO.m */,
+				22C1C0021CED81EE00288149 /* PodcastDBManager.h */,
+				22C1C0031CED81EE00288149 /* PodcastDBManager.m */,
+				CE4939391CE33A860096AC44 /* Podcast.h */,
+				CE49393A1CE33A860096AC44 /* Podcast.m */,
+			);
+			name = PodcastDatabase;
+			sourceTree = "<group>";
+		};
+		22C1C0131CED84A300288149 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				22C1BFFA1CED81EE00288149 /* IVPageContentViewController.h */,
+				CE4939381CE33A860096AC44 /* IVListTableViewController.m */,
+				22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */,
+				22C1BFF01CED81EE00288149 /* DownloadJSON.h */,
+				22C1BFF11CED81EE00288149 /* DownloadJSON.m */,
+				22C1BFFC1CED81EE00288149 /* IVPageViewController.h */,
+				22C1BFFD1CED81EE00288149 /* IVPageViewController.m */,
+				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
+				CE49393F1CE33B4E0096AC44 /* IVList.storyboard */,
+				22C1BFFE1CED81EE00288149 /* LVListTableViewController.h */,
+				22C1BFFF1CED81EE00288149 /* LVListTableViewController.m */,
+				22C1C0041CED81EE00288149 /* RootViewController.h */,
+				22C1C0051CED81EE00288149 /* RootViewController.m */,
+			);
+			name = List;
+			sourceTree = "<group>";
+		};
+		22C1C0141CED84ED00288149 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */,
+				2209BDE91CE2E16E001FBAC7 /* IVGridViewController.h */,
+				2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */,
+				2209BDEC1CE2F137001FBAC7 /* GridCell.h */,
+				2209BDED1CE2F137001FBAC7 /* GridCell.m */,
+				2209BDEE1CE2F137001FBAC7 /* GridCell.xib */,
+			);
+			name = Grid;
+			sourceTree = "<group>";
+		};
+		22C1C0151CED851500288149 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				223709C61CE2CCF600A54881 /* Main.storyboard */,
+				223709C01CE2CCF600A54881 /* AppDelegate.h */,
+				223709C11CE2CCF600A54881 /* AppDelegate.m */,
+				223709C31CE2CCF600A54881 /* ViewController.h */,
+				223709C41CE2CCF600A54881 /* ViewController.m */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		22C1C0161CED853600288149 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				22C1BFF81CED81EE00288149 /* IVCacheManager.h */,
+				22C1BFF91CED81EE00288149 /* IVCacheManager.m */,
+				2209BDF11CE2FACE001FBAC7 /* IVImageDownload.h */,
+				2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,14 +293,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C1C00C1CED81EE00288149 /* IVPageViewController.m in Sources */,
+				22C1C0101CED81EE00288149 /* RootViewController.m in Sources */,
 				CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */,
 				223709C51CE2CCF600A54881 /* ViewController.m in Sources */,
 				2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */,
+				22C1C00F1CED81EE00288149 /* PodcastDBManager.m in Sources */,
 				CE49393C1CE33A860096AC44 /* Podcast.m in Sources */,
+				22C1C0071CED81EE00288149 /* ImageDatabase.m in Sources */,
 				2209BDF31CE2FACE001FBAC7 /* IVImageDownload.m in Sources */,
-				CE4939361CE33A730096AC44 /* PodcastDAO.m in Sources */,
+				22C1C00E1CED81EE00288149 /* PodcastDAO.m in Sources */,
+				22C1C00B1CED81EE00288149 /* IVPageContentViewController.m in Sources */,
+				22C1C0081CED81EE00288149 /* ImageInfo.m in Sources */,
+				22C1C0091CED81EE00288149 /* ImageInfoManager.m in Sources */,
+				22C1C00A1CED81EE00288149 /* IVCacheManager.m in Sources */,
+				22C1C00D1CED81EE00288149 /* LVListTableViewController.m in Sources */,
 				223709C21CE2CCF600A54881 /* AppDelegate.m in Sources */,
 				2209BDEF1CE2F137001FBAC7 /* GridCell.m in Sources */,
+				22C1C0061CED81EE00288149 /* DownloadJSON.m in Sources */,
 				223709BF1CE2CCF600A54881 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

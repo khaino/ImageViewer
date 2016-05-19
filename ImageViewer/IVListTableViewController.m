@@ -10,7 +10,6 @@
 #import "Podcast.h"
 #import "PodcastDBManager.h"
 #import "DownloadJSON.h"
-#import "IVLargeViewController.h"
 #import "RootViewController.h"
 
 @interface IVListTableViewController ()

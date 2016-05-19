@@ -10,7 +10,7 @@
 #import "sqlite3.h"
 
 
-NSString *dbname = @"image.db";
+NSString *dbimagename = @"image.db";
 
 @implementation ImageDatabase
 
@@ -19,7 +19,7 @@ NSString *dbname = @"image.db";
     
     BOOL ret = NO;
     sqlite3 *db;
-    NSString *dbPath = [self getDBPath:dbname];
+    NSString *dbPath = [self getDBPath:dbimagename];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath]) {
         
@@ -55,7 +55,7 @@ NSString *dbname = @"image.db";
     sqlite3 *db;
     NSMutableDictionary *allImageInfo = [NSMutableDictionary dictionary];
     
-    if (sqlite3_open([[self getDBPath:dbname] UTF8String], &db) == SQLITE_OK) {
+    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
         
         NSString *sql = @"SELECT image_id, is_thumpnail, download_completed, loc_url, last_access image ORDER BY id asc";
         
@@ -89,7 +89,7 @@ NSString *dbname = @"image.db";
     
     BOOL ret = NO;
     sqlite3 *db;
-    if (sqlite3_open([[self getDBPath:dbname] UTF8String], &db) == SQLITE_OK) {
+    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
         
         // Create sql statement for insert
         NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO image (image_id, is_thumpnail, download_completed, loc_url, last_access) VALUES ('%@', '%d', '%d', '%@', '%@')", imageInfo.imageId, imageInfo.isThumpnail, imageInfo.downloadCompleted, imageInfo.locUrl.path, imageInfo.lastAccess];

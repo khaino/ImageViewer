@@ -8,14 +8,14 @@
 
 #import "PodcastDAO.h"
 
-NSString *dbname = @"podcast.db";
+NSString *dbPodcast = @"podcast.db";
 
 @implementation PodcastDAO
 
 + (BOOL) createDB {
     BOOL ret = NO;
     sqlite3 *db;
-    NSString *dbPath = [PodcastDAO getDBPath:dbname];
+    NSString *dbPath = [PodcastDAO getDBPath:dbPodcast];
     if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath]) {
         if (sqlite3_open([dbPath UTF8String], &db) == SQLITE_OK) {
             NSString *sql= @"CREATE TABLE IF NOT EXISTS podcast (id INTEGER, track_id TEXT PRIMARY KEY UNIQUE, collection_name TEXT, artist_name TEXT, image_small TEXT, image_large TEXT)";
@@ -50,7 +50,7 @@ NSString *dbname = @"podcast.db";
 + (NSMutableDictionary*)getAllPodcast {
     sqlite3 *db;
     NSMutableDictionary *allPodcast = [NSMutableDictionary dictionary];
-    if (sqlite3_open([[PodcastDAO getDBPath:dbname] UTF8String], &db) == SQLITE_OK) {
+    if (sqlite3_open([[PodcastDAO getDBPath:dbPodcast] UTF8String], &db) == SQLITE_OK) {
         NSString *sql = @"SELECT track_id, collection_name, artist_name, image_small, image_large FROM podcast ORDER BY id asc";
         NSLog(@"Select query: %@", sql);
         sqlite3_stmt *stmt;
@@ -81,7 +81,7 @@ NSString *dbname = @"podcast.db";
     BOOL ret = NO;
     sqlite3 *db;
     NSString *query =@"INSERT OR REPLACE INTO podcast (id, track_id, collection_name, artist_name, image_small, image_large) VALUES ((SELECT IFNULL(MAX(id), 0) + 1 FROM podcast), \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")";
-    if (sqlite3_open([[PodcastDAO getDBPath:dbname] UTF8String], &db) == SQLITE_OK) {
+    if (sqlite3_open([[PodcastDAO getDBPath:dbPodcast] UTF8String], &db) == SQLITE_OK) {
         NSString *sql = [NSString stringWithFormat:query, podcast.trackID, podcast.collectionName, podcast.artistName, podcast.smallImage, podcast.largeImage];
         char *error;
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
