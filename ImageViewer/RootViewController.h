@@ -12,4 +12,5 @@
 @interface RootViewController : UIViewController <UIPageViewControllerDataSource>
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) NSArray *pageImages;
+@property (nonatomic, assign) int currentImage;
 @end

@@ -25,7 +25,6 @@
 		22C1C00A1CED81EE00288149 /* IVCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF91CED81EE00288149 /* IVCacheManager.m */; };
 		22C1C00B1CED81EE00288149 /* IVPageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */; };
 		22C1C00C1CED81EE00288149 /* IVPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFFD1CED81EE00288149 /* IVPageViewController.m */; };
-		22C1C00D1CED81EE00288149 /* LVListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFFF1CED81EE00288149 /* LVListTableViewController.m */; };
 		22C1C00E1CED81EE00288149 /* PodcastDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0011CED81EE00288149 /* PodcastDAO.m */; };
 		22C1C00F1CED81EE00288149 /* PodcastDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0031CED81EE00288149 /* PodcastDBManager.m */; };
 		22C1C0101CED81EE00288149 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0051CED81EE00288149 /* RootViewController.m */; };
@@ -33,6 +32,7 @@
 		CE49393C1CE33A860096AC44 /* Podcast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE49393A1CE33A860096AC44 /* Podcast.m */; };
 		CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */; };
 		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
+		CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,8 +68,6 @@
 		22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVPageContentViewController.m; sourceTree = "<group>"; };
 		22C1BFFC1CED81EE00288149 /* IVPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVPageViewController.h; sourceTree = "<group>"; };
 		22C1BFFD1CED81EE00288149 /* IVPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVPageViewController.m; sourceTree = "<group>"; };
-		22C1BFFE1CED81EE00288149 /* LVListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVListTableViewController.h; sourceTree = "<group>"; };
-		22C1BFFF1CED81EE00288149 /* LVListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVListTableViewController.m; sourceTree = "<group>"; };
 		22C1C0001CED81EE00288149 /* PodcastDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastDAO.h; sourceTree = "<group>"; };
 		22C1C0011CED81EE00288149 /* PodcastDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastDAO.m; sourceTree = "<group>"; };
 		22C1C0021CED81EE00288149 /* PodcastDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastDBManager.h; sourceTree = "<group>"; };
@@ -82,6 +80,7 @@
 		CE49393A1CE33A860096AC44 /* Podcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Podcast.m; sourceTree = "<group>"; };
 		CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CE49393F1CE33B4E0096AC44 /* IVList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVList.storyboard; sourceTree = "<group>"; };
+		CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVPageControl.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,19 +166,18 @@
 		22C1C0131CED84A300288149 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				22C1BFFA1CED81EE00288149 /* IVPageContentViewController.h */,
+				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
 				CE4939381CE33A860096AC44 /* IVListTableViewController.m */,
-				22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */,
 				22C1BFF01CED81EE00288149 /* DownloadJSON.h */,
 				22C1BFF11CED81EE00288149 /* DownloadJSON.m */,
-				22C1BFFC1CED81EE00288149 /* IVPageViewController.h */,
-				22C1BFFD1CED81EE00288149 /* IVPageViewController.m */,
-				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
-				CE49393F1CE33B4E0096AC44 /* IVList.storyboard */,
-				22C1BFFE1CED81EE00288149 /* LVListTableViewController.h */,
-				22C1BFFF1CED81EE00288149 /* LVListTableViewController.m */,
 				22C1C0041CED81EE00288149 /* RootViewController.h */,
 				22C1C0051CED81EE00288149 /* RootViewController.m */,
+				22C1BFFC1CED81EE00288149 /* IVPageViewController.h */,
+				22C1BFFD1CED81EE00288149 /* IVPageViewController.m */,
+				22C1BFFA1CED81EE00288149 /* IVPageContentViewController.h */,
+				22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */,
+				CE49393F1CE33B4E0096AC44 /* IVList.storyboard */,
+				CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */,
 			);
 			name = List;
 			sourceTree = "<group>";
@@ -281,6 +279,7 @@
 				2209BDF01CE2F137001FBAC7 /* GridCell.xib in Resources */,
 				2209BDE81CE2E13B001FBAC7 /* IVGrid.storyboard in Resources */,
 				223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */,
+				CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */,
 				223709C81CE2CCF600A54881 /* Main.storyboard in Resources */,
 				CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */,
 			);
@@ -307,7 +306,6 @@
 				22C1C0081CED81EE00288149 /* ImageInfo.m in Sources */,
 				22C1C0091CED81EE00288149 /* ImageInfoManager.m in Sources */,
 				22C1C00A1CED81EE00288149 /* IVCacheManager.m in Sources */,
-				22C1C00D1CED81EE00288149 /* LVListTableViewController.m in Sources */,
 				223709C21CE2CCF600A54881 /* AppDelegate.m in Sources */,
 				2209BDEF1CE2F137001FBAC7 /* GridCell.m in Sources */,
 				22C1C0061CED81EE00288149 /* DownloadJSON.m in Sources */,

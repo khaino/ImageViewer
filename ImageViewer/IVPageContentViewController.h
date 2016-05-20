@@ -10,7 +10,7 @@
 
 @interface IVPageContentViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIImageView *spinnerImageView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 @property (strong, nonatomic) UIImage *image;
 @property NSUInteger pageIndex;
 @property NSString *imageFile;

@@ -71,6 +71,7 @@
 // Inserting search results to podcasts array
 //
 - (BOOL)processResults:(NSArray *)results {
+    
     for (NSDictionary *dict in results) {
         
         // Create podcast object and added results data to this object.

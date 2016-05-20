@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface IVListTableViewController : UITableViewController
-
+- (IBAction)chageGridView:(id)sender;
 @end

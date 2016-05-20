@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5u2-qj-Kgf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5u2-qj-Kgf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -37,9 +37,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="tQW-ru-3nO" kind="show" id="0we-ay-ef8"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -47,92 +44,18 @@
                             <outlet property="delegate" destination="4Sq-Vk-qsI" id="7Yc-7X-CPg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Wok-xr-X7N"/>
+                    <navigationItem key="navigationItem" id="Wok-xr-X7N">
+                        <barButtonItem key="leftBarButtonItem" title="Grid" id="BWC-Ug-DuV">
+                            <connections>
+                                <action selector="chageGridView:" destination="4Sq-Vk-qsI" id="NGg-9k-CMV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JnV-Sw-4wG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="376" y="-197"/>
-        </scene>
-        <!--Large View Controller-->
-        <scene sceneID="u5q-lh-r9T">
-            <objects>
-                <viewController id="6qu-pU-9xh" customClass="IVLargeViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="BIh-FP-blC"/>
-                        <viewControllerLayoutGuide type="bottom" id="LjY-74-kOm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lJx-6w-O46">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PrC-Qx-7jz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="786" y="-197"/>
-        </scene>
-        <!--Root View Controller-->
-        <scene sceneID="a3O-10-fmE">
-            <objects>
-                <viewController id="tQW-ru-3nO" customClass="RootViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qV7-eA-U4J"/>
-                        <viewControllerLayoutGuide type="bottom" id="WKI-cj-LRR"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="T6j-we-IkK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bqo-7r-7H9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="786" y="460"/>
-        </scene>
-        <!--Page View Controller-->
-        <scene sceneID="tpU-r1-eEe">
-            <objects>
-                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="L7u-kQ-tNa" customClass="IVPageViewController" sceneMemberID="viewController">
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2m4-Sn-mxS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1130" y="460"/>
-        </scene>
-        <!--Page Content View Controller-->
-        <scene sceneID="Jnx-U0-0cp">
-            <objects>
-                <viewController storyboardIdentifier="PageContentViewController" id="GMp-BT-YJA" customClass="IVPageContentViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fLT-ZV-j7z"/>
-                        <viewControllerLayoutGuide type="bottom" id="wKz-yQ-2rH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="cvt-Bq-mOc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TcX-OZ-qwk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LKB-Ib-GCV">
-                                <rect key="frame" x="130" y="210" width="60" height="60"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <outlet property="imageView" destination="TcX-OZ-qwk" id="DE6-kB-dFE"/>
-                        <outlet property="spinnerImageView" destination="LKB-Ib-GCV" id="JAw-MX-tTT"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g9b-FA-Uy4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1475" y="460"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="y7a-SI-Auk">
