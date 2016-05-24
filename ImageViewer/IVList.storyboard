@@ -92,11 +92,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="37d-gB-qFc">
-                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="65" width="320" height="416"/>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s8z-VS-z8Z">
+                                <rect key="frame" x="0.0" y="1" width="320" height="480"/>
+                                <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="0.5" colorSpace="calibratedRGB"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gJb-7p-NHM">
-                                <rect key="frame" x="0.0" y="400" width="320" height="80"/>
-                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="0.75" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="411" width="320" height="70"/>
+                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="0.40999999999999998" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="Ylt-iC-oly">
                                     <size key="itemSize" width="60" height="60"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -105,7 +109,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Li8-L6-2A5">
-                                        <rect key="frame" x="0.0" y="10" width="60" height="60"/>
+                                        <rect key="frame" x="0.0" y="5" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -130,6 +134,7 @@
                         <outlet property="activityIndicator" destination="S9x-yh-OXM" id="VFE-aL-uIU"/>
                         <outlet property="collectionView" destination="gJb-7p-NHM" id="YDP-0a-wig"/>
                         <outlet property="imageView" destination="37d-gB-qFc" id="69t-hz-LVA"/>
+                        <outlet property="overlayImageView" destination="s8z-VS-z8Z" id="q6m-QA-lDJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="odW-4C-R8y" userLabel="First Responder" sceneMemberID="firstResponder"/>

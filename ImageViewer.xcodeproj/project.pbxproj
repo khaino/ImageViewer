@@ -33,6 +33,7 @@
 		CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */; };
 		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
 		CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */; };
+		CEEAEFA31CF4491400173AE1 /* IVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,8 @@
 		CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CE49393F1CE33B4E0096AC44 /* IVList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVList.storyboard; sourceTree = "<group>"; };
 		CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVPageControl.storyboard; sourceTree = "<group>"; };
+		CEEAEFA11CF4491400173AE1 /* IVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCollectionView.h; sourceTree = "<group>"; };
+		CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,8 @@
 		22C1C0131CED84A300288149 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				CEEAEFA11CF4491400173AE1 /* IVCollectionView.h */,
+				CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */,
 				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
 				CE4939381CE33A860096AC44 /* IVListTableViewController.m */,
 				22C1BFF01CED81EE00288149 /* DownloadJSON.h */,
@@ -320,6 +325,7 @@
 				2209BDEF1CE2F137001FBAC7 /* GridCell.m in Sources */,
 				22C1C0061CED81EE00288149 /* DownloadJSON.m in Sources */,
 				223709BF1CE2CCF600A54881 /* main.m in Sources */,
+				CEEAEFA31CF4491400173AE1 /* IVCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
