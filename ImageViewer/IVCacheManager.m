@@ -7,6 +7,8 @@
 //
 
 #import "IVCacheManager.h"
+#import "ImageInfoManager.h"
+#import "ImageInfo.h"
 
 @implementation IVCacheManager
 
@@ -48,6 +50,8 @@
             completionHandler(cacheUrl);
         }
     }
+    
+//    [self cleanImageCache];
 }
 
 - (BOOL)isImageCached:(NSString*)trackId
@@ -73,6 +77,61 @@
     NSURL *imageUrl = [trackUrl URLByAppendingPathComponent:[self imageNameForType:imageType]];
     
     return imageUrl;
+}
+
+- (void)cleanImageCache {
+    
+    int thumpnailMax = 100;
+    int normalMax = 50;
+    
+    NSArray *k60ImgArr = [[ImageInfoManager defaultManager] getAllImageInfoWithType:k60];
+    if (k60ImgArr.count > thumpnailMax) {
+        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAcess"
+                                                                     ascending:NO];
+        k60ImgArr = [k60ImgArr sortedArrayUsingDescriptors:@[descriptor]];
+        NSArray *toDelete = [k60ImgArr subarrayWithRange:NSMakeRange(0, k60ImgArr.count - thumpnailMax)];
+        
+        for (ImageInfo *imageInfo in toDelete) {
+            [self deleteImageCachedForTrackId:imageInfo.trackId imageType:k60];
+            [[ImageInfoManager defaultManager]deleteImageInfo:imageInfo.imageId];
+            
+        }
+    }
+    
+    NSArray *k600ImgArr = [[ImageInfoManager defaultManager] getAllImageInfoWithType:k600];
+    
+    if (k600ImgArr.count > normalMax) {
+        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAcess"
+                                                                     ascending:NO];
+        k60ImgArr = [k60ImgArr sortedArrayUsingDescriptors:@[descriptor]];
+        NSArray *toDelete = [k60ImgArr subarrayWithRange:NSMakeRange(0, k600ImgArr.count - normalMax)];
+        
+        for (ImageInfo *imageInfo in toDelete) {
+            [self deleteImageCachedForTrackId:imageInfo.trackId imageType:k600];
+            [[ImageInfoManager defaultManager]deleteImageInfo:imageInfo.imageId];
+            
+        }
+    }
+    
+}
+
+
+
+- (BOOL)deleteImageCachedForTrackId:(NSString*)trackId imageType:(ImageType)imageType {
+    
+    BOOL ret = NO;
+    NSURL *imgUrl = [self imageDirForTrackId:trackId imageType:k60];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if (![fm fileExistsAtPath:[imgUrl path]]) {
+        NSError *error;
+        [fm removeItemAtPath:[imgUrl path] error:&error];
+        if (error) {
+            NSLog(@"Error in deletion trackId : %@", trackId);
+        } else {
+            ret = YES;
+        }
+    }
+    return ret;
 }
 
 /*

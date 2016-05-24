@@ -12,7 +12,9 @@
 @interface ImageDatabase : NSObject
 
 + (BOOL) createDB;
-+ (NSMutableDictionary*)getAllPersonInfo;
++ (NSMutableDictionary*)getAllImageInfo;
 + (BOOL)insertOrUpdateImageInfo:(ImageInfo*) imageInfo;
++ (NSString*)getLastInsertRowId;
++ (BOOL)deleteImageInfo:(NSString*)imageId;
 
 @end

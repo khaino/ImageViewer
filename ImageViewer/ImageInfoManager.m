@@ -26,17 +26,35 @@ static ImageInfoManager *imageInfoManager;
     dispatch_once(&onceToken, ^{
         imageInfoManager = [[self alloc] init];
         [ImageDatabase createDB];
-        imageInfoManager.allImageInfo = [ImageDatabase getAllPersonInfo];
+        imageInfoManager.allImageInfo = [ImageDatabase getAllImageInfo];
     });
     
     return imageInfoManager;
 }
 
-- (NSArray*)getAllImageInfo {
-    return [self.allImageInfo allValues];
+- (NSArray*)getAllImageInfoWithType:(ImageType)imageType {
+    
+    NSArray *allImages = [self.allImageInfo allValues];
+    
+    NSPredicate *predicate;
+    
+    if (imageType == k60) {
+        predicate = [NSPredicate predicateWithFormat:@"isThumpnail = YES"];
+    } else {
+        predicate = [NSPredicate predicateWithFormat:@"isThumpnail = NO"];
+    }
+    
+    NSArray *imgInfoArr = [allImages filteredArrayUsingPredicate:predicate];
+    return imgInfoArr;
+}
+
+- (NSInteger)countImageWithType:(ImageType)imageType {
+ 
+    return [self getAllImageInfoWithType:imageType].count;
 }
 
 - (NSArray*)getImageInfo:(NSString*)imageId {
+    
     return [self.allImageInfo objectForKey:imageId];
 }
 
@@ -44,7 +62,8 @@ static ImageInfoManager *imageInfoManager;
     BOOL ret = NO;
     if (imageInfo != nil && imageInfo) {
         if ([ImageDatabase insertOrUpdateImageInfo:imageInfo]) {
-            [self.allImageInfo setObject:imageInfo forKey:imageInfo.imageId];
+            NSString *imageId = [ImageDatabase getLastInsertRowId];
+            [self.allImageInfo setObject:imageInfo forKey:imageId];
             ret = YES;
         }
     }
@@ -55,11 +74,16 @@ static ImageInfoManager *imageInfoManager;
     BOOL ret = NO;
     if (imageInfo != nil) {
         if ([ImageDatabase insertOrUpdateImageInfo:imageInfo]) {
+            
             [self.allImageInfo setObject:imageInfo forKey:imageInfo.imageId];
             ret = YES;
         }
     }
     return ret;
+}
+
+- (BOOL)deleteImageInfo:(NSString*)imageId {
+    return [ImageDatabase deleteImageInfo:imageId];
 }
 
 @end

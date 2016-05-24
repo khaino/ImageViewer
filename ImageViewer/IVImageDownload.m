@@ -17,6 +17,8 @@
 /** track number to download. */
 @property (strong, nonatomic) NSString *trackId;
 
+@property (nonatomic) ImageType imageType;
+
 @end
 
 @implementation IVImageDownload
@@ -45,6 +47,7 @@
     
     self.trackId = trackId;
     self.completionHandler = completion;
+    self.imageType = imageType;
     
     IVCacheManager *cacheManager = [IVCacheManager defaultManager];
     if ([cacheManager isImageCached:trackId imageType:imageType]) {
@@ -95,7 +98,7 @@
  */
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
 
-    [[IVCacheManager defaultManager] cacheImageWithTractId:self.trackId imageType:k60 tempLoc:location completion:^(NSURL *url) {
+    [[IVCacheManager defaultManager] cacheImageWithTractId:self.trackId imageType:self.imageType tempLoc:location completion:^(NSURL *url) {
         self.completionHandler(url);
     }];
     [self.session invalidateAndCancel];

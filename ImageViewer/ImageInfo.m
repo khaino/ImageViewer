@@ -7,10 +7,11 @@
 //
 
 #import "ImageInfo.h"
+#import "ImageInfoManager.h"
 
 @implementation ImageInfo
 
-- (instancetype)initWithTrackId:(NSString*)imageId
+- (instancetype)initWithTrackId:(NSString*)trackId
                     isThumpnail:(BOOL)isThumpnail
               downloadCompleted:(BOOL)completed
                          locUrl:(NSURL*)locUrl
@@ -18,7 +19,7 @@
 {
     self = [super self];
     if (self) {
-        _imageId = imageId;
+        _trackId = trackId;
         _isThumpnail = isThumpnail;
         _downloadCompleted = completed;
         _locUrl = locUrl;
@@ -27,9 +28,44 @@
     return self;
 }
 
-- (void)setImageId:(NSString *)imageId {
-    if (imageId != nil && _imageId != imageId) {
+- (instancetype)initWithImageId:(NSString*)imageId
+                        trackId:(NSString*)trackId
+                    isThumpnail:(BOOL)isThumpnail
+              downloadCompleted:(BOOL)completed
+                         locUrl:(NSURL*)locUrl
+                      lassAcess:(NSString*) lastAcess
+{
+    self = [super self];
+    if (self) {
+        
         _imageId = imageId;
+        _trackId = trackId;
+        _isThumpnail = isThumpnail;
+        _downloadCompleted = completed;
+        _locUrl = locUrl;
+        _lastAccess = lastAcess;
+    }
+    return self;
+}
+
+- (void)setDownloadCompleted:(BOOL)downloadCompleted {
+    if (downloadCompleted != _downloadCompleted) {
+        _downloadCompleted = downloadCompleted;
+        [[ImageInfoManager defaultManager] updateImageInfo:self];
+    }
+}
+
+- (void)setLocUrl:(NSURL *)locUrl {
+    if (locUrl != nil && locUrl != _locUrl) {
+        _locUrl = locUrl;
+        [[ImageInfoManager defaultManager] updateImageInfo:self];
+    }
+}
+
+- (void)setLastAccess:(NSString *)lastAccess {
+    if (lastAccess != nil && lastAccess != _lastAccess) {
+        _lastAccess = lastAccess;
+        [[ImageInfoManager defaultManager] updateImageInfo:self];
     }
 }
 
