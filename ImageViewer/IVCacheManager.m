@@ -28,7 +28,7 @@
                    completion:(myCompletion)completionHandler
 {
 
-    NSURL *cacheUrl = [self imageDirForTrackId:trackId imageType:k60];
+    NSURL *cacheUrl = [self imageDirForTrackId:trackId imageType:imageType];
     NSFileManager *fm = [NSFileManager defaultManager];
     
     // Check if image already exists in image cache
