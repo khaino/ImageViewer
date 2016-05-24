@@ -10,7 +10,6 @@
 		2209BDE81CE2E13B001FBAC7 /* IVGrid.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */; };
 		2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */; };
 		2209BDEF1CE2F137001FBAC7 /* GridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2209BDED1CE2F137001FBAC7 /* GridCell.m */; };
-		2209BDF01CE2F137001FBAC7 /* GridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2209BDEE1CE2F137001FBAC7 /* GridCell.xib */; };
 		2209BDF31CE2FACE001FBAC7 /* IVImageDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */; };
 		223709BF1CE2CCF600A54881 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 223709BE1CE2CCF600A54881 /* main.m */; };
 		223709C21CE2CCF600A54881 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 223709C11CE2CCF600A54881 /* AppDelegate.m */; };
@@ -28,6 +27,7 @@
 		22C1C00E1CED81EE00288149 /* PodcastDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0011CED81EE00288149 /* PodcastDAO.m */; };
 		22C1C00F1CED81EE00288149 /* PodcastDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0031CED81EE00288149 /* PodcastDBManager.m */; };
 		22C1C0101CED81EE00288149 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0051CED81EE00288149 /* RootViewController.m */; };
+		22F60D811CF447A800D8BA03 /* EnumType.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F60D801CF447A800D8BA03 /* EnumType.m */; };
 		CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4939381CE33A860096AC44 /* IVListTableViewController.m */; };
 		CE49393C1CE33A860096AC44 /* Podcast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE49393A1CE33A860096AC44 /* Podcast.m */; };
 		CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */; };
@@ -41,7 +41,6 @@
 		2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVGridViewController.m; sourceTree = "<group>"; };
 		2209BDEC1CE2F137001FBAC7 /* GridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCell.h; sourceTree = "<group>"; };
 		2209BDED1CE2F137001FBAC7 /* GridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCell.m; sourceTree = "<group>"; };
-		2209BDEE1CE2F137001FBAC7 /* GridCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridCell.xib; sourceTree = "<group>"; };
 		2209BDF11CE2FACE001FBAC7 /* IVImageDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVImageDownload.h; sourceTree = "<group>"; };
 		2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVImageDownload.m; sourceTree = "<group>"; };
 		223709BA1CE2CCF600A54881 /* ImageViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +73,8 @@
 		22C1C0031CED81EE00288149 /* PodcastDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastDBManager.m; sourceTree = "<group>"; };
 		22C1C0041CED81EE00288149 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		22C1C0051CED81EE00288149 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		22F60D7F1CF447A800D8BA03 /* EnumType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumType.h; sourceTree = "<group>"; };
+		22F60D801CF447A800D8BA03 /* EnumType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumType.m; sourceTree = "<group>"; };
 		CE4939371CE33A860096AC44 /* IVListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVListTableViewController.h; sourceTree = "<group>"; };
 		CE4939381CE33A860096AC44 /* IVListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVListTableViewController.m; sourceTree = "<group>"; };
 		CE4939391CE33A860096AC44 /* Podcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Podcast.h; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 				223709CE1CE2CCF600A54881 /* Info.plist */,
 				223709BD1CE2CCF600A54881 /* Supporting Files */,
 				22C1C0141CED84ED00288149 /* Grid */,
+				22F60D821CF447F400D8BA03 /* Common */,
 			);
 			path = ImageViewer;
 			sourceTree = "<group>";
@@ -190,7 +192,6 @@
 				2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */,
 				2209BDEC1CE2F137001FBAC7 /* GridCell.h */,
 				2209BDED1CE2F137001FBAC7 /* GridCell.m */,
-				2209BDEE1CE2F137001FBAC7 /* GridCell.xib */,
 			);
 			name = Grid;
 			sourceTree = "<group>";
@@ -216,6 +217,15 @@
 				2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */,
 			);
 			name = Utility;
+			sourceTree = "<group>";
+		};
+		22F60D821CF447F400D8BA03 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				22F60D7F1CF447A800D8BA03 /* EnumType.h */,
+				22F60D801CF447A800D8BA03 /* EnumType.m */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,7 +286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				223709CD1CE2CCF600A54881 /* LaunchScreen.storyboard in Resources */,
-				2209BDF01CE2F137001FBAC7 /* GridCell.xib in Resources */,
 				2209BDE81CE2E13B001FBAC7 /* IVGrid.storyboard in Resources */,
 				223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */,
 				CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */,
@@ -298,6 +307,7 @@
 				223709C51CE2CCF600A54881 /* ViewController.m in Sources */,
 				2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */,
 				22C1C00F1CED81EE00288149 /* PodcastDBManager.m in Sources */,
+				22F60D811CF447A800D8BA03 /* EnumType.m in Sources */,
 				CE49393C1CE33A860096AC44 /* Podcast.m in Sources */,
 				22C1C0071CED81EE00288149 /* ImageDatabase.m in Sources */,
 				2209BDF31CE2FACE001FBAC7 /* IVImageDownload.m in Sources */,

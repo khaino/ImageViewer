@@ -7,19 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EnumType.h"
 
 /** This class is to cache image */
 @interface IVCacheManager : NSObject
 
-/*
- * Disposition options for various delegate messages
- */
-typedef NS_ENUM(NSInteger) {
-    /** Image size for thumpnail 60*60 */
-    k60 = 0,
-    /** Image size for normal 600*600 */
-    k600 = 1
-} ImageType;
+
 
 /** @brief Completion handler type for cache completion */
 typedef void(^myCompletion)(NSURL*);
