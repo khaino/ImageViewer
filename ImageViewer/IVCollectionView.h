@@ -15,4 +15,5 @@
 @property (nonatomic, assign) int currentImage;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSArray *podcasts;
+@property (weak, nonatomic) IBOutlet UIImageView *overlayImageView;
 @end

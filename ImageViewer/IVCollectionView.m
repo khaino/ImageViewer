@@ -8,6 +8,7 @@
 
 #import "IVCollectionView.h"
 #import "Podcast.h"
+#import "IVImageDownload.h"
 
 @interface IVCollectionView ()
 
@@ -23,17 +24,27 @@ static NSString * const reuseIdentifier = @"Cell";
     self.activityIndicator.hidesWhenStopped = YES;
     [self.activityIndicator startAnimating];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        Podcast *podcast = [self.podcasts objectAtIndex:self.currentImage];
-        NSURL *imageURL = [NSURL URLWithString:podcast.largeImage];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        
-        
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [self.activityIndicator stopAnimating];
-            self.imageView.image = [UIImage imageWithData:imageData];
-        });
-    });
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        Podcast *podcast = [self.podcasts objectAtIndex:self.currentImage];
+//        NSURL *imageURL = [NSURL URLWithString:podcast.largeImage];
+//        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+//        
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            [self.activityIndicator stopAnimating];
+//            [self.overlayImageView setHidden:YES];
+//            self.imageView.image = [UIImage imageWithData:imageData];
+//        });
+//    });
+    Podcast *podcast = [self.podcasts objectAtIndex:self.currentImage];
+    IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
+    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
+                           trackId:podcast.trackID
+                         imageType:k600
+                 completionHandler:^(NSURL *url){
+                     [self.activityIndicator stopAnimating];
+                     [self.overlayImageView setHidden:YES];
+                     self.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                 }];
     
     // Do any additional setup after loading the view, typically from a nib.
     
@@ -48,12 +59,26 @@ static NSString * const reuseIdentifier = @"Cell";
 // Action for single touch on image
 - (void)TouchImage:(UITapGestureRecognizer *)gesture {
     if (self.collectionView.hidden) {
-        self.collectionView.hidden = NO;
+        [UIView transitionWithView:self.collectionView
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^(void){
+                            self.collectionView.hidden = NO;
+                        }
+                        completion:nil];
     } else {
-        self.collectionView.hidden = YES;
+        [UIView transitionWithView:self.collectionView
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^(void){
+                            self.collectionView.hidden = YES;
+                        }
+                        completion:nil];
     }
     NSLog(@"Image Touched!");
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -70,37 +95,67 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
      
-    // Configure the cell
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            Podcast *podcast = [self.podcasts objectAtIndex:indexPath.row];
-            NSURL *imageURL = [NSURL URLWithString:podcast.smallImage];
-            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-            
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                UIImage *image= [UIImage imageWithData:imageData];
-                UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
-                cell.backgroundView = imageView;
-            });
-        });
+//    // Configure the cell
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            Podcast *podcast = [self.podcasts objectAtIndex:indexPath.row];
+//            NSURL *imageURL = [NSURL URLWithString:podcast.smallImage];
+//            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+//            
+//            dispatch_sync(dispatch_get_main_queue(), ^{
+//                UIImage *image= [UIImage imageWithData:imageData];
+//                UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
+//                cell.backgroundView = imageView;
+//            });
+//        });
+    Podcast *podcast = [self.podcasts objectAtIndex:indexPath.row];
+    IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
+    [imageDownloader downloadImage:[NSURL URLWithString:podcast.smallImage]
+                           trackId:podcast.trackID
+                         imageType:k60
+                 completionHandler:^(NSURL *url){
+                     UIImage *image= [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                     UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
+                     cell.backgroundView = imageView;
+                 }];
     
     return cell;
 }
 
 // Action for selecting a thumbnail on collection slider
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-   
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        Podcast *podcast = [self.podcasts objectAtIndex:indexPath.row];
-        NSURL *imageURL = [NSURL URLWithString:podcast.largeImage];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            self.imageView.image = [UIImage imageWithData:imageData];
-            NSLog(@"Photo %d is touched!", indexPath.row);
-        });
-    });
+    
+    [self.activityIndicator startAnimating];
+    self.activityIndicator.hidesWhenStopped = YES;
+    [self.activityIndicator setHidden:NO];
+    [self.overlayImageView setHidden:NO];
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        Podcast *podcast = [self.podcasts objectAtIndex:indexPath.row];
+//        NSURL *imageURL = [NSURL URLWithString:podcast.largeImage];
+//        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+//        
+//        
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            [self.activityIndicator stopAnimating];
+//            [self.overlayImageView setHidden:YES];
+//            self.imageView.image = [UIImage imageWithData:imageData];
+//            NSLog(@"Photo %d is touched!", indexPath.row);
+//        });
+//    });
+    
+    Podcast *podcast = [self.podcasts objectAtIndex:indexPath.row];
+    IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
+    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
+                           trackId:podcast.trackID
+                         imageType:k600
+                 completionHandler:^(NSURL *url){
+                     [self.activityIndicator stopAnimating];
+                     [self.overlayImageView setHidden:YES];
+                     self.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                 }];
 }
 
 /*
