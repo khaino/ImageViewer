@@ -1,5 +1,5 @@
 //
-//  GridCell.h
+//  GridViewLayout.h
 //  ImageViewer
 //
 //  Created by Khaino on 5/19/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GridCell : UICollectionViewCell
-
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@interface GridViewLayout : UICollectionViewLayout
 
 @end

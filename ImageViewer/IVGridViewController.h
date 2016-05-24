@@ -8,6 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IVGridViewController : UICollectionViewController
-
+@interface IVGridViewController : UICollectionViewController<UICollectionViewDelegateFlowLayout>
 @end

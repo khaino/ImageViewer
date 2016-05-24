@@ -1,13 +1,13 @@
 //
-//  GridCell.m
+//  GridViewLayout.m
 //  ImageViewer
 //
 //  Created by Khaino on 5/19/16.
 //  Copyright © 2016 khaino. All rights reserved.
 //
 
-#import "GridCell.h"
+#import "GridViewLayout.h"
 
-@implementation GridCell
+@implementation GridViewLayout
 
 @end
