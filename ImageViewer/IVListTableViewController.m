@@ -12,6 +12,7 @@
 #import "DownloadJSON.h"
 #import "RootViewController.h"
 #import "IVImageDownload.h"
+#import "IVCollectionView.h"
 
 @interface IVListTableViewController ()
 @property (strong, nonatomic) NSURLSession *session;
@@ -107,21 +108,21 @@
     return NO;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    // Add current image to first item of array
-    NSMutableArray * imageList = [[NSMutableArray alloc]initWithCapacity:self.podcasts.count];
-    for (Podcast *p in self.podcasts) {
-        [imageList addObject:p.largeImage];
-    }
-    
-    // Get the storyboard named secondStoryBoard from the main bundle:
-    UIStoryboard *pageControlStoryboard = [UIStoryboard storyboardWithName:@"IVPageControl" bundle:nil];
-    RootViewController *rvc = [pageControlStoryboard instantiateInitialViewController];
-    rvc.pageImages = imageList;
-    rvc.currentImage = (int)indexPath.row;
-    [self.navigationController pushViewController:rvc animated:YES];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    // Add current image to first item of array
+//    NSMutableArray * imageList = [[NSMutableArray alloc]initWithCapacity:self.podcasts.count];
+//    for (Podcast *p in self.podcasts) {
+//        [imageList addObject:p.largeImage];
+//    }
+//    
+//    // Get the storyboard named secondStoryBoard from the main bundle:
+//    UIStoryboard *pageControlStoryboard = [UIStoryboard storyboardWithName:@"IVPageControl" bundle:nil];
+//    RootViewController *rvc = [pageControlStoryboard instantiateInitialViewController];
+//    rvc.pageImages = imageList;
+//    rvc.currentImage = (int)indexPath.row;
+//    [self.navigationController pushViewController:rvc animated:YES];
+//}
 
 - (IBAction)chageGridView:(id)sender {
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"IVGrid" bundle:nil];
@@ -149,25 +150,26 @@
 
 #pragma mark - Navigation
 
-//// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    // Get current table row
-//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//    
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    // Get current table row
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    
 //    // Add current image to first item of array
 //    NSMutableArray * imageList = [[NSMutableArray alloc]initWithCapacity:self.podcasts.count];
 //    for (Podcast *p in self.podcasts) {
 //        [imageList addObject:p.largeImage];
 //    }
-//    
-//    // Get the new view controller using [segue destinationViewController].
-//    RootViewController *rvc = [segue destinationViewController];
-//    
-//    // Pass the selected object to the new view controller.
-//    rvc.pageImages = imageList;
-//    rvc.currentImage = (int)indexPath.row;
-//}
+    
+    // Get the new view controller using [segue destinationViewController].
+    IVCollectionView *cvc = [segue destinationViewController];
+    
+    // Pass the selected object to the new view controller.
+//    cvc.imageList = imageList;
+    cvc.podcasts = self.podcasts;
+    cvc.currentImage = (int)indexPath.row;
+}
 
 //- (UIImage *)imageForIndexPath:(NSIndexPath *)indexPath {
 //    
