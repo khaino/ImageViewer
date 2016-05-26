@@ -14,7 +14,7 @@
 + (BOOL) createDB;
 + (NSMutableDictionary*)getAllImageInfo;
 + (BOOL)insertOrUpdateImageInfo:(ImageInfo*) imageInfo;
-+ (NSString*)getLastInsertRowId;
++ (NSString*)getLastInsertRowIdImageInfo:(ImageInfo*)imageInfo;
 + (BOOL)deleteImageInfo:(NSString*)imageId;
 
 @end

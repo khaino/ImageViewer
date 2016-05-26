@@ -7,6 +7,8 @@
 //
 
 #import "IVImageDownload.h"
+#import "ImageInfoManager.h"
+#import "ImageInfo.h"
 
 @interface IVImageDownload()<NSURLSessionDelegate, NSURLSessionDownloadDelegate>
 
@@ -18,6 +20,8 @@
 @property (strong, nonatomic) NSString *trackId;
 
 @property (nonatomic) ImageType imageType;
+
+@property (strong, nonatomic)ImageInfo *imageInfo;
 
 @end
 
@@ -56,6 +60,15 @@
     } else {
         NSLog(@"Download image no : %@",trackId);
         [[self.session downloadTaskWithURL:url] resume];
+        BOOL isThumpnail = (imageType == k60)? YES : NO;
+        NSDate *date = [NSDate date];
+        self.imageInfo = [[ImageInfo alloc]initWithTrackId:self.trackId
+                                                              isThumpnail:isThumpnail
+                                                        downloadCompleted:NO
+                                                                   locUrl:nil
+                                                                lassAcess:[date description]];
+        [[ImageInfoManager defaultManager] insertImageInfo:self.imageInfo];
+        self.imageInfo.imageId = [[ImageInfoManager defaultManager] getLastInsertRowIdWithImageInfo:self.imageInfo];
     }
 }
 
@@ -99,8 +112,18 @@
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
 
     [[IVCacheManager defaultManager] cacheImageWithTractId:self.trackId imageType:self.imageType tempLoc:location completion:^(NSURL *url) {
+        self.imageInfo.downloadCompleted = YES;
+        self.imageInfo.locUrl = location;
         self.completionHandler(url);
     }];
+    [self.session invalidateAndCancel];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+    
+    if (error) {
+        [[ImageInfoManager defaultManager] deleteImageInfo:self.imageInfo.imageId];
+    }
     [self.session invalidateAndCancel];
 }
 
