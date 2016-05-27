@@ -17,6 +17,7 @@
 		223709C81CE2CCF600A54881 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223709C61CE2CCF600A54881 /* Main.storyboard */; };
 		223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223709C91CE2CCF600A54881 /* Assets.xcassets */; };
 		223709CD1CE2CCF600A54881 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223709CB1CE2CCF600A54881 /* LaunchScreen.storyboard */; };
+		225353161CF6E05800DFA036 /* IVGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 225353151CF6E05800DFA036 /* IVGridLayout.m */; };
 		22C1C0061CED81EE00288149 /* DownloadJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF11CED81EE00288149 /* DownloadJSON.m */; };
 		22C1C0071CED81EE00288149 /* ImageDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF31CED81EE00288149 /* ImageDatabase.m */; };
 		22C1C0081CED81EE00288149 /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF51CED81EE00288149 /* ImageInfo.m */; };
@@ -54,6 +55,8 @@
 		223709C91CE2CCF600A54881 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		223709CC1CE2CCF600A54881 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		223709CE1CE2CCF600A54881 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		225353141CF6E05800DFA036 /* IVGridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVGridLayout.h; sourceTree = "<group>"; };
+		225353151CF6E05800DFA036 /* IVGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVGridLayout.m; sourceTree = "<group>"; };
 		22C1BFF01CED81EE00288149 /* DownloadJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadJSON.h; sourceTree = "<group>"; };
 		22C1BFF11CED81EE00288149 /* DownloadJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadJSON.m; sourceTree = "<group>"; };
 		22C1BFF21CED81EE00288149 /* ImageDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDatabase.h; sourceTree = "<group>"; };
@@ -158,6 +161,7 @@
 		22C1C0121CED845700288149 /* PodcastDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				CEEAEFA11CF4491400173AE1 /* IVCollectionView.h */,
 				22C1C0001CED81EE00288149 /* PodcastDAO.h */,
 				22C1C0011CED81EE00288149 /* PodcastDAO.m */,
 				22C1C0021CED81EE00288149 /* PodcastDBManager.h */,
@@ -171,7 +175,6 @@
 		22C1C0131CED84A300288149 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				CEEAEFA11CF4491400173AE1 /* IVCollectionView.h */,
 				CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */,
 				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
 				CE4939381CE33A860096AC44 /* IVListTableViewController.m */,
@@ -197,6 +200,8 @@
 				2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */,
 				2209BDEC1CE2F137001FBAC7 /* GridCell.h */,
 				2209BDED1CE2F137001FBAC7 /* GridCell.m */,
+				225353141CF6E05800DFA036 /* IVGridLayout.h */,
+				225353151CF6E05800DFA036 /* IVGridLayout.m */,
 			);
 			name = Grid;
 			sourceTree = "<group>";
@@ -308,6 +313,7 @@
 			files = (
 				22C1C00C1CED81EE00288149 /* IVPageViewController.m in Sources */,
 				22C1C0101CED81EE00288149 /* RootViewController.m in Sources */,
+				225353161CF6E05800DFA036 /* IVGridLayout.m in Sources */,
 				CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */,
 				223709C51CE2CCF600A54881 /* ViewController.m in Sources */,
 				2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */,

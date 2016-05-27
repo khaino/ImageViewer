@@ -12,28 +12,35 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7xo-7G-9By">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qIW-HZ-uoH">
-                            <size key="itemSize" width="50" height="50"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qIW-HZ-uoH" customClass="IVGridLayout">
+                            <size key="itemSize" width="110" height="152"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="gridCell" id="04p-FS-wHA" customClass="GridCell">
-                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="110" height="152"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="110" height="152"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="spinner_1" translatesAutoresizingMaskIntoConstraints="NO" id="oEY-MG-dMc">
-                                            <rect key="frame" x="8" y="8" width="42" height="42"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxE-7r-f5c">
+                                            <rect key="frame" x="0.0" y="0.0" width="110" height="106"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRT-1K-bzs">
+                                            <rect key="frame" x="0.0" y="113" width="110" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <outlet property="imageView" destination="oEY-MG-dMc" id="PeV-wz-vdH"/>
+                                    <outlet property="collectionName" destination="fRT-1K-bzs" id="zK4-Ej-6u6"/>
+                                    <outlet property="imageView" destination="kxE-7r-f5c" id="79g-6m-kv1"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -43,7 +50,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="gt7-hw-l1R">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="8G6-wP-4AO"/>
+                        <barButtonItem key="leftBarButtonItem" title="List" id="8G6-wP-4AO">
+                            <connections>
+                                <action selector="toList:" destination="9PO-dv-uyB" id="mR1-jq-WAc"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </collectionViewController>
@@ -71,7 +82,4 @@
             <point key="canvasLocation" x="305" y="432"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="spinner_1" width="60" height="60"/>
-    </resources>
 </document>
