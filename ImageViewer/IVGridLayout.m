@@ -7,6 +7,7 @@
 //
 
 #import "IVGridLayout.h"
+#import "IVGridLayoutAttributes.h"
 
 @interface IVGridLayout()
 
@@ -31,14 +32,15 @@
 
 // Override Layout method
 -(void)prepareLayout {
-    self.cellPadding = 6.0;
-    self.numberOfColumns = 3;
+//    self.cellPadding = 2.0;
+//    self.numberOfColumns = 3;
+    [self calculateColNo];
     self.contentWidth = 0;
     
     if (self.cache == nil) {
         self.cache = [NSMutableArray array];
         
-        CGFloat columnWidth = self.contentWidth / self.numberOfColumns;
+        CGFloat columnWidth = self.contentWidth / (CGFloat)self.numberOfColumns;
         NSMutableArray *xOffset = [NSMutableArray array];
         
         for (int column = 0; column < self.numberOfColumns; column++) {
@@ -65,6 +67,7 @@
             CGRect frame = CGRectMake([[xOffset objectAtIndex:column] floatValue], [[yOffset objectAtIndex:column] floatValue], width, height);
             CGRectInset(frame, self.cellPadding, self.cellPadding);
             
+//             IVGridLayoutAttributes  *attributes = [IVGridLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             UICollectionViewLayoutAttributes  *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             attributes.frame = CGRectInset(frame, self.cellPadding, self.cellPadding);
             
@@ -98,5 +101,28 @@
     }
     return layoutAttributes;
 }
+
+//-(CGFloat)cellPadding {
+//    
+//}
+//
+//-(NSInteger)numberOfColumns {
+//    CGFloat screenWidth = [self screenWidth];
+//    int colNo = screenWidth/60;
+//    return colNo;
+//}
+
+- (void)calculateColNo {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    self.numberOfColumns = (screenWidth - 10)/120 ;
+//    CGFloat columnWidth = screenWidth/(CGFloat)self.numberOfColumns;
+    self.cellPadding = 2;
+    if(self.numberOfColumns > 3){
+        self.cellPadding = 3;
+    }
+    
+}
+
 
 @end

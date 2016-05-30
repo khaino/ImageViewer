@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RoundedConerView.h"
 
 @interface GridCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet RoundedConerView *roundedCorner;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *collectionName

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Grid View Controller-->
@@ -13,34 +14,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qIW-HZ-uoH" customClass="IVGridLayout">
-                            <size key="itemSize" width="110" height="152"/>
+                            <size key="itemSize" width="165" height="171"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="gridCell" id="04p-FS-wHA" customClass="GridCell">
-                                <rect key="frame" x="0.0" y="64" width="110" height="152"/>
+                                <rect key="frame" x="0.0" y="64" width="165" height="171"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="110" height="152"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="165" height="171"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxE-7r-f5c">
-                                            <rect key="frame" x="0.0" y="0.0" width="110" height="106"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRT-1K-bzs">
-                                            <rect key="frame" x="0.0" y="113" width="110" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8f4-Ff-iF7" customClass="RoundedConerView">
+                                            <rect key="frame" x="0.0" y="0.0" width="165" height="171"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="u01-Dg-waE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="165" height="134"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P0S-N9-f0R">
+                                                            <rect key="frame" x="0.0" y="0.0" width="165" height="134"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="u01-Dg-waE" secondAttribute="height" multiplier="165:134" id="Hqm-KS-qfQ"/>
+                                                    </constraints>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieo-33-DAD">
+                                                    <rect key="frame" x="4" y="138" width="157" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="u01-Dg-waE" firstAttribute="top" secondItem="8f4-Ff-iF7" secondAttribute="top" id="0s1-lA-qHD"/>
+                                                <constraint firstItem="u01-Dg-waE" firstAttribute="leading" secondItem="8f4-Ff-iF7" secondAttribute="leading" id="1BW-T1-lC4"/>
+                                                <constraint firstAttribute="trailing" secondItem="u01-Dg-waE" secondAttribute="trailing" id="1wg-3D-Cgz"/>
+                                                <constraint firstItem="ieo-33-DAD" firstAttribute="top" secondItem="u01-Dg-waE" secondAttribute="bottom" constant="4" id="AEL-dy-Xoy"/>
+                                                <constraint firstItem="u01-Dg-waE" firstAttribute="centerX" secondItem="ieo-33-DAD" secondAttribute="centerX" id="P8b-oC-aQV"/>
+                                                <constraint firstAttribute="trailing" secondItem="ieo-33-DAD" secondAttribute="trailing" constant="4" id="ZGz-ib-SPu"/>
+                                                <constraint firstItem="ieo-33-DAD" firstAttribute="leading" secondItem="8f4-Ff-iF7" secondAttribute="leading" constant="4" id="gt3-dZ-8Sq"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="8f4-Ff-iF7" firstAttribute="top" secondItem="04p-FS-wHA" secondAttribute="top" id="fVR-Nn-PTP"/>
+                                    <constraint firstItem="8f4-Ff-iF7" firstAttribute="centerY" secondItem="04p-FS-wHA" secondAttribute="centerY" id="nbD-Pv-uLs"/>
+                                    <constraint firstItem="8f4-Ff-iF7" firstAttribute="leading" secondItem="04p-FS-wHA" secondAttribute="leading" id="r5F-VG-0cg"/>
+                                    <constraint firstItem="8f4-Ff-iF7" firstAttribute="centerX" secondItem="04p-FS-wHA" secondAttribute="centerX" id="sZS-Hh-bCW"/>
+                                </constraints>
                                 <connections>
-                                    <outlet property="collectionName" destination="fRT-1K-bzs" id="zK4-Ej-6u6"/>
-                                    <outlet property="imageView" destination="kxE-7r-f5c" id="79g-6m-kv1"/>
+                                    <outlet property="collectionName" destination="ieo-33-DAD" id="KJ5-IR-vb1"/>
+                                    <outlet property="imageView" destination="P0S-N9-f0R" id="uIO-zK-IZO"/>
+                                    <outlet property="roundedCorner" destination="8f4-Ff-iF7" id="o12-7e-JN7"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
