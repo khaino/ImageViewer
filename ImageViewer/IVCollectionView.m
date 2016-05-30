@@ -35,6 +35,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //            self.imageView.image = [UIImage imageWithData:imageData];
 //        });
 //    });
+    
     Podcast *podcast = [self.podcasts objectAtIndex:self.currentImage];
     IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
     [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]

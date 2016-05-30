@@ -11,8 +11,11 @@
 #import "PodcastDBManager.h"
 #import "DownloadJSON.h"
 #import "RootViewController.h"
+#import "RootViewController2.h"
 #import "IVImageDownload.h"
 #import "IVCollectionView.h"
+#import "IVScrollView.h"
+#import "IVTableViewCell.h"
 
 @interface IVListTableViewController ()
 @property (strong, nonatomic) NSURLSession *session;
@@ -25,6 +28,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    DownloadJSON *downloader = [[DownloadJSON alloc]init];
+    [downloader performSearch:@"football"];
+    self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
+    [self.tableView reloadData];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -39,11 +46,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    DownloadJSON *downloader = [[DownloadJSON alloc]init];
-    [downloader performSearch:@"learning"];
-    self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
-}
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.tableView reloadData];
@@ -60,41 +62,60 @@
 }
 
 
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+//    Podcast *podcast = [self.podcasts objectAtIndex:(indexPath.row)];
+//    self.thumbnail = [UIImage animatedImageNamed:@"spinner_" duration:1.0f];
+//    [cell.imageView setImage:self.thumbnail];
+//    IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
+//    [imageDownloader downloadImage:[NSURL URLWithString:podcast.smallImage]
+//                           trackId:podcast.trackID
+//                         imageType:k60
+//                 completionHandler:^(NSURL *url){
+//                     cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+//                 }];
+//    cell.textLabel.text = podcast.collectionName;
+//    cell.detailTextLabel.text = podcast.artistName;
+//    
+////    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+////        
+////        NSURL *imageURL = [NSURL URLWithString:podcast.smallImage];
+////        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+////        
+////        // Completion handler
+////        dispatch_sync(dispatch_get_main_queue(), ^{
+////            self.thumbnail = [UIImage imageWithData:imageData];
+////            cell.imageView.image = self.thumbnail;
+////        });
+////    });
+//    
+//    cell.imageView.layer.cornerRadius = 7;
+//    cell.imageView.clipsToBounds = YES;
+//    return cell;
+//}
+
+
+/*
+ Custom table view cell
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    IVTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Podcast *podcast = [self.podcasts objectAtIndex:(indexPath.row)];
-    
     self.thumbnail = [UIImage animatedImageNamed:@"spinner_" duration:1.0f];
-    [cell.imageView setImage:self.thumbnail];
-    
-    // Image downloading using IVImageDownload class
+    cell.smallImageView.image = self.thumbnail;
     IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
     [imageDownloader downloadImage:[NSURL URLWithString:podcast.smallImage]
                            trackId:podcast.trackID
                          imageType:k60
                  completionHandler:^(NSURL *url){
-                     cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                     cell.smallImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
                  }];
-    cell.textLabel.text = podcast.collectionName;
-    cell.detailTextLabel.text = podcast.artistName;
-    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        
-//        NSURL *imageURL = [NSURL URLWithString:podcast.smallImage];
-//        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-//        
-//        // Completion handler
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-//            self.thumbnail = [UIImage imageWithData:imageData];
-//            cell.imageView.image = self.thumbnail;
-//        });
-//    });
-    
+    cell.titleLabel.text = podcast.collectionName;
+    cell.subtitleLabel.text = podcast.artistName;
+    cell.smallImageView.layer.cornerRadius = 10;
+    cell.smallImageView.clipsToBounds = YES;
     return cell;
 }
-
-
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -118,10 +139,26 @@
 //    
 //    // Get the storyboard named secondStoryBoard from the main bundle:
 //    UIStoryboard *pageControlStoryboard = [UIStoryboard storyboardWithName:@"IVPageControl" bundle:nil];
-//    RootViewController *rvc = [pageControlStoryboard instantiateInitialViewController];
-//    rvc.pageImages = imageList;
+//    IVCollectionView *rvc = [pageControlStoryboard instantiateInitialViewController];
+//    rvc.podcasts = self.podcasts;
 //    rvc.currentImage = (int)indexPath.row;
 //    [self.navigationController pushViewController:rvc animated:YES];
+//}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIStoryboard *pageControlStoryboard = [UIStoryboard storyboardWithName:@"IVScroll" bundle:nil];
+    IVScrollView *vc = [pageControlStoryboard instantiateInitialViewController];
+    vc.contentList = self.podcasts;
+    vc.currentImage = (int)indexPath.row;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IVPageControl" bundle:nil];
+//    RootViewController *vc = [storyboard instantiateInitialViewController];
+//    vc.podcasts = self.podcasts;
+//    vc.currentImage = (int)indexPath.row;
+//    [self.navigationController pushViewController:vc animated:YES];
 //}
 
 - (IBAction)chageGridView:(id)sender {
@@ -129,6 +166,7 @@
     UINavigationController *navigationController = (UINavigationController *)[storyBoard instantiateInitialViewController];
     [self presentViewController:navigationController animated:YES completion:nil];
 }
+
 /*
  // Override to support editing the table view.
  - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,26 +188,21 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    // Get current table row
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    
-//    // Add current image to first item of array
-//    NSMutableArray * imageList = [[NSMutableArray alloc]initWithCapacity:self.podcasts.count];
-//    for (Podcast *p in self.podcasts) {
-//        [imageList addObject:p.largeImage];
-//    }
-    
-    // Get the new view controller using [segue destinationViewController].
-    IVCollectionView *cvc = [segue destinationViewController];
-    
-    // Pass the selected object to the new view controller.
-//    cvc.imageList = imageList;
-    cvc.podcasts = self.podcasts;
-    cvc.currentImage = (int)indexPath.row;
-}
+//// In a storyboard-based application, you will often want to do a little preparation before navigation
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    // Get current table row
+//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//
+//    
+//    // Get the new view controller using [segue destinationViewController].
+//    ViewController2 *cvc = [segue destinationViewController];
+//    
+//    // Pass the selected object to the new view controller.
+////    cvc.imageList = imageList;
+//    cvc.contentList = self.podcasts;
+//    cvc.currentImage = (int)indexPath.row;
+//}
 
 //- (UIImage *)imageForIndexPath:(NSIndexPath *)indexPath {
 //    
