@@ -19,6 +19,7 @@
 @interface IVGridViewController ()<IVGridLayoutDelegate>
 
 @property (strong, nonatomic) NSMutableArray *podcasts;
+@property (strong, nonatomic) NSMutableSet *indexSet;
 
 @end
 static BOOL classVarsInitialized = NO;
@@ -52,6 +53,7 @@ static int count = 0;
 
     layout.delegate = self;
     
+    self.indexSet = [NSMutableSet set];
     
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,12 +61,13 @@ static int count = 0;
     self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
 //    NSLog(@"Podcoast count : %lu", (unsigned long)[self.podcasts count]);
     self.collectionView.backgroundColor = [UIColor grayColor];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     // Register cell classes
-    [self.collectionView registerClass:[GridCell class] forCellWithReuseIdentifier:reuseIdentifier];
+//    [self.collectionView registerClass:[GridCell class] forCellWithReuseIdentifier:reuseIdentifier];
 //    [self.collectionView reloadData];
 
 }
@@ -81,46 +84,56 @@ static int count = 0;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
+    
     return self.podcasts.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSLog(@"indexPath : %@", indexPath);
+    NSLog(@"item : %ld", (long)indexPath.item);
+//    NSLog(@"Count : %d",count++);
+    
     
     GridCell *cell = (GridCell*)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-//    cell.backgroundColor = [UIColor greenColor];
+    //    cell.backgroundColor = [UIColor greenColor];
     Podcast *podcast = [self.podcasts objectAtIndex:indexPath.row];
+    NSNumber *index = [NSNumber numberWithInteger:indexPath.row];
+    [self.indexSet addObject:index];
+    
+//    NSLog(@"collection : %@", podcast.collectionName);
     UIFont *font = [UIFont fontWithName:@"AvenirNext-Regular" size:10];
     [cell.collectionName setFont:font];
-
-   // cell.collectionName.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.collectionName.numberOfLines = 0;
-    cell.collectionName.text = podcast.collectionName;
     
+    // cell.collectionName.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.collectionName.numberOfLines = 0;
+//    cell.collectionName.text = podcast.collectionName;
+    cell.collectionName.text = @"This is just test";
+    if (cell == nil) {
+        NSLog(@"Cell is nil");
+    }
+    
+    if (cell.collectionName.text == nil) {
+        NSLog(@"Cell collection name is nil");
+    }
     
     [[[IVImageDownload alloc]init] downloadImage:[NSURL URLWithString:podcast.smallImage]  trackId:podcast.trackID imageType:k60 completionHandler:^(NSURL *url) {
-
+        
         cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+        if (cell.imageView.image == nil) {
+            NSLog(@"Image view is nill");
+        }
+       
     }];
     
     return cell;
+
 }
 
-- (UIImage*)imageWithImage: (UIImage*) sourceImage scaledToWidth: (float) i_width
-{
-    float oldWidth = sourceImage.size.width;
-    float scaleFactor = i_width / oldWidth;
-    
-    float newHeight = sourceImage.size.height * scaleFactor;
-    float newWidth = oldWidth * scaleFactor;
-    
-    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
-    [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
+
 
 // Implementation of IVGridLayoutDelegate
 
@@ -141,7 +154,6 @@ static int count = 0;
         
     }];
 
-//    CGRect rect = AVMakeRectWithAspectRatioInsideRect(size, boundingRect);
     if (height == 0.0) {
         height = 2 * width;
     }
