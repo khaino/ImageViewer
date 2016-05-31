@@ -28,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
     DownloadJSON *downloader = [[DownloadJSON alloc]init];
     [downloader search:@"football" completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if(!error){
