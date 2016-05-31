@@ -18,5 +18,6 @@
 - (BOOL)insertImageInfo:(ImageInfo*)imageInfo;
 - (BOOL)updateImageInfo:(ImageInfo*)imageInfo;
 - (BOOL)deleteImageInfo:(NSString*)imageId;
+- (NSString*)getLastInsertRowIdWithImageInfo:(ImageInfo*)imageInfo;
 
 @end

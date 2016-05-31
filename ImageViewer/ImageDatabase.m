@@ -89,13 +89,14 @@ NSString *dbimagename = @"image.db";
 }
 
 
-+ (NSString*)getLastInsertRowId {
++ (NSString*)getLastInsertRowIdImageInfo:(ImageInfo*)imageInfo {
     
     sqlite3 *db;
     NSString *imageId;
     if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
-        
-        NSString *sql = @"SELECT LAST_INSERT_ROWID()";
+        //select id from image where track_id = '75908431' and is_thumpnail = 1;
+//        NSString *sql = @"SELECT id FROM image WHERE track_id = '%@' AND is_thumpnail = '%d'";
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM image WHERE track_id = '%@' AND is_thumpnail = '%d'", imageInfo.trackId, imageInfo.isThumpnail];
         sqlite3_stmt *stmt;
         if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, NULL) == SQLITE_OK) {
             while (sqlite3_step(stmt) == SQLITE_ROW) {
@@ -118,7 +119,7 @@ NSString *dbimagename = @"image.db";
     if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
         
         // Create sql statement for insert
-        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO image (track_id, is_thumpnail, download_completed, loc_url, last_access) VALUES ('%@', '%d', '%d', '%@', '%@')", imageInfo.imageId, imageInfo.isThumpnail, imageInfo.downloadCompleted, imageInfo.locUrl.path, imageInfo.lastAccess];
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO image (track_id, is_thumpnail, download_completed, loc_url, last_access) VALUES ('%@', '%d', '%d', '%@', '%@')", imageInfo.trackId, imageInfo.isThumpnail, imageInfo.downloadCompleted, imageInfo.locUrl.path, imageInfo.lastAccess];
         
         char *error;
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {

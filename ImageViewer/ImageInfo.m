@@ -48,6 +48,12 @@
     return self;
 }
 
+- (void)setImageId:(NSString *)imageId {
+    if (imageId != nil && imageId != _imageId) {
+        _imageId = imageId;
+    }
+}
+
 - (void)setDownloadCompleted:(BOOL)downloadCompleted {
     if (downloadCompleted != _downloadCompleted) {
         _downloadCompleted = downloadCompleted;

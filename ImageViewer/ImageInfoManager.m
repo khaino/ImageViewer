@@ -62,7 +62,7 @@ static ImageInfoManager *imageInfoManager;
     BOOL ret = NO;
     if (imageInfo != nil && imageInfo) {
         if ([ImageDatabase insertOrUpdateImageInfo:imageInfo]) {
-            NSString *imageId = [ImageDatabase getLastInsertRowId];
+            NSString *imageId = [ImageDatabase getLastInsertRowIdImageInfo:imageInfo];
             [self.allImageInfo setObject:imageInfo forKey:imageId];
             ret = YES;
         }
@@ -84,6 +84,10 @@ static ImageInfoManager *imageInfoManager;
 
 - (BOOL)deleteImageInfo:(NSString*)imageId {
     return [ImageDatabase deleteImageInfo:imageId];
+}
+
+- (NSString*)getLastInsertRowIdWithImageInfo:(ImageInfo*)imageInfo {
+    return [ImageDatabase getLastInsertRowIdImageInfo:imageInfo];
 }
 
 @end
