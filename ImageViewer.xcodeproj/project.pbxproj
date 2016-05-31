@@ -35,6 +35,14 @@
 		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
 		CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */; };
 		CEEAEFA31CF4491400173AE1 /* IVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */; };
+		CEF80C221CFD523E009AD81A /* GridViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C1F1CFD523E009AD81A /* GridViewLayout.m */; };
+		CEF80C231CFD523E009AD81A /* IVGridLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C211CFD523E009AD81A /* IVGridLayoutAttributes.m */; };
+		CEF80C2E1CFD5261009AD81A /* IVScroll.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF80C241CFD5261009AD81A /* IVScroll.storyboard */; };
+		CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C261CFD5261009AD81A /* IVScrollView.m */; };
+		CEF80C301CFD5261009AD81A /* IVTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C281CFD5261009AD81A /* IVTableViewCell.m */; };
+		CEF80C311CFD5261009AD81A /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C2A1CFD5261009AD81A /* MyViewController.m */; };
+		CEF80C321CFD5261009AD81A /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF80C2B1CFD5261009AD81A /* MyViewController.xib */; };
+		CEF80C331CFD5261009AD81A /* RootViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C2D1CFD5261009AD81A /* RootViewController2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +96,20 @@
 		CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVPageControl.storyboard; sourceTree = "<group>"; };
 		CEEAEFA11CF4491400173AE1 /* IVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCollectionView.h; sourceTree = "<group>"; };
 		CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionView.m; sourceTree = "<group>"; };
+		CEF80C1E1CFD523E009AD81A /* GridViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewLayout.h; sourceTree = "<group>"; };
+		CEF80C1F1CFD523E009AD81A /* GridViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewLayout.m; sourceTree = "<group>"; };
+		CEF80C201CFD523E009AD81A /* IVGridLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVGridLayoutAttributes.h; sourceTree = "<group>"; };
+		CEF80C211CFD523E009AD81A /* IVGridLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVGridLayoutAttributes.m; sourceTree = "<group>"; };
+		CEF80C241CFD5261009AD81A /* IVScroll.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVScroll.storyboard; sourceTree = "<group>"; };
+		CEF80C251CFD5261009AD81A /* IVScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVScrollView.h; sourceTree = "<group>"; };
+		CEF80C261CFD5261009AD81A /* IVScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVScrollView.m; sourceTree = "<group>"; };
+		CEF80C271CFD5261009AD81A /* IVTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTableViewCell.h; sourceTree = "<group>"; };
+		CEF80C281CFD5261009AD81A /* IVTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVTableViewCell.m; sourceTree = "<group>"; };
+		CEF80C291CFD5261009AD81A /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		CEF80C2A1CFD5261009AD81A /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		CEF80C2B1CFD5261009AD81A /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
+		CEF80C2C1CFD5261009AD81A /* RootViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController2.h; sourceTree = "<group>"; };
+		CEF80C2D1CFD5261009AD81A /* RootViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController2.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,7 +183,6 @@
 		22C1C0121CED845700288149 /* PodcastDatabase */ = {
 			isa = PBXGroup;
 			children = (
-				CEEAEFA11CF4491400173AE1 /* IVCollectionView.h */,
 				22C1C0001CED81EE00288149 /* PodcastDAO.h */,
 				22C1C0011CED81EE00288149 /* PodcastDAO.m */,
 				22C1C0021CED81EE00288149 /* PodcastDBManager.h */,
@@ -175,19 +196,12 @@
 		22C1C0131CED84A300288149 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */,
-				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
-				CE4939381CE33A860096AC44 /* IVListTableViewController.m */,
+				CEF80C361CFD52C0009AD81A /* Scrollview */,
+				CEF80C351CFD52A3009AD81A /* Tableview */,
+				CEF80C341CFD5288009AD81A /* PageControlVC */,
+				CEF80C371CFD52D3009AD81A /* CollectionView */,
 				22C1BFF01CED81EE00288149 /* DownloadJSON.h */,
 				22C1BFF11CED81EE00288149 /* DownloadJSON.m */,
-				22C1C0041CED81EE00288149 /* RootViewController.h */,
-				22C1C0051CED81EE00288149 /* RootViewController.m */,
-				22C1BFFC1CED81EE00288149 /* IVPageViewController.h */,
-				22C1BFFD1CED81EE00288149 /* IVPageViewController.m */,
-				22C1BFFA1CED81EE00288149 /* IVPageContentViewController.h */,
-				22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */,
-				CE49393F1CE33B4E0096AC44 /* IVList.storyboard */,
-				CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */,
 			);
 			name = List;
 			sourceTree = "<group>";
@@ -195,6 +209,10 @@
 		22C1C0141CED84ED00288149 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				CEF80C1E1CFD523E009AD81A /* GridViewLayout.h */,
+				CEF80C1F1CFD523E009AD81A /* GridViewLayout.m */,
+				CEF80C201CFD523E009AD81A /* IVGridLayoutAttributes.h */,
+				CEF80C211CFD523E009AD81A /* IVGridLayoutAttributes.m */,
 				2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */,
 				2209BDE91CE2E16E001FBAC7 /* IVGridViewController.h */,
 				2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */,
@@ -236,6 +254,56 @@
 				22F60D801CF447A800D8BA03 /* EnumType.m */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		CEF80C341CFD5288009AD81A /* PageControlVC */ = {
+			isa = PBXGroup;
+			children = (
+				22C1C0041CED81EE00288149 /* RootViewController.h */,
+				22C1C0051CED81EE00288149 /* RootViewController.m */,
+				CEF80C2C1CFD5261009AD81A /* RootViewController2.h */,
+				CEF80C2D1CFD5261009AD81A /* RootViewController2.m */,
+				22C1BFFC1CED81EE00288149 /* IVPageViewController.h */,
+				22C1BFFD1CED81EE00288149 /* IVPageViewController.m */,
+				22C1BFFA1CED81EE00288149 /* IVPageContentViewController.h */,
+				22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */,
+				CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */,
+			);
+			name = PageControlVC;
+			sourceTree = "<group>";
+		};
+		CEF80C351CFD52A3009AD81A /* Tableview */ = {
+			isa = PBXGroup;
+			children = (
+				CEF80C271CFD5261009AD81A /* IVTableViewCell.h */,
+				CEF80C281CFD5261009AD81A /* IVTableViewCell.m */,
+				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
+				CE4939381CE33A860096AC44 /* IVListTableViewController.m */,
+				CE49393F1CE33B4E0096AC44 /* IVList.storyboard */,
+			);
+			name = Tableview;
+			sourceTree = "<group>";
+		};
+		CEF80C361CFD52C0009AD81A /* Scrollview */ = {
+			isa = PBXGroup;
+			children = (
+				CEF80C251CFD5261009AD81A /* IVScrollView.h */,
+				CEF80C261CFD5261009AD81A /* IVScrollView.m */,
+				CEF80C241CFD5261009AD81A /* IVScroll.storyboard */,
+				CEF80C291CFD5261009AD81A /* MyViewController.h */,
+				CEF80C2A1CFD5261009AD81A /* MyViewController.m */,
+				CEF80C2B1CFD5261009AD81A /* MyViewController.xib */,
+			);
+			name = Scrollview;
+			sourceTree = "<group>";
+		};
+		CEF80C371CFD52D3009AD81A /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */,
+				CEEAEFA11CF4491400173AE1 /* IVCollectionView.h */,
+			);
+			name = CollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,7 +365,9 @@
 			files = (
 				223709CD1CE2CCF600A54881 /* LaunchScreen.storyboard in Resources */,
 				2209BDE81CE2E13B001FBAC7 /* IVGrid.storyboard in Resources */,
+				CEF80C321CFD5261009AD81A /* MyViewController.xib in Resources */,
 				223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */,
+				CEF80C2E1CFD5261009AD81A /* IVScroll.storyboard in Resources */,
 				CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */,
 				223709C81CE2CCF600A54881 /* Main.storyboard in Resources */,
 				CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */,
@@ -312,14 +382,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				22C1C00C1CED81EE00288149 /* IVPageViewController.m in Sources */,
+				CEF80C331CFD5261009AD81A /* RootViewController2.m in Sources */,
 				22C1C0101CED81EE00288149 /* RootViewController.m in Sources */,
+				CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */,
 				225353161CF6E05800DFA036 /* IVGridLayout.m in Sources */,
 				CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */,
 				223709C51CE2CCF600A54881 /* ViewController.m in Sources */,
 				2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */,
 				22C1C00F1CED81EE00288149 /* PodcastDBManager.m in Sources */,
+				CEF80C231CFD523E009AD81A /* IVGridLayoutAttributes.m in Sources */,
 				22F60D811CF447A800D8BA03 /* EnumType.m in Sources */,
+				CEF80C301CFD5261009AD81A /* IVTableViewCell.m in Sources */,
 				CE49393C1CE33A860096AC44 /* Podcast.m in Sources */,
+				CEF80C311CFD5261009AD81A /* MyViewController.m in Sources */,
 				22C1C0071CED81EE00288149 /* ImageDatabase.m in Sources */,
 				2209BDF31CE2FACE001FBAC7 /* IVImageDownload.m in Sources */,
 				22C1C00E1CED81EE00288149 /* PodcastDAO.m in Sources */,
@@ -329,6 +404,7 @@
 				22C1C00A1CED81EE00288149 /* IVCacheManager.m in Sources */,
 				223709C21CE2CCF600A54881 /* AppDelegate.m in Sources */,
 				2209BDEF1CE2F137001FBAC7 /* GridCell.m in Sources */,
+				CEF80C221CFD523E009AD81A /* GridViewLayout.m in Sources */,
 				22C1C0061CED81EE00288149 /* DownloadJSON.m in Sources */,
 				223709BF1CE2CCF600A54881 /* main.m in Sources */,
 				CEEAEFA31CF4491400173AE1 /* IVCollectionView.m in Sources */,
