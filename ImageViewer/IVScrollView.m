@@ -37,7 +37,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // a page is the width of the scroll view
     self.scrollView.pagingEnabled = YES;
-    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.scrollView.frame) * numberPages, CGRectGetHeight(self.scrollView.frame));
+    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds) * numberPages, CGRectGetHeight(self.view.bounds));
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.scrollsToTop = NO;
@@ -90,8 +90,10 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     // replace the placeholder if necessary
     MyViewController *controller = [self.viewControllers objectAtIndex:page];
+    
     if ((NSNull *)controller == [NSNull null]) {
         controller = [[MyViewController alloc] init];
+        NSLog(@"Create new viewController");
         [self.viewControllers replaceObjectAtIndex:page withObject:controller];
     }
     
