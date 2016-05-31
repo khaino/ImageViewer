@@ -11,7 +11,6 @@
 @interface DownloadJSON ()
 @property (strong, nonatomic) NSURLSession *session;
 @property (strong, nonatomic) NSURLSessionDataTask *dataTask;
-@property (strong, nonatomic) NSArray *podcasts;
 @end
 
 @implementation DownloadJSON
@@ -38,8 +37,9 @@
 //
 // Searching the data with keyword
 //
-- (void)performSearch:(NSString *)keyword {
 
+-(void)search:(NSString *)keyword completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))myCompletion
+{
     if (self.dataTask) {
         [self.dataTask cancel];
     }
@@ -56,6 +56,7 @@
                 [self processResults:results];
             }
         }
+        myCompletion(data, response, error);
     }];
     
     if (self.dataTask) {
@@ -85,23 +86,4 @@
         [[PodcastDBManager defaultManager] insertPodcast:podcast];
     }
 }
-
-
-////
-//// Inserting search results to podcasts array
-////
-//- (BOOL)processResults:(NSArray *)results {
-//    NSMutableArray *tempArray = [[NSMutableArray alloc]init];
-//    for (NSDictionary *dict in results) {
-//        Podcast *podcast = [[Podcast alloc]init];
-//        [podcast setTrackID:[dict objectForKey:@"trackId"]];
-//        [podcast setCollectionName:[dict objectForKey:@"collectionName"]];
-//        [podcast setArtistName:[dict objectForKey:@"artistName"]];
-//        [podcast setSmallImage:[dict objectForKey:@"artworkUrl60"]];
-//        [podcast setLargeImage:[dict objectForKey:@"artworkUrl600"]];
-//        [tempArray addObject:podcast];
-//    }
-//    self.podcasts = tempArray;
-//    return YES;
-//}
 @end

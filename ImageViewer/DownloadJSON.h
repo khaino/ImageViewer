@@ -11,6 +11,5 @@
 #import "PodcastDBManager.h"
 
 @interface DownloadJSON : NSObject
-@property (strong, nonatomic) NSArray *results;
-- (void)performSearch:(NSString *)keyword;
+- (void)search:(NSString *)keyword completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))myCompletion;
 @end

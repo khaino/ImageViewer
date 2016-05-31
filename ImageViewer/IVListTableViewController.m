@@ -29,28 +29,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     DownloadJSON *downloader = [[DownloadJSON alloc]init];
-    [downloader performSearch:@"football"];
-    self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
-    [self.tableView reloadData];
-   
-    
+    [downloader search:@"football" completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if(!error){
+            self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
+            NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+            if (httpResp.statusCode == 200) {
+                NSLog(@"SUCESS");
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        }
+    }];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     // Create page view controller
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
-- (void)viewDidAppear:(BOOL)animated {
-    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -63,7 +65,9 @@
     return self.podcasts ? self.podcasts.count : 0;
 }
 
-
+/*
+ Default Table Cell
+ */
 //- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 //    Podcast *podcast = [self.podcasts objectAtIndex:(indexPath.row)];
