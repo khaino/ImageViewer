@@ -32,6 +32,7 @@
     [downloader performSearch:@"football"];
     self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
     [self.tableView reloadData];
+   
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -39,6 +40,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     // Create page view controller
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,16 +101,23 @@
  Custom table view cell
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     IVTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
     Podcast *podcast = [self.podcasts objectAtIndex:(indexPath.row)];
+    
     self.thumbnail = [UIImage animatedImageNamed:@"spinner_" duration:1.0f];
     cell.smallImageView.image = self.thumbnail;
+    
     IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
     [imageDownloader downloadImage:[NSURL URLWithString:podcast.smallImage]
                            trackId:podcast.trackID
                          imageType:k60
                  completionHandler:^(NSURL *url){
-                     cell.smallImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         self.thumbnail = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                         cell.smallImageView.image = self.thumbnail;
+                     });
                  }];
     cell.titleLabel.text = podcast.collectionName;
     cell.subtitleLabel.text = podcast.artistName;

@@ -102,9 +102,11 @@ static NSString * const reuseIdentifier = @"Cell";
         frame.origin.y = 0;
         controller.view.frame = frame;
         
-        [self addChildViewController:controller];
-        [self.scrollView addSubview:controller.view];
-        [controller didMoveToParentViewController:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self addChildViewController:controller];
+            [self.scrollView addSubview:controller.view];
+            [controller didMoveToParentViewController:self];
+        });
         
         Podcast *podcast = [self.contentList objectAtIndex:page];
         IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
@@ -112,8 +114,10 @@ static NSString * const reuseIdentifier = @"Cell";
                                trackId:podcast.trackID
                              imageType:k600
                      completionHandler:^(NSURL *url){
-                         [controller.activityIndicator stopAnimating];
-                         controller.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                             [controller.activityIndicator stopAnimating];
+                             controller.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                         });
                      }];
     }
 }
@@ -127,9 +131,12 @@ static NSString * const reuseIdentifier = @"Cell";
     self.pageControl.currentPage = page;
     
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-    [self loadScrollViewWithPage:page - 1];
-    [self loadScrollViewWithPage:page];
-    [self loadScrollViewWithPage:page + 1];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self loadScrollViewWithPage:page - 1];
+        [self loadScrollViewWithPage:page];
+        [self loadScrollViewWithPage:page + 1];
+    });
+    
     
     // a possible optimization would be to unload the views+controllers which are no longer visible
 }
@@ -137,38 +144,42 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)gotoPage:(BOOL)animated {
     
     NSInteger page = self.pageControl.currentPage;
-    if (page >= self.contentList.count) {
-        return;
-    }
-    if (page == 0) {
-        [self loadScrollViewWithPage:page];
-        [self loadScrollViewWithPage:page + 1];
-    }
-    if (page == self.contentList.count - 1) {
-        [self loadScrollViewWithPage:page - 1];
-        [self loadScrollViewWithPage:page];
-    }
-    if (page > 0 && page < self.contentList.count - 1){
-        // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-        [self loadScrollViewWithPage:page - 1];
-        [self loadScrollViewWithPage:page];
-        [self loadScrollViewWithPage:page + 1];
-    }
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (page >= self.contentList.count) {
+            return;
+        }
+        if (page == 0) {
+            [self loadScrollViewWithPage:page];
+            [self loadScrollViewWithPage:page + 1];
+        }
+        if (page == self.contentList.count - 1) {
+            [self loadScrollViewWithPage:page - 1];
+            [self loadScrollViewWithPage:page];
+        }
+        if (page > 0 && page < self.contentList.count - 1){
+            // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
+            [self loadScrollViewWithPage:page - 1];
+            [self loadScrollViewWithPage:page];
+            [self loadScrollViewWithPage:page + 1];
+        }
+        
+        // update the scroll view to the appropriate page
+        CGRect bounds = self.scrollView.bounds;
+        bounds.origin.x = CGRectGetWidth(bounds) * page;
+        bounds.origin.y = 0;
+        [self.scrollView scrollRectToVisible:bounds animated:animated];
+        [UIView transitionWithView:self.collectionView
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^(void){
+                            self.collectionView.hidden = NO;
+                        }
+                        completion:nil];
+        self.collectionView.hidden = YES;
+        
+    });
     
-    // update the scroll view to the appropriate page
-    CGRect bounds = self.scrollView.bounds;
-    bounds.origin.x = CGRectGetWidth(bounds) * page;
-    bounds.origin.y = 0;
-    [self.scrollView scrollRectToVisible:bounds animated:animated];
-    [UIView transitionWithView:self.collectionView
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^(void){
-                        self.collectionView.hidden = NO;
-                    }
-                    completion:nil];
-    self.collectionView.hidden = YES;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -190,9 +201,11 @@ static NSString * const reuseIdentifier = @"Cell";
                            trackId:podcast.trackID
                          imageType:k60
                  completionHandler:^(NSURL *url){
-                     UIImage *image= [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-                     UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
-                     cell.backgroundView = imageView;
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         UIImage *image= [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                         UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
+                         cell.backgroundView = imageView;
+                     });
                  }];
     return cell;
 }

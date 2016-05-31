@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Podcast.h"
 
 @interface IVPageContentViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -14,4 +15,5 @@
 @property (strong, nonatomic) UIImage *image;
 @property NSUInteger pageIndex;
 @property NSString *imageFile;
+@property (strong, nonatomic) Podcast *podcast;
 @end

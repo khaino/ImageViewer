@@ -14,25 +14,22 @@
                         <viewControllerLayoutGuide type="bottom" id="zYt-ec-MSP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KBL-FU-ImB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfc-DE-yqp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2" y="-62"/>
+            <point key="canvasLocation" x="-758" y="-482"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="E5N-88-lpP">
             <objects>
-                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rEC-Wx-UGY" customClass="IVPageViewController" sceneMemberID="viewController">
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                </pageViewController>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rEC-Wx-UGY" customClass="IVPageViewController" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EKm-gv-5d8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="342" y="-62"/>
+            <point key="canvasLocation" x="-92" y="-146"/>
         </scene>
         <!--Page Content View Controller-->
         <scene sceneID="gxH-7y-Arm">
@@ -43,28 +40,27 @@
                         <viewControllerLayoutGuide type="bottom" id="dan-rs-okJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GyQ-Br-yTn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lfd-me-aUp">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                            </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Zk9-Gd-HEK">
-                                <rect key="frame" x="150" y="230" width="20" height="20"/>
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
                             </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lfd-me-aUp">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Zk9-Gd-HEK" firstAttribute="centerX" secondItem="GyQ-Br-yTn" secondAttribute="centerX" id="CLr-WY-5Fm"/>
-                            <constraint firstItem="Lfd-me-aUp" firstAttribute="bottom" secondItem="dan-rs-okJ" secondAttribute="top" id="Hg4-O0-TYn"/>
-                            <constraint firstItem="Lfd-me-aUp" firstAttribute="centerX" secondItem="GyQ-Br-yTn" secondAttribute="centerX" id="gow-nA-UhZ"/>
-                            <constraint firstItem="Lfd-me-aUp" firstAttribute="centerY" secondItem="GyQ-Br-yTn" secondAttribute="centerY" id="j63-p5-biF"/>
-                            <constraint firstItem="Zk9-Gd-HEK" firstAttribute="centerY" secondItem="GyQ-Br-yTn" secondAttribute="centerY" id="jqn-3f-0Ox"/>
-                            <constraint firstItem="Lfd-me-aUp" firstAttribute="leading" secondItem="GyQ-Br-yTn" secondAttribute="leading" id="osz-TW-7Xx"/>
+                            <constraint firstItem="Lfd-me-aUp" firstAttribute="centerX" secondItem="GyQ-Br-yTn" secondAttribute="centerX" id="1x4-hY-hQU"/>
+                            <constraint firstItem="Lfd-me-aUp" firstAttribute="bottom" secondItem="dan-rs-okJ" secondAttribute="top" id="REr-lI-gGn"/>
+                            <constraint firstItem="Zk9-Gd-HEK" firstAttribute="centerX" secondItem="GyQ-Br-yTn" secondAttribute="centerX" id="aVN-h5-O2H"/>
+                            <constraint firstItem="Lfd-me-aUp" firstAttribute="centerY" secondItem="GyQ-Br-yTn" secondAttribute="centerY" id="dev-lt-iFi"/>
+                            <constraint firstItem="Lfd-me-aUp" firstAttribute="leading" secondItem="GyQ-Br-yTn" secondAttribute="leading" id="gN3-J0-bFh"/>
+                            <constraint firstItem="Zk9-Gd-HEK" firstAttribute="centerY" secondItem="GyQ-Br-yTn" secondAttribute="centerY" id="pC7-he-vyj"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="Zk9-Gd-HEK" id="jvy-pU-cIJ"/>
                         <outlet property="imageView" destination="Lfd-me-aUp" id="GlI-Ia-saE"/>
@@ -72,7 +68,60 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L7p-SA-gva" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="687" y="-62"/>
+            <point key="canvasLocation" x="549" y="-146"/>
+        </scene>
+        <!--Root View Controller2-->
+        <scene sceneID="jGP-kD-47n">
+            <objects>
+                <viewController id="nln-nX-Mj3" customClass="RootViewController2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="avZ-OK-xf7"/>
+                        <viewControllerLayoutGuide type="bottom" id="iMm-4m-b4i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="77s-zL-kM5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bE6-5p-DwQ">
+                                <rect key="frame" x="0.0" y="411" width="600" height="70"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AhJ-gy-czv">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
+                                        <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="0.40999999999999998" colorSpace="calibratedRGB"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="eqh-p5-VbK">
+                                            <size key="itemSize" width="60" height="60"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="dvi-ln-94S">
+                                                <rect key="frame" x="0.0" y="5" width="60" height="60"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="nln-nX-Mj3" id="Wk1-th-yeB"/>
+                                            <outlet property="delegate" destination="nln-nX-Mj3" id="DDv-6b-c6y"/>
+                                        </connections>
+                                    </collectionView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="AhJ-gy-czv" id="4Jt-jK-QeV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gAB-eH-QIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-758" y="191"/>
         </scene>
     </scenes>
 </document>
