@@ -17,6 +17,7 @@
 		223709C81CE2CCF600A54881 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223709C61CE2CCF600A54881 /* Main.storyboard */; };
 		223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223709C91CE2CCF600A54881 /* Assets.xcassets */; };
 		223709CD1CE2CCF600A54881 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223709CB1CE2CCF600A54881 /* LaunchScreen.storyboard */; };
+		22452EF31CFD6F2400C13937 /* RoundedConerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22452EF21CFD6F2400C13937 /* RoundedConerView.m */; };
 		225353161CF6E05800DFA036 /* IVGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 225353151CF6E05800DFA036 /* IVGridLayout.m */; };
 		22C1C0061CED81EE00288149 /* DownloadJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF11CED81EE00288149 /* DownloadJSON.m */; };
 		22C1C0071CED81EE00288149 /* ImageDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF31CED81EE00288149 /* ImageDatabase.m */; };
@@ -63,6 +64,8 @@
 		223709C91CE2CCF600A54881 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		223709CC1CE2CCF600A54881 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		223709CE1CE2CCF600A54881 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22452EF11CFD6F2400C13937 /* RoundedConerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedConerView.h; sourceTree = "<group>"; };
+		22452EF21CFD6F2400C13937 /* RoundedConerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedConerView.m; sourceTree = "<group>"; };
 		225353141CF6E05800DFA036 /* IVGridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVGridLayout.h; sourceTree = "<group>"; };
 		225353151CF6E05800DFA036 /* IVGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVGridLayout.m; sourceTree = "<group>"; };
 		22C1BFF01CED81EE00288149 /* DownloadJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadJSON.h; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 		22C1C0141CED84ED00288149 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				22452EF11CFD6F2400C13937 /* RoundedConerView.h */,
+				22452EF21CFD6F2400C13937 /* RoundedConerView.m */,
 				CEF80C1E1CFD523E009AD81A /* GridViewLayout.h */,
 				CEF80C1F1CFD523E009AD81A /* GridViewLayout.m */,
 				CEF80C201CFD523E009AD81A /* IVGridLayoutAttributes.h */,
@@ -385,6 +390,7 @@
 				CEF80C331CFD5261009AD81A /* RootViewController2.m in Sources */,
 				22C1C0101CED81EE00288149 /* RootViewController.m in Sources */,
 				CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */,
+				22452EF31CFD6F2400C13937 /* RoundedConerView.m in Sources */,
 				225353161CF6E05800DFA036 /* IVGridLayout.m in Sources */,
 				CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */,
 				223709C51CE2CCF600A54881 /* ViewController.m in Sources */,
