@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iwj-jR-ruo">
-                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                    <rect key="frame" x="0.0" y="64" width="600" height="556"/>
                 </imageView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hPU-P0-HIf">
                     <rect key="frame" x="290" y="290" width="20" height="20"/>
@@ -27,13 +27,13 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="hPU-P0-HIf" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="0k7-Uc-Zrg"/>
-                <constraint firstItem="iwj-jR-ruo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="KcM-eA-yIb"/>
+                <constraint firstItem="iwj-jR-ruo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="KcM-eA-yIb"/>
                 <constraint firstItem="hPU-P0-HIf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Wef-S0-OJO"/>
                 <constraint firstItem="iwj-jR-ruo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YB2-vD-4JI"/>
                 <constraint firstAttribute="trailing" secondItem="iwj-jR-ruo" secondAttribute="trailing" id="dux-Su-X3L"/>
                 <constraint firstItem="iwj-jR-ruo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="lMl-Jk-iSW"/>
-                <constraint firstAttribute="bottom" secondItem="iwj-jR-ruo" secondAttribute="bottom" id="tyo-aN-mTN"/>
-                <constraint firstItem="iwj-jR-ruo" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="22" id="v2r-Ru-npR"/>
+                <constraint firstAttribute="bottom" secondItem="iwj-jR-ruo" secondAttribute="bottom" constant="-20" id="tyo-aN-mTN"/>
+                <constraint firstItem="iwj-jR-ruo" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="42" id="v2r-Ru-npR"/>
             </constraints>
             <point key="canvasLocation" x="250" y="417"/>
         </view>
