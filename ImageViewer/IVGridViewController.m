@@ -56,7 +56,6 @@ static NSString * const reuseIdentifier = @"gridCell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
-    self.collectionView.backgroundColor = [UIColor clearColor];
     
 }
 
