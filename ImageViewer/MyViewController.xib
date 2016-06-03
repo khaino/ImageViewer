@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="hPU-P0-HIf" id="DNf-2L-TUI"/>
                 <outlet property="imageView" destination="iwj-jR-ruo" id="RcK-mQ-8zW"/>
+                <outlet property="pageScrollView" destination="P1N-9L-M22" id="8zs-Wg-N9o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,23 +18,34 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iwj-jR-ruo">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="P1N-9L-M22">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                </imageView>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iwj-jR-ruo">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="iwj-jR-ruo" secondAttribute="bottom" id="3m6-9A-OEh"/>
+                        <constraint firstItem="iwj-jR-ruo" firstAttribute="leading" secondItem="P1N-9L-M22" secondAttribute="leading" id="4eI-b8-hE7"/>
+                        <constraint firstAttribute="trailing" secondItem="iwj-jR-ruo" secondAttribute="trailing" id="5ff-Xy-0KP"/>
+                        <constraint firstItem="iwj-jR-ruo" firstAttribute="centerX" secondItem="P1N-9L-M22" secondAttribute="centerX" id="6ew-1T-B9a"/>
+                        <constraint firstItem="iwj-jR-ruo" firstAttribute="top" secondItem="P1N-9L-M22" secondAttribute="top" id="GKw-K9-43Y"/>
+                        <constraint firstItem="iwj-jR-ruo" firstAttribute="centerY" secondItem="P1N-9L-M22" secondAttribute="centerY" id="vLz-pX-dd9"/>
+                    </constraints>
+                </scrollView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hPU-P0-HIf">
                     <rect key="frame" x="290" y="290" width="20" height="20"/>
                 </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="iwj-jR-ruo" secondAttribute="bottom" id="2g5-TZ-Uxk"/>
-                <constraint firstItem="iwj-jR-ruo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9ck-tC-nbr"/>
-                <constraint firstItem="iwj-jR-ruo" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="AWk-MQ-8Jg"/>
-                <constraint firstItem="hPU-P0-HIf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Khw-9s-ltD"/>
-                <constraint firstItem="iwj-jR-ruo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZT2-52-kqY"/>
-                <constraint firstItem="hPU-P0-HIf" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="mqK-eQ-iO6"/>
-                <constraint firstAttribute="trailing" secondItem="iwj-jR-ruo" secondAttribute="trailing" id="vQu-bD-pm7"/>
-                <constraint firstItem="iwj-jR-ruo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="w8k-77-jhB"/>
+                <constraint firstAttribute="bottom" secondItem="P1N-9L-M22" secondAttribute="bottom" id="5eW-9f-BQl"/>
+                <constraint firstItem="P1N-9L-M22" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GQQ-SB-bRI"/>
+                <constraint firstItem="P1N-9L-M22" firstAttribute="centerY" secondItem="hPU-P0-HIf" secondAttribute="centerY" id="JNG-Rd-fGe"/>
+                <constraint firstAttribute="trailing" secondItem="P1N-9L-M22" secondAttribute="trailing" id="TdT-Qr-dEQ"/>
+                <constraint firstItem="P1N-9L-M22" firstAttribute="centerX" secondItem="hPU-P0-HIf" secondAttribute="centerX" id="U3a-ev-xb2"/>
+                <constraint firstItem="P1N-9L-M22" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gzH-q9-kpI"/>
             </constraints>
             <point key="canvasLocation" x="221" y="298"/>
         </view>

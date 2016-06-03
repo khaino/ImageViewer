@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.activityIndicator.hidesWhenStopped = YES;
+    self.pageScrollView.delegate = self;
     [self.activityIndicator startAnimating];
     // Do any additional setup after loading the view from its nib.
 }
@@ -26,6 +27,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.imageView;
+}
 /*
 #pragma mark - Navigation
 

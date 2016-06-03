@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyViewController : UIViewController
+@interface MyViewController : UIViewController <UIScrollViewDelegate>
+@property (weak, nonatomic) IBOutlet UIScrollView *pageScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) NSArray *contentList;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
