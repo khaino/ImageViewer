@@ -25,7 +25,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    
     NSUInteger numberPages = self.contentList.count;
     
     // view controllers are created lazily
@@ -74,11 +74,26 @@ static NSString * const reuseIdentifier = @"Cell";
                            trackId:podcast.trackID
                          imageType:k600
                  completionHandler:^(NSURL *url){
-                         image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                     image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                     NSArray *array = @[image];
+                     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
+                     
+                         // Only for iPad
+                         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                             
+                             // If possible, display as model popup (such as on iPad).
+                             activityVC.modalPresentationStyle = UIModalPresentationPopover;
+                             
+                             // Configure the Popover presentation controller
+                             UIPopoverPresentationController *popController = [activityVC popoverPresentationController];
+                             popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+                             popController.barButtonItem = self.actionButton;
+                         }
+                         [self presentViewController:activityVC animated:YES completion:nil];
                  }];
-    NSArray *array = @[image];
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
-    [self presentViewController:activityVC animated:YES completion:nil];
+    
+    
+    
 }
 
 /*
