@@ -74,9 +74,7 @@ static NSString * const reuseIdentifier = @"Cell";
                            trackId:podcast.trackID
                          imageType:k600
                  completionHandler:^(NSURL *url){
-                     dispatch_async(dispatch_get_main_queue(), ^{
                          image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-                     });
                  }];
     NSArray *array = @[image];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
