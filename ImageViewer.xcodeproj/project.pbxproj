@@ -36,7 +36,6 @@
 		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
 		CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */; };
 		CEEAEFA31CF4491400173AE1 /* IVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */; };
-		CEF80C221CFD523E009AD81A /* GridViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C1F1CFD523E009AD81A /* GridViewLayout.m */; };
 		CEF80C231CFD523E009AD81A /* IVGridLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C211CFD523E009AD81A /* IVGridLayoutAttributes.m */; };
 		CEF80C2E1CFD5261009AD81A /* IVScroll.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF80C241CFD5261009AD81A /* IVScroll.storyboard */; };
 		CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C261CFD5261009AD81A /* IVScrollView.m */; };
@@ -99,8 +98,6 @@
 		CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVPageControl.storyboard; sourceTree = "<group>"; };
 		CEEAEFA11CF4491400173AE1 /* IVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCollectionView.h; sourceTree = "<group>"; };
 		CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionView.m; sourceTree = "<group>"; };
-		CEF80C1E1CFD523E009AD81A /* GridViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewLayout.h; sourceTree = "<group>"; };
-		CEF80C1F1CFD523E009AD81A /* GridViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewLayout.m; sourceTree = "<group>"; };
 		CEF80C201CFD523E009AD81A /* IVGridLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVGridLayoutAttributes.h; sourceTree = "<group>"; };
 		CEF80C211CFD523E009AD81A /* IVGridLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVGridLayoutAttributes.m; sourceTree = "<group>"; };
 		CEF80C241CFD5261009AD81A /* IVScroll.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVScroll.storyboard; sourceTree = "<group>"; };
@@ -214,8 +211,6 @@
 			children = (
 				22452EF11CFD6F2400C13937 /* RoundedConerView.h */,
 				22452EF21CFD6F2400C13937 /* RoundedConerView.m */,
-				CEF80C1E1CFD523E009AD81A /* GridViewLayout.h */,
-				CEF80C1F1CFD523E009AD81A /* GridViewLayout.m */,
 				CEF80C201CFD523E009AD81A /* IVGridLayoutAttributes.h */,
 				CEF80C211CFD523E009AD81A /* IVGridLayoutAttributes.m */,
 				2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */,
@@ -410,7 +405,6 @@
 				22C1C00A1CED81EE00288149 /* IVCacheManager.m in Sources */,
 				223709C21CE2CCF600A54881 /* AppDelegate.m in Sources */,
 				2209BDEF1CE2F137001FBAC7 /* GridCell.m in Sources */,
-				CEF80C221CFD523E009AD81A /* GridViewLayout.m in Sources */,
 				22C1C0061CED81EE00288149 /* DownloadJSON.m in Sources */,
 				223709BF1CE2CCF600A54881 /* main.m in Sources */,
 				CEEAEFA31CF4491400173AE1 /* IVCollectionView.m in Sources */,
