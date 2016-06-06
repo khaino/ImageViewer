@@ -14,6 +14,7 @@
 #import "IVCacheManager.h"
 #import "IVGridLayout.h"
 #import "AVFoundation/AVFoundation.h"
+#import "IVScrollView.h"
 
 
 @interface IVGridViewController ()<IVGridLayoutDelegate>
@@ -96,6 +97,15 @@ static NSString * const reuseIdentifier = @"gridCell";
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UIStoryboard *pageControlStoryboard = [UIStoryboard storyboardWithName:@"IVScroll" bundle:nil];
+    IVScrollView *vc = [pageControlStoryboard instantiateInitialViewController];
+    vc.contentList = self.podcasts;
+    vc.currentImage = (int)indexPath.row;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
 
 // Implementation of IVGridLayoutDelegate
@@ -124,10 +134,7 @@ static NSString * const reuseIdentifier = @"gridCell";
 }
 
 - (IBAction)toList:(id)sender {
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"IVList" bundle:nil];
-    UINavigationController *navigationController = (UINavigationController *)[storyBoard instantiateInitialViewController];
-    [self presentViewController:navigationController animated:YES completion:nil];
-
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
