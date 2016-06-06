@@ -33,6 +33,7 @@ static NSString * const reuseIdentifier = @"Cell";
     for (NSUInteger i = 0; i < numberPages; i++){
         [controllers addObject:[NSNull null]];
     }
+    
     self.viewControllers = controllers;
     
     // a page is the width of the scroll view
@@ -46,14 +47,13 @@ static NSString * const reuseIdentifier = @"Cell";
     self.pageControl.numberOfPages = numberPages;
     self.pageControl.currentPage = self.currentImage;
     self.collectionView.delegate = self;
-    
-    [self gotoPage:YES];
+
+    [self gotoPage:NO];
     
     // Add single touch gesture to image view
     UITapGestureRecognizer *singleTapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     [self.scrollView addGestureRecognizer:singleTapImage];
     self.collectionView.hidden = YES;
-
 }
 
 // Action for single touch on image
@@ -99,7 +99,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // add the controller's view to the scroll view
     if (controller.view.superview == nil) {
-        CGRect frame = self.scrollView.frame;
+        CGRect frame = self.scrollView.bounds;
         frame.origin.x = CGRectGetWidth(frame) * page;
         frame.origin.y = 0;
         controller.view.frame = frame;
@@ -111,6 +111,8 @@ static NSString * const reuseIdentifier = @"Cell";
         });
         
         Podcast *podcast = [self.contentList objectAtIndex:page];
+        
+
         IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
         [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
                                trackId:podcast.trackID
@@ -128,9 +130,13 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     // switch the indicator when more than 50% of the previous/next page is visible
-    CGFloat pageWidth = CGRectGetWidth(self.scrollView.frame);
+    CGFloat pageWidth = CGRectGetWidth(self.scrollView.bounds);
     NSUInteger page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = page;
+    
+    // Set navigation title to artist name
+    Podcast *podcast = [self.contentList objectAtIndex:page];
+    self.navigationItem.title = podcast.artistName;
     
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -146,6 +152,10 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)gotoPage:(BOOL)animated {
     
     NSInteger page = self.pageControl.currentPage;
+    
+    // Set navigation title to artist name
+    Podcast *podcast = [self.contentList objectAtIndex:page];
+    self.navigationItem.title = podcast.artistName;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (page >= self.contentList.count) {
@@ -217,6 +227,38 @@ static NSString * const reuseIdentifier = @"Cell";
     NSLog(@"Click at index %ld",(long)indexPath.row);
     self.pageControl.currentPage = indexPath.row;
     [self gotoPage:YES];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    NSUInteger numberPages = self.contentList.count;
+    
+    // view controllers are created lazily
+    // in the meantime, load the array with placeholders which will be replaced on demand
+    NSMutableArray *controllers = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 0; i < numberPages; i++){
+        [controllers addObject:[NSNull null]];
+    }
+    self.viewControllers = controllers;
+    
+    // a page is the width of the scroll view
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds) * numberPages, CGRectGetHeight(self.view.bounds));
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.scrollsToTop = NO;
+    self.scrollView.delegate = self;
+    self.scrollView.bounces = YES;
+    self.pageControl.numberOfPages = numberPages;
+    self.collectionView.delegate = self;
+    
+    [self gotoPage:NO];
+    
+    // Add single touch gesture to image view
+    UITapGestureRecognizer *singleTapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
+    [self.scrollView addGestureRecognizer:singleTapImage];
+    self.collectionView.hidden = YES;
+
 }
 
 @end
