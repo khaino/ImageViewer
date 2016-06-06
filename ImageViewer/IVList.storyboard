@@ -194,6 +194,11 @@
                                 <action selector="chageGridView:" destination="0wv-Nz-Vee" id="ivj-vV-WAm"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="wvW-i8-XrA">
+                            <connections>
+                                <action selector="shareButton:" destination="0wv-Nz-Vee" id="5nz-dC-7dC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQQ-gb-imC" userLabel="First Responder" sceneMemberID="firstResponder"/>

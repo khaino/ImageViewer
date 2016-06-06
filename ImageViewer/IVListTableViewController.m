@@ -234,4 +234,15 @@
 //    return image;
 //}
 
+
+- (IBAction)shareButton:(UIBarButtonItem *)sender
+{
+    NSMutableArray *mArray = [[NSMutableArray alloc]init];
+    for (Podcast *podcast in self.podcasts) {
+        [mArray addObject:podcast.collectionName];
+    }
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:mArray applicationActivities:nil];
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
+
 @end

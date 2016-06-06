@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *viewControllers;
+@property (strong, nonnull) UIBarButtonItem *actionButton;
 @end
 
 @implementation IVScrollView
@@ -54,9 +55,37 @@ static NSString * const reuseIdentifier = @"Cell";
     UITapGestureRecognizer *singleTapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     [self.scrollView addGestureRecognizer:singleTapImage];
     self.collectionView.hidden = YES;
+    
+    // Add share button to navigation
+    self.actionButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                     target:self
+                                                                     action:@selector(shareButton:)];
+    self.navigationItem.rightBarButtonItem = self.actionButton;
 }
 
-// Action for single touch on image
+/*
+ Action handler for share button
+ */
+- (IBAction)shareButton:(UIBarButtonItem *)sender {
+    Podcast *podcast = [self.contentList objectAtIndex:self.pageControl.currentPage];
+    __block UIImage *image = [[UIImage alloc]init];
+    IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
+    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
+                           trackId:podcast.trackID
+                         imageType:k600
+                 completionHandler:^(NSURL *url){
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                     });
+                 }];
+    NSArray *array = @[image];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
+
+/*
+ Gesture handler for single touch on image
+ */
 - (void)singleTap:(UITapGestureRecognizer *)gesture {
     if (self.collectionView.hidden) {
         [UIView transitionWithView:self.collectionView
@@ -78,12 +107,18 @@ static NSString * const reuseIdentifier = @"Cell";
     NSLog(@"Image Touched!");
 }
 
+/*
+ Prevent vertical scrolling
+ */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y != 0) {
         [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
     }
 }
 
+/*
+ Create view controller with scrollview and imageview
+ */
 - (void)loadScrollViewWithPage:(NSUInteger)page {
     if (page >= self.contentList.count) {
         return;
@@ -126,7 +161,10 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
-// at the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
+/*
+ Create smooth scrolling
+ at the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
+ */
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     // switch the indicator when more than 50% of the previous/next page is visible
@@ -149,6 +187,9 @@ static NSString * const reuseIdentifier = @"Cell";
     // a possible optimization would be to unload the views+controllers which are no longer visible
 }
 
+/*
+ Go to view controller based on user select 
+ */
 - (void)gotoPage:(BOOL)animated {
     
     NSInteger page = self.pageControl.currentPage;
@@ -222,13 +263,19 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
-// Action for selecting a thumbnail on collection slider
+/*
+ Action for selecting a thumbnail on collection slider
+ */
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Click at index %ld",(long)indexPath.row);
     self.pageControl.currentPage = indexPath.row;
     [self gotoPage:YES];
 }
 
+/*
+ Handling rotation
+ When rotate create new array
+ */
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     NSUInteger numberPages = self.contentList.count;
