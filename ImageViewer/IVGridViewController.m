@@ -15,42 +15,34 @@
 #import "IVGridLayout.h"
 #import "AVFoundation/AVFoundation.h"
 #import "IVScrollView.h"
+#import "AnimatedViewController.h"
 
 
 @interface IVGridViewController ()<IVGridLayoutDelegate>
 
 @property (strong, nonatomic) NSMutableArray *podcasts;
-@property (strong, nonatomic) NSMutableSet *indexSet;
+@property (nonatomic)CGPoint scrollPositionBeforeRotation;
 
 @end
-static BOOL classVarsInitialized = NO;
-static UIEdgeInsets sectionInsets;
 
-static void initializeClassVars() {
-    if(classVarsInitialized) {
-        return;
-    }
-    
-    sectionInsets = UIEdgeInsetsMake(20.0, 20.0, 20.0, 20.0);
-    classVarsInitialized = YES;
-}
+const CGFloat HORIZONTAL_PADDING = 10;
+const CGFloat VERTICAL_PADDING = 15;
+const CGFloat INDICATOR_WIDTH = 4;
+const CGFloat ANNOTATION_PADDING = 2;
 
 @implementation IVGridViewController
 
 static NSString * const reuseIdentifier = @"gridCell";
 
-+(void)initialize {
-    initializeClassVars();
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.clearsSelectionOnViewWillAppear = NO;
+    self.navigationItem.title = @"Podcasts Collection";
     
     IVGridLayout *layout = (IVGridLayout*)self.collectionView.collectionViewLayout;
-    self.collectionView.contentInset = UIEdgeInsetsMake(23, 5, 10, 5);
-
+    self.collectionView.contentInset = UIEdgeInsetsMake(VERTICAL_PADDING, HORIZONTAL_PADDING, VERTICAL_PADDING, HORIZONTAL_PADDING - INDICATOR_WIDTH);
     layout.delegate = self;
     
 }
@@ -81,10 +73,7 @@ static NSString * const reuseIdentifier = @"gridCell";
     
     // Configure the cell
     Podcast *podcast = [self.podcasts objectAtIndex:indexPath.row];
-    NSNumber *index = [NSNumber numberWithInteger:indexPath.row];
-    [self.indexSet addObject:index];
-    
-    UIFont *font = [UIFont fontWithName:@"AvenirNext-Regular" size:10];
+    UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     [cell.collectionName setFont:font];
     
     cell.collectionName.numberOfLines = 0;
@@ -107,6 +96,12 @@ static NSString * const reuseIdentifier = @"gridCell";
     
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    IVGridLayout *layout = (IVGridLayout*)self.collectionView.collectionViewLayout;
+    [layout invalidateLayout];
+    layout.isRotate = YES;
+}
+
 
 // Implementation of IVGridLayoutDelegate
 
@@ -122,16 +117,17 @@ static NSString * const reuseIdentifier = @"gridCell";
 
 - (CGFloat)collectionView:(UICollectionView*)collectionView heightForAnnotationAtIndexPath:(NSIndexPath*)indexPath withWidth:(CGFloat)width{
     
-    CGFloat annotationPadding = 2;
-    CGFloat annotationHeaderHeight =  0;//17;
-    UIFont *font = [UIFont fontWithName:@"AvenirNext-Regular" size:10];
+    UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     Podcast *podcast = [self.podcasts objectAtIndex:(indexPath.row)];
     CGRect rect = [podcast.collectionName boundingRectWithSize:CGSizeMake(width - 8, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
     CGFloat commentHeight = rect.size.height;
-    CGFloat height = annotationPadding + annotationHeaderHeight + commentHeight + annotationPadding;
+    CGFloat height = ANNOTATION_PADDING + commentHeight + ANNOTATION_PADDING;
     
     return height;
 }
+
+#pragma private method
+
 
 - (IBAction)toList:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

@@ -18,6 +18,8 @@
 @interface IVGridLayout : UICollectionViewLayout
 
 @property(weak, nonatomic)id<IVGridLayoutDelegate> delegate;
+@property(nonatomic)NSInteger numberOfColumns;
+@property (nonatomic)BOOL isRotate;
 
 @end
 
