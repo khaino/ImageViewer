@@ -37,7 +37,6 @@
 		CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */; };
 		CEDCBBD41D06A83600FEC1DA /* IVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */; };
 		CEEAEFA31CF4491400173AE1 /* IVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */; };
-		CEF80C231CFD523E009AD81A /* IVGridLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C211CFD523E009AD81A /* IVGridLayoutAttributes.m */; };
 		CEF80C2E1CFD5261009AD81A /* IVScroll.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF80C241CFD5261009AD81A /* IVScroll.storyboard */; };
 		CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C261CFD5261009AD81A /* IVScrollView.m */; };
 		CEF80C301CFD5261009AD81A /* IVTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C281CFD5261009AD81A /* IVTableViewCell.m */; };
@@ -101,8 +100,6 @@
 		CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionViewCell.m; sourceTree = "<group>"; };
 		CEEAEFA11CF4491400173AE1 /* IVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCollectionView.h; sourceTree = "<group>"; };
 		CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionView.m; sourceTree = "<group>"; };
-		CEF80C201CFD523E009AD81A /* IVGridLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVGridLayoutAttributes.h; sourceTree = "<group>"; };
-		CEF80C211CFD523E009AD81A /* IVGridLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVGridLayoutAttributes.m; sourceTree = "<group>"; };
 		CEF80C241CFD5261009AD81A /* IVScroll.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVScroll.storyboard; sourceTree = "<group>"; };
 		CEF80C251CFD5261009AD81A /* IVScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVScrollView.h; sourceTree = "<group>"; };
 		CEF80C261CFD5261009AD81A /* IVScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVScrollView.m; sourceTree = "<group>"; };
@@ -214,8 +211,6 @@
 			children = (
 				22452EF11CFD6F2400C13937 /* RoundedConerView.h */,
 				22452EF21CFD6F2400C13937 /* RoundedConerView.m */,
-				CEF80C201CFD523E009AD81A /* IVGridLayoutAttributes.h */,
-				CEF80C211CFD523E009AD81A /* IVGridLayoutAttributes.m */,
 				2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */,
 				2209BDE91CE2E16E001FBAC7 /* IVGridViewController.h */,
 				2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */,
@@ -397,7 +392,6 @@
 				223709C51CE2CCF600A54881 /* ViewController.m in Sources */,
 				2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */,
 				22C1C00F1CED81EE00288149 /* PodcastDBManager.m in Sources */,
-				CEF80C231CFD523E009AD81A /* IVGridLayoutAttributes.m in Sources */,
 				22F60D811CF447A800D8BA03 /* EnumType.m in Sources */,
 				CEF80C301CFD5261009AD81A /* IVTableViewCell.m in Sources */,
 				CE49393C1CE33A860096AC44 /* Podcast.m in Sources */,

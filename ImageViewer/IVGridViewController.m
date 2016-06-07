@@ -15,7 +15,6 @@
 #import "IVGridLayout.h"
 #import "AVFoundation/AVFoundation.h"
 #import "IVScrollView.h"
-#import "AnimatedViewController.h"
 
 
 @interface IVGridViewController ()<IVGridLayoutDelegate>

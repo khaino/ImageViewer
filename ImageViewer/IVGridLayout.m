@@ -7,7 +7,6 @@
 //
 
 #import "IVGridLayout.h"
-#import "IVGridLayoutAttributes.h"
 
 @interface IVGridLayout()
 
