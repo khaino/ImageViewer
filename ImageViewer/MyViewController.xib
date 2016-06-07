@@ -47,7 +47,7 @@
                 <constraint firstItem="P1N-9L-M22" firstAttribute="centerX" secondItem="hPU-P0-HIf" secondAttribute="centerX" id="U3a-ev-xb2"/>
                 <constraint firstItem="P1N-9L-M22" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gzH-q9-kpI"/>
             </constraints>
-            <point key="canvasLocation" x="507" y="494"/>
+            <point key="canvasLocation" x="90" y="429"/>
         </view>
     </objects>
 </document>

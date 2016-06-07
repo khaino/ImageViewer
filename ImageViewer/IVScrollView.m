@@ -10,6 +10,7 @@
 #import "MyViewController.h"
 #import "Podcast.h"
 #import "IVImageDownload.h"
+#import "IVCollectionViewCell.h"
 
 @interface IVScrollView ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, weak) IBOutlet UIPageControl *pageControl;
@@ -258,8 +259,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
+//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    IVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     // Configure the cell
     Podcast *podcast = [self.contentList objectAtIndex:indexPath.row];
     IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
@@ -269,8 +270,9 @@ static NSString * const reuseIdentifier = @"Cell";
                  completionHandler:^(NSURL *url){
                      dispatch_async(dispatch_get_main_queue(), ^{
                          UIImage *image= [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-                         UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
-                         cell.backgroundView = imageView;
+//                         UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
+                         cell.imageView.image = image;
+//                         cell.backgroundView = imageView;
                      });
                  }];
     return cell;

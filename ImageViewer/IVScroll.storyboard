@@ -21,9 +21,6 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFM-LP-fNl">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="gFM-LP-fNl" secondAttribute="height" multiplier="1:1" id="0C7-CI-LDP"/>
-                                </constraints>
                             </scrollView>
                             <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="gst-KX-PMv">
                                 <rect key="frame" x="0.0" y="281" width="600" height="37"/>
@@ -42,14 +39,31 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="dfK-Y4-Fe9">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="dfK-Y4-Fe9" customClass="IVCollectionViewCell">
                                         <rect key="frame" x="0.0" y="10" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YWf-5W-o2I">
+                                                    <rect key="frame" x="0.0" y="1" width="60" height="59"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="YWf-5W-o2I" secondAttribute="height" multiplier="60:59" id="MhK-Fd-dgR"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="YWf-5W-o2I" secondAttribute="bottom" id="FvY-Px-gPr"/>
+                                            <constraint firstAttribute="trailing" secondItem="YWf-5W-o2I" secondAttribute="trailing" id="Zq2-3E-DZN"/>
+                                            <constraint firstItem="YWf-5W-o2I" firstAttribute="top" secondItem="dfK-Y4-Fe9" secondAttribute="top" constant="1" id="gxI-mw-DQI"/>
+                                            <constraint firstItem="YWf-5W-o2I" firstAttribute="leading" secondItem="dfK-Y4-Fe9" secondAttribute="leading" id="oPo-O4-wIB"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="YWf-5W-o2I" id="SNf-60-mOD"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>

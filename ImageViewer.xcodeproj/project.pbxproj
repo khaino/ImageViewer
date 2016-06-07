@@ -35,6 +35,7 @@
 		CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */; };
 		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
 		CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */; };
+		CEDCBBD41D06A83600FEC1DA /* IVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */; };
 		CEEAEFA31CF4491400173AE1 /* IVCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */; };
 		CEF80C231CFD523E009AD81A /* IVGridLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C211CFD523E009AD81A /* IVGridLayoutAttributes.m */; };
 		CEF80C2E1CFD5261009AD81A /* IVScroll.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF80C241CFD5261009AD81A /* IVScroll.storyboard */; };
@@ -96,6 +97,8 @@
 		CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CE49393F1CE33B4E0096AC44 /* IVList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVList.storyboard; sourceTree = "<group>"; };
 		CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVPageControl.storyboard; sourceTree = "<group>"; };
+		CEDCBBD21D06A83600FEC1DA /* IVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCollectionViewCell.h; sourceTree = "<group>"; };
+		CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionViewCell.m; sourceTree = "<group>"; };
 		CEEAEFA11CF4491400173AE1 /* IVCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCollectionView.h; sourceTree = "<group>"; };
 		CEEAEFA21CF4491400173AE1 /* IVCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionView.m; sourceTree = "<group>"; };
 		CEF80C201CFD523E009AD81A /* IVGridLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVGridLayoutAttributes.h; sourceTree = "<group>"; };
@@ -289,6 +292,8 @@
 			children = (
 				CEF80C251CFD5261009AD81A /* IVScrollView.h */,
 				CEF80C261CFD5261009AD81A /* IVScrollView.m */,
+				CEDCBBD21D06A83600FEC1DA /* IVCollectionViewCell.h */,
+				CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */,
 				CEF80C241CFD5261009AD81A /* IVScroll.storyboard */,
 				CEF80C291CFD5261009AD81A /* MyViewController.h */,
 				CEF80C2A1CFD5261009AD81A /* MyViewController.m */,
@@ -388,6 +393,7 @@
 				22452EF31CFD6F2400C13937 /* RoundedConerView.m in Sources */,
 				225353161CF6E05800DFA036 /* IVGridLayout.m in Sources */,
 				CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */,
+				CEDCBBD41D06A83600FEC1DA /* IVCollectionViewCell.m in Sources */,
 				223709C51CE2CCF600A54881 /* ViewController.m in Sources */,
 				2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */,
 				22C1C00F1CED81EE00288149 /* PodcastDBManager.m in Sources */,
