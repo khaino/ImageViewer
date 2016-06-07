@@ -11,9 +11,7 @@
 #import "PodcastDBManager.h"
 #import "DownloadJSON.h"
 #import "RootViewController.h"
-#import "RootViewController2.h"
 #import "IVImageDownload.h"
-#import "IVCollectionView.h"
 #import "IVScrollView.h"
 #import "IVTableViewCell.h"
 
