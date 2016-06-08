@@ -114,9 +114,9 @@
     cell.smallImageView.image = self.thumbnail;
     
     IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
-    [imageDownloader downloadImage:[NSURL URLWithString:podcast.smallImage]
+    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
                            trackId:podcast.trackID
-                         imageType:k60
+                         imageType:k600
                  completionHandler:^(NSURL *url){
                      dispatch_async(dispatch_get_main_queue(), ^{
                          self.thumbnail = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
@@ -125,7 +125,7 @@
                  }];
     cell.titleLabel.text = podcast.collectionName;
     cell.subtitleLabel.text = podcast.artistName;
-    cell.smallImageView.layer.cornerRadius = 10;
+    cell.smallImageView.layer.cornerRadius = 20;
     cell.smallImageView.clipsToBounds = YES;
     return cell;
 }
@@ -242,6 +242,10 @@
     }
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:mArray applicationActivities:nil];
     [self presentViewController:activityVC animated:YES completion:nil];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return tableView.frame.size.width/5;
 }
 
 @end

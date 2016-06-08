@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--List Table View Controller-->
@@ -22,22 +24,37 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aPD-tp-3Yf">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aPD-tp-3Yf">
                                             <rect key="frame" x="8" y="5" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="aPD-tp-3Yf" secondAttribute="height" multiplier="1:1" id="Qk0-DS-Q84"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4a-MM-r4N">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4a-MM-r4N">
                                             <rect key="frame" x="83" y="8" width="509" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIp-UY-8Vr">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIp-UY-8Vr">
                                             <rect key="frame" x="83" y="28" width="509" height="33"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="tIp-UY-8Vr" firstAttribute="top" secondItem="8eP-rZ-fvv" secondAttribute="topMargin" constant="20" id="0nV-1t-evs"/>
+                                        <constraint firstItem="Q4a-MM-r4N" firstAttribute="top" secondItem="8eP-rZ-fvv" secondAttribute="topMargin" id="4x8-uy-11r"/>
+                                        <constraint firstItem="tIp-UY-8Vr" firstAttribute="bottom" secondItem="8eP-rZ-fvv" secondAttribute="bottomMargin" id="8vx-jA-vId"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="aPD-tp-3Yf" secondAttribute="bottom" constant="-4" id="Ktv-Sc-u9h"/>
+                                        <constraint firstItem="tIp-UY-8Vr" firstAttribute="trailing" secondItem="8eP-rZ-fvv" secondAttribute="trailingMargin" id="NEK-O0-ufN"/>
+                                        <constraint firstItem="aPD-tp-3Yf" firstAttribute="top" secondItem="8eP-rZ-fvv" secondAttribute="topMargin" constant="-3" id="TRe-Gh-lLh"/>
+                                        <constraint firstItem="aPD-tp-3Yf" firstAttribute="leading" secondItem="8eP-rZ-fvv" secondAttribute="leadingMargin" id="UrS-uw-ctu"/>
+                                        <constraint firstItem="tIp-UY-8Vr" firstAttribute="leading" secondItem="aPD-tp-3Yf" secondAttribute="trailing" constant="15" id="hUI-HQ-Kr1"/>
+                                        <constraint firstItem="tIp-UY-8Vr" firstAttribute="leading" secondItem="Q4a-MM-r4N" secondAttribute="leading" id="hhD-on-cqR"/>
+                                        <constraint firstItem="tIp-UY-8Vr" firstAttribute="trailing" secondItem="Q4a-MM-r4N" secondAttribute="trailing" id="mLH-j5-krw"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
