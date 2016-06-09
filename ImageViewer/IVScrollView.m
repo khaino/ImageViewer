@@ -258,23 +258,20 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     IVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     // Configure the cell
     Podcast *podcast = [self.contentList objectAtIndex:indexPath.row];
     IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
-    [imageDownloader downloadImage:[NSURL URLWithString:podcast.smallImage]
+    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
                            trackId:podcast.trackID
-                         imageType:k60
+                         imageType:k600
                  completionHandler:^(NSURL *url){
                      dispatch_async(dispatch_get_main_queue(), ^{
                          UIImage *image= [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-//                         UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
                          cell.imageView.image = image;
-//                         cell.backgroundView = imageView;
                      });
                  }];
+    cell.imageView.layer.cornerRadius = 20;
     return cell;
 }
 
