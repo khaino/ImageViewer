@@ -44,6 +44,13 @@ static NSString * const reuseIdentifier = @"gridCell";
     self.collectionView.contentInset = UIEdgeInsetsMake(VERTICAL_PADDING, HORIZONTAL_PADDING, VERTICAL_PADDING, HORIZONTAL_PADDING - INDICATOR_WIDTH);
     layout.delegate = self;
     
+    // To this:
+    DDLogError(@"Error CocoaLumberjack");
+    DDLogVerbose(@"Verbose CocoaLumberjack");
+    DDLogWarn(@"Warn CocoaLumberjack");
+    DDLogInfo(@"Info CocoaLumberjack");
+    DDLogDebug(@"Debug CocoaLumberjack");
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
