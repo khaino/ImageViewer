@@ -19,6 +19,7 @@
 		223709CD1CE2CCF600A54881 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223709CB1CE2CCF600A54881 /* LaunchScreen.storyboard */; };
 		22452EF31CFD6F2400C13937 /* RoundedConerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22452EF21CFD6F2400C13937 /* RoundedConerView.m */; };
 		225353161CF6E05800DFA036 /* IVGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 225353151CF6E05800DFA036 /* IVGridLayout.m */; };
+		227283A31D0AA0A600FF53C4 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227283A21D0AA0A600FF53C4 /* CocoaLumberjack.framework */; };
 		22C1C0061CED81EE00288149 /* DownloadJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF11CED81EE00288149 /* DownloadJSON.m */; };
 		22C1C0071CED81EE00288149 /* ImageDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF31CED81EE00288149 /* ImageDatabase.m */; };
 		22C1C0081CED81EE00288149 /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF51CED81EE00288149 /* ImageInfo.m */; };
@@ -65,6 +66,8 @@
 		22452EF21CFD6F2400C13937 /* RoundedConerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedConerView.m; sourceTree = "<group>"; };
 		225353141CF6E05800DFA036 /* IVGridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVGridLayout.h; sourceTree = "<group>"; };
 		225353151CF6E05800DFA036 /* IVGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVGridLayout.m; sourceTree = "<group>"; };
+		227283A21D0AA0A600FF53C4 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		227283A61D0AA61500FF53C4 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		22C1BFF01CED81EE00288149 /* DownloadJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadJSON.h; sourceTree = "<group>"; };
 		22C1BFF11CED81EE00288149 /* DownloadJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadJSON.m; sourceTree = "<group>"; };
 		22C1BFF21CED81EE00288149 /* ImageDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDatabase.h; sourceTree = "<group>"; };
@@ -112,6 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */,
+				227283A31D0AA0A600FF53C4 /* CocoaLumberjack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +125,8 @@
 		223709B11CE2CCF600A54881 = {
 			isa = PBXGroup;
 			children = (
+				227283A61D0AA61500FF53C4 /* PrefixHeader.pch */,
+				227283A21D0AA0A600FF53C4 /* CocoaLumberjack.framework */,
 				CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */,
 				223709BC1CE2CCF600A54881 /* ImageViewer */,
 				223709BB1CE2CCF600A54881 /* Products */,
@@ -298,6 +304,7 @@
 				223709B61CE2CCF600A54881 /* Sources */,
 				223709B71CE2CCF600A54881 /* Frameworks */,
 				223709B81CE2CCF600A54881 /* Resources */,
+				227283A41D0AA0CB00FF53C4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -357,6 +364,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		227283A41D0AA0CB00FF53C4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		223709B61CE2CCF600A54881 /* Sources */ = {
@@ -440,6 +464,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -482,6 +507,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -499,6 +525,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				INFOPLIST_FILE = ImageViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.khaino.ImageViewer;
@@ -511,6 +542,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				INFOPLIST_FILE = ImageViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.khaino.ImageViewer;
