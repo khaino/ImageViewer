@@ -176,7 +176,14 @@
                             <outlet property="delegate" destination="zhw-0h-4QH" id="gld-HU-3tb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="j8z-Do-4Y5"/>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="ZYG-eZ-nV0"/>
+                        <barButtonItem title="Item" id="kht-mu-4OG"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="Jrq-69-7dt">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="f2e-gM-dXq"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchBar" destination="d2D-ut-8hi" id="7hv-dd-6kk"/>
                     </connections>
