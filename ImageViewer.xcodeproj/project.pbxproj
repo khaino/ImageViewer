@@ -36,6 +36,7 @@
 		CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */; };
 		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
 		CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */; };
+		CEC9289D1D0AB6EF00CFDAE4 /* IVSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */; };
 		CEDCBBD41D06A83600FEC1DA /* IVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */; };
 		CEF80C2E1CFD5261009AD81A /* IVScroll.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF80C241CFD5261009AD81A /* IVScroll.storyboard */; };
 		CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C261CFD5261009AD81A /* IVScrollView.m */; };
@@ -97,6 +98,8 @@
 		CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CE49393F1CE33B4E0096AC44 /* IVList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVList.storyboard; sourceTree = "<group>"; };
 		CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVPageControl.storyboard; sourceTree = "<group>"; };
+		CEC9289B1D0AB6EF00CFDAE4 /* IVSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVSearchViewController.h; sourceTree = "<group>"; };
+		CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVSearchViewController.m; sourceTree = "<group>"; };
 		CEDCBBD21D06A83600FEC1DA /* IVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCollectionViewCell.h; sourceTree = "<group>"; };
 		CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionViewCell.m; sourceTree = "<group>"; };
 		CEF80C241CFD5261009AD81A /* IVScroll.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVScroll.storyboard; sourceTree = "<group>"; };
@@ -270,6 +273,8 @@
 		CEF80C351CFD52A3009AD81A /* Tableview */ = {
 			isa = PBXGroup;
 			children = (
+				CEC9289B1D0AB6EF00CFDAE4 /* IVSearchViewController.h */,
+				CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */,
 				CEF80C271CFD5261009AD81A /* IVTableViewCell.h */,
 				CEF80C281CFD5261009AD81A /* IVTableViewCell.m */,
 				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
@@ -390,6 +395,7 @@
 				22C1C00C1CED81EE00288149 /* IVPageViewController.m in Sources */,
 				22C1C0101CED81EE00288149 /* RootViewController.m in Sources */,
 				CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */,
+				CEC9289D1D0AB6EF00CFDAE4 /* IVSearchViewController.m in Sources */,
 				22452EF31CFD6F2400C13937 /* RoundedConerView.m in Sources */,
 				225353161CF6E05800DFA036 /* IVGridLayout.m in Sources */,
 				CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */,
