@@ -10,4 +10,5 @@
 
 @interface IVSearchViewController : UITableViewController <UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+- (IBAction)saveAction:(id)sender;
 @end

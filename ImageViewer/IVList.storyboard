@@ -181,7 +181,11 @@
                         <barButtonItem title="Item" id="kht-mu-4OG"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="Jrq-69-7dt">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="f2e-gM-dXq"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="f2e-gM-dXq">
+                            <connections>
+                                <action selector="saveAction:" destination="zhw-0h-4QH" id="slc-FF-7gQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

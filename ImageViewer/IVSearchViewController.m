@@ -219,4 +219,11 @@
 }
 */
 
+- (IBAction)saveAction:(id)sender {
+    for (Podcast *podcast in self.podcasts) {
+        [[PodcastDBManager defaultManager] insertPodcast:podcast];
+    }
+    // Dismiss View Controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
