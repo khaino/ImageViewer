@@ -28,19 +28,19 @@
     [super viewDidLoad];
     
     self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
-    DownloadJSON *downloader = [[DownloadJSON alloc]init];
-    [downloader search:@"football" completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if(!error){
-            self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
-            NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-            if (httpResp.statusCode == 200) {
-                NSLog(@"SUCESS");
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-        }
-    }];
+//    DownloadJSON *downloader = [[DownloadJSON alloc]init];
+//    [downloader search:@"football" completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        if(!error){
+//            self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
+//            NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+//            if (httpResp.statusCode == 200) {
+//                NSLog(@"SUCESS");
+//            }
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.tableView reloadData];
+//            });
+//        }
+//    }];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -54,8 +54,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.podcasts ? 1 : 0;
@@ -83,17 +81,17 @@
 //    cell.textLabel.text = podcast.collectionName;
 //    cell.detailTextLabel.text = podcast.artistName;
 //    
-////    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-////        
-////        NSURL *imageURL = [NSURL URLWithString:podcast.smallImage];
-////        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-////        
-////        // Completion handler
-////        dispatch_sync(dispatch_get_main_queue(), ^{
-////            self.thumbnail = [UIImage imageWithData:imageData];
-////            cell.imageView.image = self.thumbnail;
-////        });
-////    });
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//
+//        NSURL *imageURL = [NSURL URLWithString:podcast.smallImage];
+//        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+//
+//        // Completion handler
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            self.thumbnail = [UIImage imageWithData:imageData];
+//            cell.imageView.image = self.thumbnail;
+//        });
+//    });
 //    
 //    cell.imageView.layer.cornerRadius = 7;
 //    cell.imageView.clipsToBounds = YES;
@@ -234,15 +232,15 @@
 //}
 
 
-- (IBAction)shareButton:(UIBarButtonItem *)sender
-{
-    NSMutableArray *mArray = [[NSMutableArray alloc]init];
-    for (Podcast *podcast in self.podcasts) {
-        [mArray addObject:podcast.collectionName];
-    }
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:mArray applicationActivities:nil];
-    [self presentViewController:activityVC animated:YES completion:nil];
-}
+//- (IBAction)shareButton:(UIBarButtonItem *)sender
+//{
+//    NSMutableArray *mArray = [[NSMutableArray alloc]init];
+//    for (Podcast *podcast in self.podcasts) {
+//        [mArray addObject:podcast.collectionName];
+//    }
+//    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:mArray applicationActivities:nil];
+//    [self presentViewController:activityVC animated:YES completion:nil];
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return tableView.frame.size.width/5;
