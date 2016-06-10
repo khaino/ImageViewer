@@ -225,5 +225,6 @@
     }
     // Dismiss View Controller
     [self dismissViewControllerAnimated:YES completion:nil];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
