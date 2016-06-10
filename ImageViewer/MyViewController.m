@@ -42,8 +42,12 @@
 }
 
 // When slide to another image, image zoom is reset.
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self.pageScrollView setZoomScale:0.1f animated:YES];
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    [self.pageScrollView setZoomScale:0.1f animated:YES];
+//}
+
+- (void)zoomOut{
+    [self.pageScrollView setZoomScale:0.2f animated:YES];
 }
 
 // Double tap handler

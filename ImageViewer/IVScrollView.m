@@ -161,7 +161,6 @@ static NSString * const reuseIdentifier = @"Cell";
         
         Podcast *podcast = [self.contentList objectAtIndex:page];
         
-
         IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
         [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
                                trackId:podcast.trackID
@@ -184,7 +183,14 @@ static NSString * const reuseIdentifier = @"Cell";
     // switch the indicator when more than 50% of the previous/next page is visible
     CGFloat pageWidth = CGRectGetWidth(self.scrollView.bounds);
     NSUInteger page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-    self.pageControl.currentPage = page;
+    
+    // Zoom out the image when scroll to another image
+    if (self.pageControl.currentPage != page){
+        // replace the placeholder if necessary
+        MyViewController *controller = [self.viewControllers objectAtIndex:self.pageControl.currentPage];
+        [controller zoomOut];
+        self.pageControl.currentPage = page;
+    }
     
     // Set navigation title to artist name
     Podcast *podcast = [self.contentList objectAtIndex:page];
@@ -196,7 +202,6 @@ static NSString * const reuseIdentifier = @"Cell";
         [self loadScrollViewWithPage:page];
         [self loadScrollViewWithPage:page + 1];
     });
-    
     
     // a possible optimization would be to unload the views+controllers which are no longer visible
 }
