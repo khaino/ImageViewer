@@ -26,8 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
+    [self.tableView reloadData];
 //    DownloadJSON *downloader = [[DownloadJSON alloc]init];
 //    [downloader search:@"football" completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 //        if(!error){
@@ -51,7 +51,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
+    [super viewWillAppear:animated];
+    self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
     [self.tableView reloadData]; // to reload selected cell
 }
 
@@ -179,6 +180,12 @@
 
 - (IBAction)chageGridView:(id)sender {
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"IVGrid" bundle:nil];
+    UINavigationController *navigationController = (UINavigationController *)[storyBoard instantiateInitialViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (IBAction)searchAction:(id)sender {
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"IVSearch" bundle:nil];
     UINavigationController *navigationController = (UINavigationController *)[storyBoard instantiateInitialViewController];
     [self presentViewController:navigationController animated:YES completion:nil];
 }

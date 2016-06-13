@@ -10,5 +10,6 @@
 
 @interface IVListTableViewController : UITableViewController
 - (IBAction)chageGridView:(id)sender;
+- (IBAction)searchAction:(id)sender;
 //- (IBAction)shareButton:(UIBarButtonItem *)sender;
 @end

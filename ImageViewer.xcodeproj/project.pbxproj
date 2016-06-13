@@ -37,6 +37,7 @@
 		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
 		CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */; };
 		CEC9289D1D0AB6EF00CFDAE4 /* IVSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */; };
+		CEC9EFDF1D0EBA8300A99B31 /* IVSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */; };
 		CEDCBBD41D06A83600FEC1DA /* IVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */; };
 		CEF80C2E1CFD5261009AD81A /* IVScroll.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF80C241CFD5261009AD81A /* IVScroll.storyboard */; };
 		CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C261CFD5261009AD81A /* IVScrollView.m */; };
@@ -100,6 +101,7 @@
 		CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVPageControl.storyboard; sourceTree = "<group>"; };
 		CEC9289B1D0AB6EF00CFDAE4 /* IVSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVSearchViewController.h; sourceTree = "<group>"; };
 		CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVSearchViewController.m; sourceTree = "<group>"; };
+		CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVSearch.storyboard; sourceTree = "<group>"; };
 		CEDCBBD21D06A83600FEC1DA /* IVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCollectionViewCell.h; sourceTree = "<group>"; };
 		CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionViewCell.m; sourceTree = "<group>"; };
 		CEF80C241CFD5261009AD81A /* IVScroll.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVScroll.storyboard; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		223709BC1CE2CCF600A54881 /* ImageViewer */ = {
 			isa = PBXGroup;
 			children = (
+				CEC9EFE01D0EBA9100A99B31 /* Search */,
 				22C1C0111CED843F00288149 /* ImageDatabase */,
 				22C1C0161CED853600288149 /* Utility */,
 				22C1C0131CED84A300288149 /* List */,
@@ -256,6 +259,16 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		CEC9EFE01D0EBA9100A99B31 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				CEC9289B1D0AB6EF00CFDAE4 /* IVSearchViewController.h */,
+				CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */,
+				CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		CEF80C341CFD5288009AD81A /* PageControlVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,8 +286,6 @@
 		CEF80C351CFD52A3009AD81A /* Tableview */ = {
 			isa = PBXGroup;
 			children = (
-				CEC9289B1D0AB6EF00CFDAE4 /* IVSearchViewController.h */,
-				CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */,
 				CEF80C271CFD5261009AD81A /* IVTableViewCell.h */,
 				CEF80C281CFD5261009AD81A /* IVTableViewCell.m */,
 				CE4939371CE33A860096AC44 /* IVListTableViewController.h */,
@@ -365,6 +376,7 @@
 				CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */,
 				223709C81CE2CCF600A54881 /* Main.storyboard in Resources */,
 				CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */,
+				CEC9EFDF1D0EBA8300A99B31 /* IVSearch.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

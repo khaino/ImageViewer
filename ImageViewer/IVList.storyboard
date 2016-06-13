@@ -76,16 +76,16 @@
                                 <action selector="chageGridView:" destination="0wv-Nz-Vee" id="ivj-vV-WAm"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="EbX-aM-cwq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="EbX-aM-cwq">
                             <connections>
-                                <segue destination="zhw-0h-4QH" kind="show" id="6E8-5b-1Db"/>
+                                <action selector="searchAction:" destination="0wv-Nz-Vee" id="uNc-be-L1t"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQQ-gb-imC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1509" y="-2302"/>
+            <point key="canvasLocation" x="-1507" y="-2826"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pzE-ml-csM">
@@ -103,7 +103,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Af-yq-Z0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2167" y="-2302"/>
+            <point key="canvasLocation" x="-2217" y="-2826"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="Fih-hI-oQz">
@@ -115,7 +115,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="2"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="d2D-ut-8hi">
-                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -124,7 +124,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="1" indentationWidth="10" reuseIdentifier="cell" rowHeight="70" id="JgG-Y9-9Aw" customClass="IVTableViewCell">
-                                <rect key="frame" x="0.0" y="136" width="600" height="70"/>
+                                <rect key="frame" x="0.0" y="72" width="600" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JgG-Y9-9Aw" id="HRf-5D-Fg2">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
@@ -176,10 +176,7 @@
                             <outlet property="delegate" destination="zhw-0h-4QH" id="gld-HU-3tb"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="ZYG-eZ-nV0"/>
-                        <barButtonItem title="Item" id="kht-mu-4OG"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="Jrq-69-7dt">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="f2e-gM-dXq">
                             <connections>
@@ -194,7 +191,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAN-Kw-mtp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-839" y="-2302"/>
+            <point key="canvasLocation" x="-799" y="-2826"/>
         </scene>
     </scenes>
 </document>
