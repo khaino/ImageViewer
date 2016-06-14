@@ -72,7 +72,7 @@ static ImageInfoManager *imageInfoManager;
 
 - (BOOL)updateImageInfo:(ImageInfo*)imageInfo {
     BOOL ret = NO;
-    if (imageInfo != nil) {
+    if (imageInfo != nil && imageInfo.imageId != nil) {
         if ([ImageDatabase insertOrUpdateImageInfo:imageInfo]) {
             
             [self.allImageInfo setObject:imageInfo forKey:imageInfo.imageId];
