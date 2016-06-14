@@ -34,6 +34,12 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if ([self.searchBar isFirstResponder]) {
+        [self.searchBar resignFirstResponder];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
