@@ -11,6 +11,7 @@
 		2209BDEB1CE2E16E001FBAC7 /* IVGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */; };
 		2209BDEF1CE2F137001FBAC7 /* GridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2209BDED1CE2F137001FBAC7 /* GridCell.m */; };
 		2209BDF31CE2FACE001FBAC7 /* IVImageDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */; };
+		223050CA1D1110CA007838D2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 223050C91D1110CA007838D2 /* Localizable.strings */; };
 		223709BF1CE2CCF600A54881 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 223709BE1CE2CCF600A54881 /* main.m */; };
 		223709C21CE2CCF600A54881 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 223709C11CE2CCF600A54881 /* AppDelegate.m */; };
 		223709C51CE2CCF600A54881 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223709C41CE2CCF600A54881 /* ViewController.m */; };
@@ -50,6 +51,7 @@
 		2209BDED1CE2F137001FBAC7 /* GridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCell.m; sourceTree = "<group>"; };
 		2209BDF11CE2FACE001FBAC7 /* IVImageDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVImageDownload.h; sourceTree = "<group>"; };
 		2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVImageDownload.m; sourceTree = "<group>"; };
+		223050C91D1110CA007838D2 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		223709BA1CE2CCF600A54881 /* ImageViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		223709BE1CE2CCF600A54881 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		223709C01CE2CCF600A54881 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 		223709BD1CE2CCF600A54881 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				223050C91D1110CA007838D2 /* Localizable.strings */,
 				223709BE1CE2CCF600A54881 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -346,6 +349,7 @@
 				2209BDE81CE2E13B001FBAC7 /* IVGrid.storyboard in Resources */,
 				CEF80C321CFD5261009AD81A /* MyViewController.xib in Resources */,
 				223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */,
+				223050CA1D1110CA007838D2 /* Localizable.strings in Resources */,
 				CEF80C2E1CFD5261009AD81A /* IVScroll.storyboard in Resources */,
 				223709C81CE2CCF600A54881 /* Main.storyboard in Resources */,
 				CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */,

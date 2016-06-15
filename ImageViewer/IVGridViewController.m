@@ -38,7 +38,7 @@ static NSString * const reuseIdentifier = @"gridCell";
     [super viewDidLoad];
     
     self.clearsSelectionOnViewWillAppear = NO;
-    self.navigationItem.title = @"Podcasts Collection";
+    self.navigationItem.title = NSLocalizedString(@"GRID_TITLE", nil);
     
     IVGridLayout *layout = (IVGridLayout*)self.collectionView.collectionViewLayout;
     self.collectionView.contentInset = UIEdgeInsetsMake(VERTICAL_PADDING, HORIZONTAL_PADDING, VERTICAL_PADDING, HORIZONTAL_PADDING - INDICATOR_WIDTH);
