@@ -87,17 +87,9 @@ NSString *dbPodcast = @"podcast.db";
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
             ret = YES;
             DDLogDebug(@"Podcast info inserted.");
-            DDLogDebug(@"%@", podcast.trackID);
-            DDLogDebug(@"%@", podcast.collectionName);
-            DDLogDebug(@"%@", podcast.artistName);
-            DDLogDebug(@"%@", podcast.smallImage);
-            DDLogDebug(@"%@", podcast.largeImage);
         } else {
             DDLogError(@"Error: %s", error);
             DDLogError(@"Query: %@", query);
-            DDLogError(@"%@", podcast.trackID);
-            DDLogError(@"%@", podcast.collectionName);
-            DDLogError(@"%@", podcast.artistName);
         }
     } else {
         DDLogError(@"Database open error : %s", sqlite3_errmsg(db));
