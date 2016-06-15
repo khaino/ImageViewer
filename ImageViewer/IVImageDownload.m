@@ -16,11 +16,11 @@
 @property (strong, nonatomic) NSURLSession *session;
 /** completion handler for callback. */
 @property (nonatomic) myCompletion completionHandler;
-/** track number to download. */
+/** track id to download. */
 @property (strong, nonatomic) NSString *trackId;
-
+/** image type to download */
 @property (nonatomic) ImageType imageType;
-
+/** image information for download */
 @property (strong, nonatomic)ImageInfo *imageInfo;
 
 @end
@@ -58,7 +58,7 @@
         NSURL *imgUrl = [cacheManager imageDirForTrackId:trackId imageType:imageType];
         self.completionHandler(imgUrl);
     } else {
-        NSLog(@"Download image no : %@",trackId);
+
         [[self.session downloadTaskWithURL:url] resume];
         BOOL isThumpnail = (imageType == k60)? YES : NO;
         NSDate *date = [NSDate date];
@@ -69,6 +69,8 @@
                                                                 lassAcess:[date description]];
         [[ImageInfoManager defaultManager] insertImageInfo:self.imageInfo];
         self.imageInfo.imageId = [[ImageInfoManager defaultManager] getLastInsertRowIdWithImageInfo:self.imageInfo];
+        DDLogDebug(@"Download start image id : %@, image type : %ld", self.imageInfo.imageId, (long)self.imageType);
+
     }
 }
 
@@ -93,7 +95,7 @@
         [fm createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:&error];
         
         if (error) {
-            NSLog(@"Unable to create image directory. %@, %@", error, error.userInfo);
+            DDLogError(@"Unable to create image directory. %@, %@", error, error.userInfo);
         }
     }
     return url;
@@ -115,14 +117,22 @@
         self.imageInfo.downloadCompleted = YES;
         self.imageInfo.locUrl = location;
         self.completionHandler(url);
+        DDLogDebug(@"Download complete image id : %@, image type : %ld", self.imageInfo.imageId, (long)self.imageType);
     }];
     [self.session invalidateAndCancel];
 }
 
+/*
+ * @brief Callback when download completed.
+ * @param task nsurl session task.
+ * @param error error.
+ * @return none.
+ */
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
     
     if (error) {
         [[ImageInfoManager defaultManager] deleteImageInfo:self.imageInfo.imageId];
+        DDLogError(@"Download error image id : %@, image type : %ld", self.imageInfo.imageId, (long)self.imageType);
     }
     [self.session invalidateAndCancel];
 }

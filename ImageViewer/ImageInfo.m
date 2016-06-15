@@ -54,6 +54,14 @@
     }
 }
 
+
+#pragma setters
+
+/*
+ * @brief Setter of download completed field
+ * @param downloadCompleted download completed.
+ * @return none.
+ */
 - (void)setDownloadCompleted:(BOOL)downloadCompleted {
     if (downloadCompleted != _downloadCompleted) {
         _downloadCompleted = downloadCompleted;
@@ -61,6 +69,11 @@
     }
 }
 
+/*
+ * @brief Setter of locUrl field
+ * @param locUrl location url.
+ * @return none.
+ */
 - (void)setLocUrl:(NSURL *)locUrl {
     if (locUrl != nil && locUrl != _locUrl) {
         _locUrl = locUrl;
@@ -68,6 +81,11 @@
     }
 }
 
+/*
+ * @brief Setter of lastAccess field
+ * @param lastAccess last access time.
+ * @return none.
+ */
 - (void)setLastAccess:(NSString *)lastAccess {
     if (lastAccess != nil && lastAccess != _lastAccess) {
         _lastAccess = lastAccess;

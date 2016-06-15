@@ -33,7 +33,7 @@
     
     // Check if image already exists in image cache
     if ([fm fileExistsAtPath:[cacheUrl path]]) {
-        NSLog(@"Image already exist for file : %@", cacheUrl);
+        DDLogDebug(@"Image already exist for file : %@", cacheUrl);
         return;
     }
     
@@ -45,13 +45,13 @@
         [fm moveItemAtURL:tempUrl toURL:cacheUrl error:&error];
         
         if (error) {
-            NSLog(@"File move error : %@", error);
+            DDLogError(@"File move error : %@", error);
         } else {
             completionHandler(cacheUrl);
         }
     }
     
-//    [self cleanImageCache];
+    [self cleanImageCache];
 }
 
 - (BOOL)isImageCached:(NSString*)trackId
@@ -86,6 +86,7 @@
     
     NSArray *k60ImgArr = [[ImageInfoManager defaultManager] getAllImageInfoWithType:k60];
     if (k60ImgArr.count > thumpnailMax) {
+        DDLogDebug(@"Clean Cache For Thumpnail");
         NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAcess"
                                                                      ascending:NO];
         k60ImgArr = [k60ImgArr sortedArrayUsingDescriptors:@[descriptor]];
@@ -101,6 +102,7 @@
     NSArray *k600ImgArr = [[ImageInfoManager defaultManager] getAllImageInfoWithType:k600];
     
     if (k600ImgArr.count > normalMax) {
+        DDLogDebug(@"Clean Cache For Normal Image");
         NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAcess"
                                                                      ascending:NO];
         k60ImgArr = [k60ImgArr sortedArrayUsingDescriptors:@[descriptor]];
@@ -125,7 +127,7 @@
         NSError *error;
         [fm removeItemAtPath:[imgUrl path] error:&error];
         if (error) {
-            NSLog(@"Error in deletion trackId : %@", trackId);
+            DDLogError(@"Error in deletion trackId : %@", trackId);
         } else {
             ret = YES;
         }
@@ -148,7 +150,7 @@
         [fm createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:&error];
         
         if (error) {
-            NSLog(@"Unable to create image directory. %@, %@", error, error.userInfo);
+            DDLogError(@"Unable to create image directory. %@, %@", error, error.userInfo);
         }
     }
     return url;

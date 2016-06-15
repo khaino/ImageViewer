@@ -26,13 +26,13 @@ NSString *dbimagename = @"image.db";
         if (sqlite3_open([dbPath UTF8String], &db) == SQLITE_OK) {
             
             NSString *sql= @"CREATE TABLE IF NOT EXISTS image (id INTEGER PRIMARY KEY AUTOINCREMENT, track_id TEXT UNIQUE, is_thumpnail BOOL, download_completed BOOL, loc_url TEXT, last_access DATE)";
-            
+            DDLogDebug(@"SQL Statement : %@", sql);
             char *error;
             if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
                 ret = YES;
-                NSLog(@"Table has been sucessfully created");
+                DDLogDebug(@"Table has been sucessfully created");
             } else {
-                NSLog(@"Error: %s", error);
+                DDLogError(@"Error: %s", error);
             }
         }
         sqlite3_close(db);
@@ -58,15 +58,15 @@ NSString *dbimagename = @"image.db";
     if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
         
         NSString *sql = @"SELECT track_id, is_thumpnail, download_completed, loc_url, last_access image ORDER BY id asc";
-        
+        DDLogDebug(@"SQL Statement : %@", sql);
         sqlite3_stmt *stmt;
         if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, NULL) == SQLITE_OK) {
             while (sqlite3_step(stmt) == SQLITE_ROW) {
                 
                 NSString *imageId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(stmt, 0)];
                 NSString *trackId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(stmt, 1)];
-                BOOL isThumpnail  = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(stmt, 2)];
-                BOOL downloadCompleted = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(stmt, 3)];
+                BOOL isThumpnail  = (BOOL)sqlite3_column_int(stmt, 2);
+                BOOL downloadCompleted = (BOOL)sqlite3_column_int(stmt, 3);
                 NSString *locUrl = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(stmt, 4)];
                 NSString *lastAccess = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(stmt, 5)];
 
@@ -94,9 +94,8 @@ NSString *dbimagename = @"image.db";
     sqlite3 *db;
     NSString *imageId;
     if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
-        //select id from image where track_id = '75908431' and is_thumpnail = 1;
-//        NSString *sql = @"SELECT id FROM image WHERE track_id = '%@' AND is_thumpnail = '%d'";
         NSString *sql = [NSString stringWithFormat:@"SELECT id FROM image WHERE track_id = '%@' AND is_thumpnail = '%d'", imageInfo.trackId, imageInfo.isThumpnail];
+        DDLogDebug(@"SQL Statement : %@", sql);
         sqlite3_stmt *stmt;
         if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, NULL) == SQLITE_OK) {
             while (sqlite3_step(stmt) == SQLITE_ROW) {
@@ -120,16 +119,16 @@ NSString *dbimagename = @"image.db";
         
         // Create sql statement for insert
         NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO image (track_id, is_thumpnail, download_completed, loc_url, last_access) VALUES ('%@', '%d', '%d', '%@', '%@')", imageInfo.trackId, imageInfo.isThumpnail, imageInfo.downloadCompleted, imageInfo.locUrl.path, imageInfo.lastAccess];
-        
+        DDLogDebug(@"SQL Statement : %@", sql);
         char *error;
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
             ret = YES;
-            NSLog(@"Image info inserted or modified");
+            DDLogDebug(@"Image inserted or modified : %@", imageInfo.imageId);
         } else {
-            NSLog(@"Error: %s", error);
+            DDLogError(@"Image inserted or modified error : %@", imageInfo.imageId);
         }
     } else {
-        NSLog(@"Database open error : %s", sqlite3_errmsg(db));
+        DDLogError(@"Database open error : %s", sqlite3_errmsg(db));
     }
     
     sqlite3_close(db);
@@ -144,16 +143,16 @@ NSString *dbimagename = @"image.db";
         
         // Create sql statement for delete
         NSString *sql = [NSString stringWithFormat:@"DELETE FROM image WHERE imageId = '%@')", imageId];
-        
+        DDLogDebug(@"SQL Statement : %@", sql);
         char *error;
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
             ret = YES;
-            NSLog(@"Image deleted %@", imageId);
+            DDLogDebug(@"Image deleted %@", imageId);
         } else {
-            NSLog(@"Error: %s", error);
+            DDLogError(@"Error: %s", error);
         }
     } else {
-        NSLog(@"Database open error : %s", sqlite3_errmsg(db));
+        DDLogError(@"Database open error : %s", sqlite3_errmsg(db));
     }
     
     sqlite3_close(db);

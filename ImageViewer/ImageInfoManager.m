@@ -65,6 +65,7 @@ static ImageInfoManager *imageInfoManager;
             NSString *imageId = [ImageDatabase getLastInsertRowIdImageInfo:imageInfo];
             [self.allImageInfo setObject:imageInfo forKey:imageId];
             ret = YES;
+            DDLogDebug(@"Insert image id %@", imageInfo.imageId);
         }
     }
     return ret;
@@ -74,16 +75,21 @@ static ImageInfoManager *imageInfoManager;
     BOOL ret = NO;
     if (imageInfo != nil && imageInfo.imageId != nil) {
         if ([ImageDatabase insertOrUpdateImageInfo:imageInfo]) {
-            
             [self.allImageInfo setObject:imageInfo forKey:imageInfo.imageId];
             ret = YES;
+            DDLogDebug(@"Update image id %@", imageInfo.imageId);
         }
     }
     return ret;
 }
 
 - (BOOL)deleteImageInfo:(NSString*)imageId {
-    return [ImageDatabase deleteImageInfo:imageId];
+    BOOL ret = NO;
+    if ([ImageDatabase deleteImageInfo:imageId]){
+        ret = YES;
+        DDLogDebug(@"Delete image : %@", imageId);
+    }
+    return ret;
 }
 
 - (NSString*)getLastInsertRowIdWithImageInfo:(ImageInfo*)imageInfo {
