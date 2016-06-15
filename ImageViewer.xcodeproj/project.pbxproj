@@ -33,9 +33,9 @@
 		CE49393C1CE33A860096AC44 /* Podcast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE49393A1CE33A860096AC44 /* Podcast.m */; };
 		CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */; };
 		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
-		CEC9289D1D0AB6EF00CFDAE4 /* IVSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */; };
 		CEC9EFDF1D0EBA8300A99B31 /* IVSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */; };
 		CEDCBBD41D06A83600FEC1DA /* IVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */; };
+		CEE192581D1145A500C623EE /* IVSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE192571D1145A500C623EE /* IVSearchView.m */; };
 		CEF80C2E1CFD5261009AD81A /* IVScroll.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF80C241CFD5261009AD81A /* IVScroll.storyboard */; };
 		CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C261CFD5261009AD81A /* IVScrollView.m */; };
 		CEF80C301CFD5261009AD81A /* IVTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF80C281CFD5261009AD81A /* IVTableViewCell.m */; };
@@ -90,11 +90,11 @@
 		CE49393A1CE33A860096AC44 /* Podcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Podcast.m; sourceTree = "<group>"; };
 		CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CE49393F1CE33B4E0096AC44 /* IVList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVList.storyboard; sourceTree = "<group>"; };
-		CEC9289B1D0AB6EF00CFDAE4 /* IVSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVSearchViewController.h; sourceTree = "<group>"; };
-		CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVSearchViewController.m; sourceTree = "<group>"; };
 		CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVSearch.storyboard; sourceTree = "<group>"; };
 		CEDCBBD21D06A83600FEC1DA /* IVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCollectionViewCell.h; sourceTree = "<group>"; };
 		CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionViewCell.m; sourceTree = "<group>"; };
+		CEE192561D1145A500C623EE /* IVSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVSearchView.h; sourceTree = "<group>"; };
+		CEE192571D1145A500C623EE /* IVSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVSearchView.m; sourceTree = "<group>"; };
 		CEF80C241CFD5261009AD81A /* IVScroll.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVScroll.storyboard; sourceTree = "<group>"; };
 		CEF80C251CFD5261009AD81A /* IVScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVScrollView.h; sourceTree = "<group>"; };
 		CEF80C261CFD5261009AD81A /* IVScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVScrollView.m; sourceTree = "<group>"; };
@@ -253,8 +253,8 @@
 		CEC9EFE01D0EBA9100A99B31 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				CEC9289B1D0AB6EF00CFDAE4 /* IVSearchViewController.h */,
-				CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */,
+				CEE192561D1145A500C623EE /* IVSearchView.h */,
+				CEE192571D1145A500C623EE /* IVSearchView.m */,
 				CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */,
 			);
 			name = Search;
@@ -382,7 +382,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */,
-				CEC9289D1D0AB6EF00CFDAE4 /* IVSearchViewController.m in Sources */,
 				22452EF31CFD6F2400C13937 /* RoundedConerView.m in Sources */,
 				225353161CF6E05800DFA036 /* IVGridLayout.m in Sources */,
 				CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */,
@@ -398,6 +397,7 @@
 				2209BDF31CE2FACE001FBAC7 /* IVImageDownload.m in Sources */,
 				22C1C00E1CED81EE00288149 /* PodcastDAO.m in Sources */,
 				22C1C0081CED81EE00288149 /* ImageInfo.m in Sources */,
+				CEE192581D1145A500C623EE /* IVSearchView.m in Sources */,
 				22C1C0091CED81EE00288149 /* ImageInfoManager.m in Sources */,
 				22C1C00A1CED81EE00288149 /* IVCacheManager.m in Sources */,
 				223709C21CE2CCF600A54881 /* AppDelegate.m in Sources */,
