@@ -27,25 +27,6 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Create null view controllar array
-    [self createControllerArray];
-    
-    // Single touch gesture to image view
-    UITapGestureRecognizer *singleTapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
-    [self.scrollView addGestureRecognizer:singleTapImage];
-    self.collectionView.hidden = YES;
-    
-    // Share button to navigation
-    self.actionButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                     target:self
-                                                                     action:@selector(shareButton:)];
-    self.navigationItem.rightBarButtonItem = self.actionButton;
-}
-
-/*
- Create null view controller array
- */
-- (void)createControllerArray{
     NSUInteger numberPages = self.contentList.count;
     
     // view controllers are created lazily
@@ -71,6 +52,16 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [self gotoPage:NO];
     
+    // Single touch gesture to image view
+    UITapGestureRecognizer *singleTapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
+    [self.scrollView addGestureRecognizer:singleTapImage];
+    self.collectionView.hidden = YES;
+    
+    // Share button to navigation
+    self.actionButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                     target:self
+                                                                     action:@selector(shareButton:)];
+    self.navigationItem.rightBarButtonItem = self.actionButton;
 }
 
 /*
@@ -301,7 +292,29 @@ static NSString * const reuseIdentifier = @"Cell";
  When rotate create new array
  */
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [self createControllerArray];
+    NSUInteger numberPages = self.contentList.count;
+    
+    // view controllers are created lazily
+    // in the meantime, load the array with placeholders which will be replaced on demand
+    NSMutableArray *controllers = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 0; i < numberPages; i++){
+        [controllers addObject:[NSNull null]];
+    }
+    
+    self.viewControllers = controllers;
+    
+    // a page is the width of the scroll view
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds) * numberPages, CGRectGetHeight(self.view.bounds));
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.scrollsToTop = NO;
+    self.scrollView.delegate = self;
+    self.scrollView.bounces = YES;
+    self.pageControl.numberOfPages = numberPages;
+    self.collectionView.delegate = self;
+    
+    [self gotoPage:NO];
 }
 
 @end
