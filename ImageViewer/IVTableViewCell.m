@@ -2,7 +2,7 @@
 //  IVTableViewCell.m
 //  ImageViewer
 //
-//  Created by user on 5/27/16.
+//  Created by NCAung on 5/27/16.
 //  Copyright © 2016 khaino. All rights reserved.
 //
 

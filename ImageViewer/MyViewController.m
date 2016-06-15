@@ -22,10 +22,8 @@
     self.pageScrollView.delegate = self;
     [self.activityIndicator startAnimating];
     
-    // Do any additional setup after loading the view from its nib.
-    
     // Add double touch gesture to pageScrollView
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap)];
     doubleTap.numberOfTapsRequired = 2;
     [self.pageScrollView addGestureRecognizer:doubleTap];
 
@@ -41,17 +39,12 @@
     return self.imageView;
 }
 
-// When slide to another image, image zoom is reset.
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-//    [self.pageScrollView setZoomScale:0.1f animated:YES];
-//}
-
 - (void)zoomOut{
     [self.pageScrollView setZoomScale:0.2f animated:YES];
 }
 
 // Double tap handler
-- (void)handleDoubleTap:(CGPoint)touchPoint {
+- (void)handleDoubleTap{
 
     // Cancel any single tap handling
     [NSObject cancelPreviousPerformRequestsWithTarget:self.imageView];
@@ -67,15 +60,5 @@
         [self.pageScrollView setZoomScale:self.pageScrollView.maximumZoomScale animated:YES];
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -25,17 +25,13 @@
 		22C1C0081CED81EE00288149 /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF51CED81EE00288149 /* ImageInfo.m */; };
 		22C1C0091CED81EE00288149 /* ImageInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF71CED81EE00288149 /* ImageInfoManager.m */; };
 		22C1C00A1CED81EE00288149 /* IVCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFF91CED81EE00288149 /* IVCacheManager.m */; };
-		22C1C00B1CED81EE00288149 /* IVPageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */; };
-		22C1C00C1CED81EE00288149 /* IVPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1BFFD1CED81EE00288149 /* IVPageViewController.m */; };
 		22C1C00E1CED81EE00288149 /* PodcastDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0011CED81EE00288149 /* PodcastDAO.m */; };
 		22C1C00F1CED81EE00288149 /* PodcastDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0031CED81EE00288149 /* PodcastDBManager.m */; };
-		22C1C0101CED81EE00288149 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C0051CED81EE00288149 /* RootViewController.m */; };
 		22F60D811CF447A800D8BA03 /* EnumType.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F60D801CF447A800D8BA03 /* EnumType.m */; };
 		CE49393B1CE33A860096AC44 /* IVListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4939381CE33A860096AC44 /* IVListTableViewController.m */; };
 		CE49393C1CE33A860096AC44 /* Podcast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE49393A1CE33A860096AC44 /* Podcast.m */; };
 		CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */; };
 		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
-		CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */; };
 		CEC9289D1D0AB6EF00CFDAE4 /* IVSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */; };
 		CEC9EFDF1D0EBA8300A99B31 /* IVSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */; };
 		CEDCBBD41D06A83600FEC1DA /* IVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */; };
@@ -80,16 +76,10 @@
 		22C1BFF71CED81EE00288149 /* ImageInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInfoManager.m; sourceTree = "<group>"; };
 		22C1BFF81CED81EE00288149 /* IVCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCacheManager.h; sourceTree = "<group>"; };
 		22C1BFF91CED81EE00288149 /* IVCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCacheManager.m; sourceTree = "<group>"; };
-		22C1BFFA1CED81EE00288149 /* IVPageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVPageContentViewController.h; sourceTree = "<group>"; };
-		22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVPageContentViewController.m; sourceTree = "<group>"; };
-		22C1BFFC1CED81EE00288149 /* IVPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVPageViewController.h; sourceTree = "<group>"; };
-		22C1BFFD1CED81EE00288149 /* IVPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVPageViewController.m; sourceTree = "<group>"; };
 		22C1C0001CED81EE00288149 /* PodcastDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastDAO.h; sourceTree = "<group>"; };
 		22C1C0011CED81EE00288149 /* PodcastDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastDAO.m; sourceTree = "<group>"; };
 		22C1C0021CED81EE00288149 /* PodcastDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastDBManager.h; sourceTree = "<group>"; };
 		22C1C0031CED81EE00288149 /* PodcastDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastDBManager.m; sourceTree = "<group>"; };
-		22C1C0041CED81EE00288149 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		22C1C0051CED81EE00288149 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		22F60D7F1CF447A800D8BA03 /* EnumType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumType.h; sourceTree = "<group>"; };
 		22F60D801CF447A800D8BA03 /* EnumType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumType.m; sourceTree = "<group>"; };
 		CE4939371CE33A860096AC44 /* IVListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVListTableViewController.h; sourceTree = "<group>"; };
@@ -98,7 +88,6 @@
 		CE49393A1CE33A860096AC44 /* Podcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Podcast.m; sourceTree = "<group>"; };
 		CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CE49393F1CE33B4E0096AC44 /* IVList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVList.storyboard; sourceTree = "<group>"; };
-		CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVPageControl.storyboard; sourceTree = "<group>"; };
 		CEC9289B1D0AB6EF00CFDAE4 /* IVSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVSearchViewController.h; sourceTree = "<group>"; };
 		CEC9289C1D0AB6EF00CFDAE4 /* IVSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVSearchViewController.m; sourceTree = "<group>"; };
 		CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVSearch.storyboard; sourceTree = "<group>"; };
@@ -131,8 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				227283A61D0AA61500FF53C4 /* PrefixHeader.pch */,
-				227283A21D0AA0A600FF53C4 /* CocoaLumberjack.framework */,
 				CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */,
+				227283A21D0AA0A600FF53C4 /* CocoaLumberjack.framework */,
 				223709BC1CE2CCF600A54881 /* ImageViewer */,
 				223709BB1CE2CCF600A54881 /* Products */,
 			);
@@ -155,12 +144,12 @@
 				22C1C0131CED84A300288149 /* List */,
 				22C1C0121CED845700288149 /* PodcastDatabase */,
 				22C1C0151CED851500288149 /* App */,
+				223709BD1CE2CCF600A54881 /* Supporting Files */,
+				22F60D821CF447F400D8BA03 /* Common */,
+				22C1C0141CED84ED00288149 /* Grid */,
 				223709C91CE2CCF600A54881 /* Assets.xcassets */,
 				223709CB1CE2CCF600A54881 /* LaunchScreen.storyboard */,
 				223709CE1CE2CCF600A54881 /* Info.plist */,
-				223709BD1CE2CCF600A54881 /* Supporting Files */,
-				22C1C0141CED84ED00288149 /* Grid */,
-				22F60D821CF447F400D8BA03 /* Common */,
 			);
 			path = ImageViewer;
 			sourceTree = "<group>";
@@ -204,9 +193,6 @@
 			children = (
 				CEF80C361CFD52C0009AD81A /* Scrollview */,
 				CEF80C351CFD52A3009AD81A /* Tableview */,
-				CEF80C341CFD5288009AD81A /* PageControlVC */,
-				22C1BFF01CED81EE00288149 /* DownloadJSON.h */,
-				22C1BFF11CED81EE00288149 /* DownloadJSON.m */,
 			);
 			name = List;
 			sourceTree = "<group>";
@@ -216,13 +202,13 @@
 			children = (
 				22452EF11CFD6F2400C13937 /* RoundedConerView.h */,
 				22452EF21CFD6F2400C13937 /* RoundedConerView.m */,
-				2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */,
 				2209BDE91CE2E16E001FBAC7 /* IVGridViewController.h */,
 				2209BDEA1CE2E16E001FBAC7 /* IVGridViewController.m */,
 				2209BDEC1CE2F137001FBAC7 /* GridCell.h */,
 				2209BDED1CE2F137001FBAC7 /* GridCell.m */,
 				225353141CF6E05800DFA036 /* IVGridLayout.h */,
 				225353151CF6E05800DFA036 /* IVGridLayout.m */,
+				2209BDE71CE2E13B001FBAC7 /* IVGrid.storyboard */,
 			);
 			name = Grid;
 			sourceTree = "<group>";
@@ -246,6 +232,8 @@
 				22C1BFF91CED81EE00288149 /* IVCacheManager.m */,
 				2209BDF11CE2FACE001FBAC7 /* IVImageDownload.h */,
 				2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */,
+				22C1BFF01CED81EE00288149 /* DownloadJSON.h */,
+				22C1BFF11CED81EE00288149 /* DownloadJSON.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -267,20 +255,6 @@
 				CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */,
 			);
 			name = Search;
-			sourceTree = "<group>";
-		};
-		CEF80C341CFD5288009AD81A /* PageControlVC */ = {
-			isa = PBXGroup;
-			children = (
-				22C1C0041CED81EE00288149 /* RootViewController.h */,
-				22C1C0051CED81EE00288149 /* RootViewController.m */,
-				22C1BFFC1CED81EE00288149 /* IVPageViewController.h */,
-				22C1BFFD1CED81EE00288149 /* IVPageViewController.m */,
-				22C1BFFA1CED81EE00288149 /* IVPageContentViewController.h */,
-				22C1BFFB1CED81EE00288149 /* IVPageContentViewController.m */,
-				CE8F20AD1CEECAE600715CA5 /* IVPageControl.storyboard */,
-			);
-			name = PageControlVC;
 			sourceTree = "<group>";
 		};
 		CEF80C351CFD52A3009AD81A /* Tableview */ = {
@@ -373,7 +347,6 @@
 				CEF80C321CFD5261009AD81A /* MyViewController.xib in Resources */,
 				223709CA1CE2CCF600A54881 /* Assets.xcassets in Resources */,
 				CEF80C2E1CFD5261009AD81A /* IVScroll.storyboard in Resources */,
-				CE8F20AE1CEECAE600715CA5 /* IVPageControl.storyboard in Resources */,
 				223709C81CE2CCF600A54881 /* Main.storyboard in Resources */,
 				CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */,
 				CEC9EFDF1D0EBA8300A99B31 /* IVSearch.storyboard in Resources */,
@@ -404,8 +377,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22C1C00C1CED81EE00288149 /* IVPageViewController.m in Sources */,
-				22C1C0101CED81EE00288149 /* RootViewController.m in Sources */,
 				CEF80C2F1CFD5261009AD81A /* IVScrollView.m in Sources */,
 				CEC9289D1D0AB6EF00CFDAE4 /* IVSearchViewController.m in Sources */,
 				22452EF31CFD6F2400C13937 /* RoundedConerView.m in Sources */,
@@ -422,7 +393,6 @@
 				22C1C0071CED81EE00288149 /* ImageDatabase.m in Sources */,
 				2209BDF31CE2FACE001FBAC7 /* IVImageDownload.m in Sources */,
 				22C1C00E1CED81EE00288149 /* PodcastDAO.m in Sources */,
-				22C1C00B1CED81EE00288149 /* IVPageContentViewController.m in Sources */,
 				22C1C0081CED81EE00288149 /* ImageInfo.m in Sources */,
 				22C1C0091CED81EE00288149 /* ImageInfoManager.m in Sources */,
 				22C1C00A1CED81EE00288149 /* IVCacheManager.m in Sources */,

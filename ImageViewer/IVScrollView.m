@@ -27,6 +27,25 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Create null view controllar array
+    [self createControllerArray];
+    
+    // Single touch gesture to image view
+    UITapGestureRecognizer *singleTapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
+    [self.scrollView addGestureRecognizer:singleTapImage];
+    self.collectionView.hidden = YES;
+    
+    // Share button to navigation
+    self.actionButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                     target:self
+                                                                     action:@selector(shareButton:)];
+    self.navigationItem.rightBarButtonItem = self.actionButton;
+}
+
+/*
+ Create null view controller array
+ */
+- (void)createControllerArray{
     NSUInteger numberPages = self.contentList.count;
     
     // view controllers are created lazily
@@ -49,165 +68,13 @@ static NSString * const reuseIdentifier = @"Cell";
     self.pageControl.numberOfPages = numberPages;
     self.pageControl.currentPage = self.currentImage;
     self.collectionView.delegate = self;
-
+    
     [self gotoPage:NO];
     
-    // Add single touch gesture to image view
-    UITapGestureRecognizer *singleTapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
-    [self.scrollView addGestureRecognizer:singleTapImage];
-    self.collectionView.hidden = YES;
-    
-    // Add share button to navigation
-    self.actionButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                     target:self
-                                                                     action:@selector(shareButton:)];
-    self.navigationItem.rightBarButtonItem = self.actionButton;
 }
 
 /*
- Action handler for share button
- */
-- (IBAction)shareButton:(UIBarButtonItem *)sender {
-    Podcast *podcast = [self.contentList objectAtIndex:self.pageControl.currentPage];
-    __block UIImage *image = [[UIImage alloc]init];
-    IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
-    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
-                           trackId:podcast.trackID
-                         imageType:k600
-                 completionHandler:^(NSURL *url){
-                     image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-                     NSArray *array = @[image];
-                     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
-                     
-                         // Only for iPad
-                         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                             
-                             // If possible, display as model popup (such as on iPad).
-                             activityVC.modalPresentationStyle = UIModalPresentationPopover;
-                             
-                             // Configure the Popover presentation controller
-                             UIPopoverPresentationController *popController = [activityVC popoverPresentationController];
-                             popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-                             popController.barButtonItem = self.actionButton;
-                         }
-                         [self presentViewController:activityVC animated:YES completion:nil];
-                 }];
-    
-    
-    
-}
-
-/*
- Gesture handler for single touch on image
- */
-- (void)singleTap:(UITapGestureRecognizer *)gesture {
-    if (self.collectionView.hidden) {
-        [UIView transitionWithView:self.collectionView
-                          duration:0.5
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^(void){
-                            self.collectionView.hidden = NO;
-                        }
-                        completion:nil];
-    } else {
-        [UIView transitionWithView:self.collectionView
-                          duration:0.5
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^(void){
-                            self.collectionView.hidden = YES;
-                        }
-                        completion:nil];
-    }
-    NSLog(@"Image Touched!");
-}
-
-/*
- Prevent vertical scrolling
- */
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y != 0) {
-        [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
-    }
-}
-
-/*
- Create view controller with scrollview and imageview
- */
-- (void)loadScrollViewWithPage:(NSUInteger)page {
-    if (page >= self.contentList.count) {
-        return;
-    }
-    // replace the placeholder if necessary
-    MyViewController *controller = [self.viewControllers objectAtIndex:page];
-    
-    if ((NSNull *)controller == [NSNull null]) {
-        controller = [[MyViewController alloc] init];
-        NSLog(@"Create new viewController");
-        [self.viewControllers replaceObjectAtIndex:page withObject:controller];
-    }
-    
-    // add the controller's view to the scroll view
-    if (controller.view.superview == nil) {
-        CGRect frame = self.scrollView.bounds;
-        frame.origin.x = CGRectGetWidth(frame) * page;
-        frame.origin.y = 0;
-        controller.view.frame = frame;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self addChildViewController:controller];
-            [self.scrollView addSubview:controller.view];
-            [controller didMoveToParentViewController:self];
-        });
-        
-        Podcast *podcast = [self.contentList objectAtIndex:page];
-        
-        IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
-        [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
-                               trackId:podcast.trackID
-                             imageType:k600
-                     completionHandler:^(NSURL *url){
-                         dispatch_async(dispatch_get_main_queue(), ^{
-                             [controller.activityIndicator stopAnimating];
-                             controller.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-                         });
-                     }];
-    }
-}
-
-/*
- Create smooth scrolling
- at the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
- */
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
-    // switch the indicator when more than 50% of the previous/next page is visible
-    CGFloat pageWidth = CGRectGetWidth(self.scrollView.bounds);
-    NSUInteger page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-    
-    // Zoom out the image when scroll to another image
-    if (self.pageControl.currentPage != page){
-        // replace the placeholder if necessary
-        MyViewController *controller = [self.viewControllers objectAtIndex:self.pageControl.currentPage];
-        [controller zoomOut];
-        self.pageControl.currentPage = page;
-    }
-    
-    // Set navigation title to artist name
-    Podcast *podcast = [self.contentList objectAtIndex:page];
-    self.navigationItem.title = podcast.artistName;
-    
-    // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self loadScrollViewWithPage:page - 1];
-        [self loadScrollViewWithPage:page];
-        [self loadScrollViewWithPage:page + 1];
-    });
-    
-    // a possible optimization would be to unload the views+controllers which are no longer visible
-}
-
-/*
- Go to view controller based on user select 
+ Go to view controller based on user select
  */
 - (void)gotoPage:(BOOL)animated {
     
@@ -254,6 +121,150 @@ static NSString * const reuseIdentifier = @"Cell";
     
 }
 
+/*
+ Create view controller with scrollview and imageview
+ */
+- (void)loadScrollViewWithPage:(NSUInteger)page {
+    if (page >= self.contentList.count) {
+        return;
+    }
+    // replace the placeholder if necessary
+    MyViewController *controller = [self.viewControllers objectAtIndex:page];
+    
+    if ((NSNull *)controller == [NSNull null]) {
+        controller = [[MyViewController alloc] init];
+        NSLog(@"Create new viewController");
+        [self.viewControllers replaceObjectAtIndex:page withObject:controller];
+    }
+    
+    // add the controller's view to the scroll view
+    if (controller.view.superview == nil) {
+        CGRect frame = self.scrollView.bounds;
+        frame.origin.x = CGRectGetWidth(frame) * page;
+        frame.origin.y = 0;
+        controller.view.frame = frame;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self addChildViewController:controller];
+            [self.scrollView addSubview:controller.view];
+            [controller didMoveToParentViewController:self];
+        });
+        
+        Podcast *podcast = [self.contentList objectAtIndex:page];
+        
+        IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
+        [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
+                               trackId:podcast.trackID
+                             imageType:k600
+                     completionHandler:^(NSURL *url){
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                             [controller.activityIndicator stopAnimating];
+                             controller.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                         });
+                     }];
+    }
+}
+
+
+/*
+ Gesture handler for single touch on image
+ */
+- (void)singleTap:(UITapGestureRecognizer *)gesture {
+    if (self.collectionView.hidden) {
+        [UIView transitionWithView:self.collectionView
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^(void){
+                            self.collectionView.hidden = NO;
+                        }
+                        completion:nil];
+    } else {
+        [UIView transitionWithView:self.collectionView
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^(void){
+                            self.collectionView.hidden = YES;
+                        }
+                        completion:nil];
+    }
+    NSLog(@"Image Touched!");
+}
+
+/*
+ Action handler for share button
+ */
+- (IBAction)shareButton:(UIBarButtonItem *)sender {
+    
+    Podcast *podcast = [self.contentList objectAtIndex:self.pageControl.currentPage];
+    
+    __block UIImage *image = [[UIImage alloc]init];
+    
+    IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
+    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
+                           trackId:podcast.trackID
+                         imageType:k600
+                 completionHandler:^(NSURL *url){
+                     image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                     NSArray *array = @[image];
+                     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
+                     
+                         // Only for iPad
+                         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                             
+                             // If possible, display as model popup (such as on iPad).
+                             activityVC.modalPresentationStyle = UIModalPresentationPopover;
+                             
+                             // Configure the Popover presentation controller
+                             UIPopoverPresentationController *popController = [activityVC popoverPresentationController];
+                             popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+                             popController.barButtonItem = self.actionButton;
+                         }
+                         [self presentViewController:activityVC animated:YES completion:nil];
+                 }];
+}
+
+/*
+ Prevent vertical scrolling
+ */
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView.contentOffset.y != 0) {
+        [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+    }
+}
+
+/*
+ Create smooth scrolling
+ at the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
+ */
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    // switch the indicator when more than 50% of the previous/next page is visible
+    CGFloat pageWidth = CGRectGetWidth(self.scrollView.bounds);
+    NSUInteger page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    
+    // Zoom out the image when scroll to another image
+    if (self.pageControl.currentPage != page){
+        
+        // replace the placeholder if necessary
+        MyViewController *controller = [self.viewControllers objectAtIndex:self.pageControl.currentPage];
+        [controller zoomOut];
+        self.pageControl.currentPage = page;
+    }
+    
+    // Set navigation title to artist name
+    Podcast *podcast = [self.contentList objectAtIndex:page];
+    self.navigationItem.title = podcast.artistName;
+    
+    // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self loadScrollViewWithPage:page - 1];
+        [self loadScrollViewWithPage:page];
+        [self loadScrollViewWithPage:page + 1];
+    });
+    
+    // a possible optimization would be to unload the views+controllers which are no longer visible
+}
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
@@ -263,9 +274,12 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     IVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
     // Configure the cell
     Podcast *podcast = [self.contentList objectAtIndex:indexPath.row];
+    
     IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
     [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
                            trackId:podcast.trackID
@@ -276,7 +290,9 @@ static NSString * const reuseIdentifier = @"Cell";
                          cell.imageView.image = image;
                      });
                  }];
+    
     cell.imageView.layer.cornerRadius = 20;
+    
     return cell;
 }
 
@@ -284,7 +300,6 @@ static NSString * const reuseIdentifier = @"Cell";
  Action for selecting a thumbnail on collection slider
  */
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Click at index %ld",(long)indexPath.row);
     self.pageControl.currentPage = indexPath.row;
     [self gotoPage:YES];
 }
@@ -293,36 +308,9 @@ static NSString * const reuseIdentifier = @"Cell";
  Handling rotation
  When rotate create new array
  */
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    NSUInteger numberPages = self.contentList.count;
-    
-    // view controllers are created lazily
-    // in the meantime, load the array with placeholders which will be replaced on demand
-    NSMutableArray *controllers = [[NSMutableArray alloc] init];
-    for (NSUInteger i = 0; i < numberPages; i++){
-        [controllers addObject:[NSNull null]];
-    }
-    self.viewControllers = controllers;
-    
-    // a page is the width of the scroll view
-    self.scrollView.pagingEnabled = YES;
-    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds) * numberPages, CGRectGetHeight(self.view.bounds));
-    self.scrollView.showsHorizontalScrollIndicator = NO;
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView.scrollsToTop = NO;
-    self.scrollView.delegate = self;
-    self.scrollView.bounces = YES;
-    self.pageControl.numberOfPages = numberPages;
-    self.collectionView.delegate = self;
-    
-    [self gotoPage:NO];
-    
-    // Add single touch gesture to image view
-    UITapGestureRecognizer *singleTapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
-    [self.scrollView addGestureRecognizer:singleTapImage];
-    self.collectionView.hidden = YES;
-
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    [self createControllerArray];
 }
+
 
 @end

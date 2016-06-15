@@ -2,7 +2,7 @@
 //  IVSearchViewController.h
 //  ImageViewer
 //
-//  Created by user on 6/10/16.
+//  Created by NCAung on 6/10/16.
 //  Copyright © 2016 khaino. All rights reserved.
 //
 
@@ -10,6 +10,6 @@
 
 @interface IVSearchViewController : UITableViewController <UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-//- (IBAction)saveAction:(id)sender;
+- (IBAction)saveAction:(id)sender;
 - (IBAction)backAction:(id)sender;
 @end

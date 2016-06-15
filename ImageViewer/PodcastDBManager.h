@@ -2,7 +2,7 @@
 //  PodcastDBManager.h
 //  ImageViewer
 //
-//  Created by user on 5/16/16.
+//  Created by NCAung on 5/16/16.
 //  Copyright © 2016 khaino. All rights reserved.
 //
 

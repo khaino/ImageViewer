@@ -11,7 +11,7 @@
 @interface IVScrollView : UIViewController
 @property (nonatomic, strong) NSArray *contentList;
 @property (nonatomic, assign) int currentImage;
-- (IBAction)shareButton:(UIBarButtonItem *)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailView;
+- (IBAction)shareButton:(UIBarButtonItem *)sender;
 @end
 
