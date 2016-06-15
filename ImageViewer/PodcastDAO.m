@@ -22,9 +22,9 @@ NSString *dbPodcast = @"podcast.db";
             char *error;
             if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
                 ret = YES;
-                NSLog(@"Podcast table has been sucessfully created");
+                DDLogDebug(@"Podcast table has been sucessfully created");
             } else {
-                NSLog(@"Error: %s", error);
+                DDLogError(@"Error: %s", error);
             }
         }
         sqlite3_close(db);
@@ -68,7 +68,7 @@ NSString *dbPodcast = @"podcast.db";
                 [podcast setSmallImage:smallImage];
                 [podcast setLargeImage:largeImage];
                 [allPodcast setObject:podcast forKey:podcast.trackID];
-                NSLog(@"Podcast selected");
+                DDLogDebug(@"Podcast selected successful");
             }
         }
         sqlite3_finalize(stmt);
@@ -86,21 +86,21 @@ NSString *dbPodcast = @"podcast.db";
         char *error;
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
             ret = YES;
-            NSLog(@"Podcast info inserted.");
-            NSLog(@"%@", podcast.trackID);
-            NSLog(@"%@", podcast.collectionName);
-            NSLog(@"%@", podcast.artistName);
-            NSLog(@"%@", podcast.smallImage);
-            NSLog(@"%@", podcast.largeImage);
+            DDLogDebug(@"Podcast info inserted.");
+            DDLogDebug(@"%@", podcast.trackID);
+            DDLogDebug(@"%@", podcast.collectionName);
+            DDLogDebug(@"%@", podcast.artistName);
+            DDLogDebug(@"%@", podcast.smallImage);
+            DDLogDebug(@"%@", podcast.largeImage);
         } else {
-            NSLog(@"Error: %s", error);
-            NSLog(@"Query: %@", query);
-            NSLog(@"%@", podcast.trackID);
-            NSLog(@"%@", podcast.collectionName);
-            NSLog(@"%@", podcast.artistName);
+            DDLogError(@"Error: %s", error);
+            DDLogError(@"Query: %@", query);
+            DDLogError(@"%@", podcast.trackID);
+            DDLogError(@"%@", podcast.collectionName);
+            DDLogError(@"%@", podcast.artistName);
         }
     } else {
-        NSLog(@"Database open error : %s", sqlite3_errmsg(db));
+        DDLogError(@"Database open error : %s", sqlite3_errmsg(db));
     }
     sqlite3_close(db);
     return ret;

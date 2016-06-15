@@ -133,7 +133,6 @@ static NSString * const reuseIdentifier = @"Cell";
     
     if ((NSNull *)controller == [NSNull null]) {
         controller = [[MyViewController alloc] init];
-        NSLog(@"Create new viewController");
         [self.viewControllers replaceObjectAtIndex:page withObject:controller];
     }
     
@@ -187,14 +186,13 @@ static NSString * const reuseIdentifier = @"Cell";
                         }
                         completion:nil];
     }
-    NSLog(@"Image Touched!");
 }
 
 /*
  Action handler for share button
  */
 - (IBAction)shareButton:(UIBarButtonItem *)sender {
-    
+
     Podcast *podcast = [self.contentList objectAtIndex:self.pageControl.currentPage];
     
     __block UIImage *image = [[UIImage alloc]init];
@@ -274,12 +272,8 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     IVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
     Podcast *podcast = [self.contentList objectAtIndex:indexPath.row];
-    
     IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
     [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
                            trackId:podcast.trackID
@@ -290,9 +284,7 @@ static NSString * const reuseIdentifier = @"Cell";
                          cell.imageView.image = image;
                      });
                  }];
-    
     cell.imageView.layer.cornerRadius = 20;
-    
     return cell;
 }
 
@@ -308,9 +300,8 @@ static NSString * const reuseIdentifier = @"Cell";
  Handling rotation
  When rotate create new array
  */
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [self createControllerArray];
 }
-
 
 @end
