@@ -276,6 +276,7 @@ static NSString * const reuseIdentifier = @"Cell";
                      });
                  }];
     cell.imageView.layer.cornerRadius = 20;
+    cell.imageView.clipsToBounds = YES;
     return cell;
 }
 

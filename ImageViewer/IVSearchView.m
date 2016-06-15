@@ -67,7 +67,7 @@
                  }];
     cell.titleLabel.text = podcast.collectionName;
     cell.subtitleLabel.text = podcast.artistName;
-    cell.smallImageView.layer.cornerRadius = 10;
+    cell.smallImageView.layer.cornerRadius = 20;
     cell.smallImageView.clipsToBounds = YES;
     return cell;
 }
