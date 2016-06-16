@@ -12,6 +12,12 @@
 @property (nonatomic, strong) NSArray *contentList;
 @property (nonatomic, assign) int currentImage;
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailView;
+
+/*
+ * @brief When share button is pressed, image related sharing options are displayed.
+ * @param sender
+ * @return none
+ */
 - (IBAction)shareButton:(UIBarButtonItem *)sender;
 @end
 

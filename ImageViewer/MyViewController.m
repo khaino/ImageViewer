@@ -34,16 +34,29 @@
     // Dispose of any resources that can be recreated.
 }
 
-// Set imageView as object to zoom
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.imageView;
-}
+#pragma mark - Private methods
 
 - (void)zoomOut{
     [self.pageScrollView setZoomScale:0.2f animated:YES];
 }
 
-// Double tap handler
+#pragma mark - UIScrollViewDelegate
+
+/*
+ * @brief Set imageView as object to zoom.
+ * @param scrollView
+ * @return Return imageView to zoom
+ */
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.imageView;
+}
+
+#pragma mark - Handlers
+
+/*
+ * @brief When double tap, image is zoomed.
+ * @return none
+ */
 - (void)handleDoubleTap{
 
     // Cancel any single tap handling

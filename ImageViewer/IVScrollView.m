@@ -64,8 +64,12 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationItem.rightBarButtonItem = self.actionButton;
 }
 
+#pragma mark - Private methods
+
 /*
- Go to view controller based on user select
+ * @brief Go to view controller based on user select
+ * @param animated
+ * @return none
  */
 - (void)gotoPage:(BOOL)animated {
     
@@ -113,7 +117,9 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 /*
- Create view controller with scrollview and imageview
+ * @brief Create view controller with scrollview and imageview
+ * @param page
+ * @return none
  */
 - (void)loadScrollViewWithPage:(NSUInteger)page {
     if (page >= self.contentList.count) {
@@ -155,65 +161,12 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
+#pragma mark - UISCrollViewDelegate
 
 /*
- Gesture handler for single touch on image
- */
-- (void)singleTap:(UITapGestureRecognizer *)gesture {
-    if (self.collectionView.hidden) {
-        [UIView transitionWithView:self.collectionView
-                          duration:0.5
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^(void){
-                            self.collectionView.hidden = NO;
-                        }
-                        completion:nil];
-    } else {
-        [UIView transitionWithView:self.collectionView
-                          duration:0.5
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^(void){
-                            self.collectionView.hidden = YES;
-                        }
-                        completion:nil];
-    }
-}
-
-/*
- Action handler for share button
- */
-- (IBAction)shareButton:(UIBarButtonItem *)sender {
-
-    Podcast *podcast = [self.contentList objectAtIndex:self.pageControl.currentPage];
-    
-    __block UIImage *image = [[UIImage alloc]init];
-    
-    IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
-    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
-                           trackId:podcast.trackID
-                         imageType:k600
-                 completionHandler:^(NSURL *url){
-                     image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-                     NSArray *array = @[image];
-                     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
-                     
-                         // Only for iPad
-                         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                             
-                             // If possible, display as model popup (such as on iPad).
-                             activityVC.modalPresentationStyle = UIModalPresentationPopover;
-                             
-                             // Configure the Popover presentation controller
-                             UIPopoverPresentationController *popController = [activityVC popoverPresentationController];
-                             popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-                             popController.barButtonItem = self.actionButton;
-                         }
-                         [self presentViewController:activityVC animated:YES completion:nil];
-                 }];
-}
-
-/*
- Prevent vertical scrolling
+ * @brief Prevent vertical scrolling
+ * @param scrollView
+ * @return none
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y != 0) {
@@ -222,8 +175,9 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 /*
- Create smooth scrolling
- at the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
+ * @brief Create smooth scrolling. At the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
+ * @param scrollView
+ * @return none
  */
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
@@ -254,14 +208,33 @@ static NSString * const reuseIdentifier = @"Cell";
     // a possible optimization would be to unload the views+controllers which are no longer visible
 }
 
+#pragma mark - UICollectionViewDataSource
+
+/*
+ * @brief Number of session for collection view
+ * @param collectionView
+ * @return Return 1 because we use only one section.
+ */
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
+/*
+ * @brief Total number of items for a section.
+ * @param collectionView
+ * @param section
+ * @return Retrun array count of contetnList.
+ */
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.contentList.count;
 }
 
+/*
+ * @brief Get current cell of collection view and configure item.
+ * @param collectionView
+ * @param indexPath
+ * @return Retrun configured cell.
+ */
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     IVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     Podcast *podcast = [self.contentList objectAtIndex:indexPath.row];
@@ -280,17 +253,25 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
+#pragma mark - UICollectionViewDelegate
+
 /*
- Action for selecting a thumbnail on collection slider
+ * @brief Action for selecting a thumbnail on collection slider
+ * @param collectionView
+ * @param indexPath
+ * @return none
  */
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.pageControl.currentPage = indexPath.row;
     [self gotoPage:YES];
 }
 
+#pragma mark - Handlers
+
 /*
- Handling rotation
- When rotate create new array
+ * @brief Handling rotation. When rotate create new array.
+ * @param fromInterfaceOrientation
+ * @return none
  */
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     NSUInteger numberPages = self.contentList.count;
@@ -316,6 +297,63 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.delegate = self;
     
     [self gotoPage:NO];
+}
+
+/*
+ * @brief Gesture handler for single touch on image
+ * @param gesture
+ * @return none
+ */
+- (void)singleTap:(UITapGestureRecognizer *)gesture {
+    if (self.collectionView.hidden) {
+        [UIView transitionWithView:self.collectionView
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^(void){
+                            self.collectionView.hidden = NO;
+                        }
+                        completion:nil];
+    } else {
+        [UIView transitionWithView:self.collectionView
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^(void){
+                            self.collectionView.hidden = YES;
+                        }
+                        completion:nil];
+    }
+}
+
+#pragma mark - Action methods
+
+- (IBAction)shareButton:(UIBarButtonItem *)sender {
+    
+    Podcast *podcast = [self.contentList objectAtIndex:self.pageControl.currentPage];
+    
+    __block UIImage *image = [[UIImage alloc]init];
+    
+    IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
+    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
+                           trackId:podcast.trackID
+                         imageType:k600
+                 completionHandler:^(NSURL *url){
+                     image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                     NSArray *array = @[image];
+                     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
+                     
+                     // Only for iPad
+                     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                         
+                         // If possible, display as model popup (such as on iPad).
+                         activityVC.modalPresentationStyle = UIModalPresentationPopover;
+                         
+                         // Configure the Popover presentation controller
+                         UIPopoverPresentationController *popController = [activityVC popoverPresentationController];
+                         popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+                         popController.barButtonItem = self.actionButton;
+                     }
+                     [self presentViewController:activityVC animated:YES completion:nil];
+                 }];
 }
 
 @end

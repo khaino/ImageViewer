@@ -28,8 +28,16 @@
     [self.searchBar becomeFirstResponder];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Private method
+
 /*
- When scroll, keyboard is hidden.
+ * @brief When scroll, keyboard is hidden.
+ * @param scrollView
+ * @return none
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if ([self.searchBar isFirstResponder]) {
@@ -37,19 +45,43 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+/*
+ * @brief Change table row height with respect to screen size
+ * @param tableView
+ * @param indexPath
+ * @return Return calculated size of table row
+ */
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return tableView.frame.size.width/5;
 }
 
+#pragma mark - Table view data source
+
+/*
+ * @brief Set number of section based on podcast array
+ * @param tableView
+ * @return Return 1 if podcast data is available, 0 otherwise.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.podcasts ? 1 : 0;
 }
 
+/*
+ * @brief Set number of row on a section based on podcast array
+ * @param tableView
+ * @param section
+ * @return Return total number of podcast if podcast data is available, 0 otherwise.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.podcasts ? self.podcasts.count : 0;
 }
 
-
+/*
+ * @brief Get current table row and configure cell
+ * @param tableView
+ * @param indexPath
+ * @return Return configured cell.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     IVTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Podcast *podcast = [self.podcasts objectAtIndex:(indexPath.row)];
@@ -72,8 +104,13 @@
     return cell;
 }
 
+#pragma mark - Session connection
+
 /*
- When typing text is greater than 3 character, search is working
+ * @brief When typing text is greater than 3 character, search is working
+ * @param searchBar
+ * @param searchText
+ * @return none
  */
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (!searchText) return;
@@ -84,13 +121,19 @@
     }
 }
 
-// Clear search results
+/*
+ * @brief Clear search results
+ * @return none
+ */
 - (void)resetSearch {
     [self.podcasts removeAllObjects];
     [self.tableView reloadData];
 }
 
-// Search start
+/*
+ * @brief Search start
+ * @return none
+ */
 - (void)performSearch {
     NSString *query = self.searchBar.text;
     
@@ -119,13 +162,21 @@
     }
 }
 
-// Link to search
+/*
+ * @brief Url link to search
+ * @param query
+ * @return Return NSURL with search query
+ */
 - (NSURL *)urlForQuery:(NSString *)query {
     query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     return [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?media=podcast&entity=podcast&term=%@", query]];
 }
 
-// Insert search results to array
+/*
+ * @brief Insert search results to array
+ * @param results
+ * @return none
+ */
 - (void)processResults:(NSArray *)results {
     if (!self.podcasts) {
         self.podcasts = [NSMutableArray array];
@@ -143,6 +194,10 @@
     [self.tableView reloadData];
 }
 
+/*
+ * @brief Configure session
+ * @return Return configured session
+ */
 - (NSURLSession *)session {
     if (!_session) {
         // Initialize Session Configuration
@@ -157,6 +212,8 @@
     return _session;
 }
 
+#pragma mark - ActionMethods 
+
 - (IBAction)saveAction:(id)sender {
     for (Podcast *podcast in self.podcasts) {
         [[PodcastDBManager defaultManager] insertPodcast:podcast];
@@ -166,13 +223,6 @@
 
 - (IBAction)backAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-/*
- Change table row height with respect to screen size
- */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return tableView.frame.size.width/5;
 }
 
 @end

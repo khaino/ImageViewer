@@ -13,5 +13,10 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) NSArray *contentList;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+/*
+ * @brief Handling zoomout.
+ * @return none
+ */
 - (void)zoomOut;
 @end

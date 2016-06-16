@@ -11,6 +11,18 @@
 @interface IVSearchView : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+/*
+ * @brief When save button is pressed, data is save to database.
+ * @param sender
+ * @return none
+ */
 - (IBAction)saveAction:(id)sender;
+
+/*
+ * @brief When back button is pressed, go back to previous controller.
+ * @param sender
+ * @return none
+ */
 - (IBAction)backAction:(id)sender;
 @end

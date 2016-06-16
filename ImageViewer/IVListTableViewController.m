@@ -42,14 +42,33 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - UITableViewDataSource
+
+/*
+ * @brief Set number of section based on podcast array.
+ * @param tableView
+ * @return Return 1 if podcast is not null, 0 otherwise.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.podcasts ? 1 : 0;
 }
 
+/*
+ * @brief Set number of rows based on podcast array count.
+ * @param tableView
+ * @param section
+ * @return Return total count of podcast array.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.podcasts ? self.podcasts.count : 0;
 }
 
+/*
+ * @brief Set table cell to be configure
+ * @param tableView
+ * @param indexPath
+ * @return Return configured cell
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     IVTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -78,16 +97,33 @@
     return cell;
 }
 
+#pragma mark - UITableViewDataDelegate
+
+/*
+ * @brief Set table row editable or not.
+ * @param tableView
+ * @param indexPath
+ * @return Return NO, table row cannot edit.
+ */
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
 
+/*
+ * @brief Set table row movable or not.
+ * @param tableView
+ * @param indexPath
+ * @return Return NO, table row cannot move.
+ */
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
 
 /*
- If select a row, go to scroll view with larger image.
+ * @brief If select a row, go to scroll view with larger image.
+ * @param tableView
+ * @param indexPath
+ * @return none
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard *pageControlStoryboard = [UIStoryboard storyboardWithName:@"IVScroll" bundle:nil];
@@ -98,28 +134,27 @@
 }
 
 /*
- Change to grid view
+ * @brief Change table row height with respect to screen size.
+ * @param tableView
+ * @param indexPath
+ * @return Return calculated table row height.
  */
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return tableView.frame.size.width/5;
+}
+
+#pragma mark - Action methods
+
 - (IBAction)chageGridView:(id)sender {
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"IVGrid" bundle:nil];
     UINavigationController *navigationController = (UINavigationController *)[storyBoard instantiateInitialViewController];
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 
-/*
- Go to search
- */
 - (IBAction)searchAction:(id)sender {
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"IVSearch" bundle:nil];
     UINavigationController *navigationController = (UINavigationController *)[storyBoard instantiateInitialViewController];
     [self presentViewController:navigationController animated:YES completion:nil];
-}
-
-/*
- Change table row height with respect to screen size
- */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return tableView.frame.size.width/5;
 }
 
 @end
