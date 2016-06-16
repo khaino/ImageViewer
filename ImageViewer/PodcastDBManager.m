@@ -27,7 +27,12 @@ static PodcastDBManager *podcastDBManager;
 }
 
 - (NSArray*)getAllPodcast {
-    return [self.podcastDict allValues];
+    
+    // Set sort pattern on database results with insert date
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"insertDate" ascending:NO];
+    NSArray *sortDescriptors = @[descriptor];
+    
+    return [[self.podcastDict allValues] sortedArrayUsingDescriptors:sortDescriptors];
 }
 
 - (BOOL)insertPodcast:(Podcast *)podcast {

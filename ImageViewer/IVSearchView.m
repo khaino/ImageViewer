@@ -182,6 +182,11 @@
         self.podcasts = [NSMutableArray array];
     }
     [self.podcasts removeAllObjects];
+    
+    // Date format with respect to SQLite DATETIME
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
     for (NSDictionary *dict in results) {
         Podcast *podcast = [[Podcast alloc]init];
         [podcast setTrackID:[dict objectForKey:@"trackId"]];
@@ -189,6 +194,12 @@
         [podcast setArtistName:[dict objectForKey:@"artistName"]];
         [podcast setSmallImage:[dict objectForKey:@"artworkUrl60"]];
         [podcast setLargeImage:[dict objectForKey:@"artworkUrl600"]];
+        
+        // Set current datetime to podcast insert date.
+        NSString *dateString=[dateFormat stringFromDate:[NSDate date]];
+        [podcast setInsertDate:dateString];
+        
+        // Add podcast to array
         [self.podcasts addObject:podcast];
     }
     [self.tableView reloadData];

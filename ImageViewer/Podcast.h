@@ -14,4 +14,5 @@
 @property(strong,nonatomic)NSString *artistName;
 @property(strong,nonatomic)NSString *smallImage;
 @property(strong,nonatomic)NSString *largeImage;
+@property(strong,nonatomic)NSString *insertDate;
 @end
