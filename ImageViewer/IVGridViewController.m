@@ -52,14 +52,22 @@ static NSString * const reuseIdentifier = @"gridCell";
     DDLogDebug(@"Debug CocoaLumberjack");
     
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
     
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    IVGridLayout *layout = (IVGridLayout*)self.collectionView.collectionViewLayout;
+    [layout invalidateLayout];
+    layout.isRotate = YES;
+}
 
-#pragma mark <UICollectionViewDataSource>
+
+
+#pragma mark- Collection Datasource methods
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 
@@ -92,6 +100,7 @@ static NSString * const reuseIdentifier = @"gridCell";
     return cell;
 }
 
+#pragma mark- Collection Delegate methods
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     UIStoryboard *pageControlStoryboard = [UIStoryboard storyboardWithName:@"IVScroll" bundle:nil];
@@ -102,14 +111,9 @@ static NSString * const reuseIdentifier = @"gridCell";
     
 }
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    IVGridLayout *layout = (IVGridLayout*)self.collectionView.collectionViewLayout;
-    [layout invalidateLayout];
-    layout.isRotate = YES;
-}
 
 
-// Implementation of IVGridLayoutDelegate
+#pragma mark- GridLayout Delegate methods
 
 - (CGFloat)collectionView:(UICollectionView*)collectionView heightForPhotoAtIndexPath:(NSIndexPath*)indexPath withWidth:(CGFloat)width{
     
@@ -132,11 +136,15 @@ static NSString * const reuseIdentifier = @"gridCell";
     return height;
 }
 
-#pragma private method
-
+#pragma mark- Action methods
 
 - (IBAction)toList:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)searchAction:(id)sender {
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"IVSearch" bundle:nil];
+    UINavigationController *navigationController = (UINavigationController *)[storyBoard instantiateInitialViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
+}
 @end
