@@ -11,6 +11,7 @@
 
 
 NSString *dbimagename = @"image.db";
+static sqlite3 *db;
 
 @implementation ImageDatabase
 
@@ -18,14 +19,14 @@ NSString *dbimagename = @"image.db";
 + (BOOL) createDB {
     
     BOOL ret = NO;
-    sqlite3 *db;
+
     NSString *dbPath = [self getDBPath:dbimagename];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath]) {
         
         if (sqlite3_open([dbPath UTF8String], &db) == SQLITE_OK) {
             
-            NSString *sql= @"CREATE TABLE IF NOT EXISTS image (id INTEGER PRIMARY KEY AUTOINCREMENT, track_id TEXT UNIQUE, is_thumpnail BOOL, download_completed BOOL, loc_url TEXT, last_access DATE)";
+            NSString *sql= @"CREATE TABLE IF NOT EXISTS image (id INTEGER PRIMARY KEY AUTOINCREMENT, track_id TEXT, is_thumpnail BOOL, download_completed BOOL, loc_url TEXT, last_access DATE, UNIQUE (track_id, is_thumpnail) ON CONFLICT REPLACE)";
             DDLogDebug(@"SQL Statement : %@", sql);
             char *error;
             if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
@@ -35,7 +36,7 @@ NSString *dbimagename = @"image.db";
                 DDLogError(@"Error: %s", error);
             }
         }
-        sqlite3_close(db);
+//        sqlite3_close(db);
     }
     return ret;
 }
@@ -52,12 +53,12 @@ NSString *dbimagename = @"image.db";
 
 + (NSMutableDictionary*)getAllImageInfo {
     
-    sqlite3 *db;
+//    sqlite3 *db;
     NSMutableDictionary *allImageInfo = [NSMutableDictionary dictionary];
     
-    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
+    if ([self openDatabase]) {
         
-        NSString *sql = @"SELECT track_id, is_thumpnail, download_completed, loc_url, last_access image ORDER BY id asc";
+        NSString *sql = @"SELECT id, track_id, is_thumpnail, download_completed, loc_url, last_access image ORDER BY id asc";
         DDLogDebug(@"SQL Statement : %@", sql);
         sqlite3_stmt *stmt;
         if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, NULL) == SQLITE_OK) {
@@ -83,7 +84,7 @@ NSString *dbimagename = @"image.db";
         }
         sqlite3_finalize(stmt);
     }
-    sqlite3_close(db);
+//    sqlite3_close(db);
     
     return allImageInfo;
 }
@@ -91,9 +92,9 @@ NSString *dbimagename = @"image.db";
 
 + (NSString*)getLastInsertRowIdImageInfo:(ImageInfo*)imageInfo {
     
-    sqlite3 *db;
+//    sqlite3 *db;
     NSString *imageId;
-    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
+    if ([self openDatabase]) {
         NSString *sql = [NSString stringWithFormat:@"SELECT id FROM image WHERE track_id = '%@' AND is_thumpnail = '%d'", imageInfo.trackId, imageInfo.isThumpnail];
         DDLogDebug(@"SQL Statement : %@", sql);
         sqlite3_stmt *stmt;
@@ -106,7 +107,7 @@ NSString *dbimagename = @"image.db";
         }
         sqlite3_finalize(stmt);
     }
-    sqlite3_close(db);
+//    sqlite3_close(db);
     
     return imageId;
 }
@@ -114,8 +115,8 @@ NSString *dbimagename = @"image.db";
 + (BOOL)insertOrUpdateImageInfo: (ImageInfo*) imageInfo {
     
     BOOL ret = NO;
-    sqlite3 *db;
-    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
+//    sqlite3 *db;
+    if ([self openDatabase]) {
         
         // Create sql statement for insert
         NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO image (track_id, is_thumpnail, download_completed, loc_url, last_access) VALUES ('%@', '%d', '%d', '%@', '%@')", imageInfo.trackId, imageInfo.isThumpnail, imageInfo.downloadCompleted, imageInfo.locUrl.path, imageInfo.lastAccess];
@@ -123,7 +124,7 @@ NSString *dbimagename = @"image.db";
         char *error;
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
             ret = YES;
-            DDLogDebug(@"Image inserted or modified : %@", imageInfo.imageId);
+            //DDLogDebug(@"Image inserted or modified : %@", imageInfo.imageId);
         } else {
             DDLogError(@"Image inserted or modified error : %@", imageInfo.imageId);
         }
@@ -131,18 +132,18 @@ NSString *dbimagename = @"image.db";
         DDLogError(@"Database open error : %s", sqlite3_errmsg(db));
     }
     
-    sqlite3_close(db);
+//    sqlite3_close(db);
     return ret;
 }
 
 + (BOOL)deleteImageInfo:(NSString*)imageId {
 
     BOOL ret = NO;
-    sqlite3 *db;
-    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
+//    sqlite3 *db;
+    if ([self openDatabase]) {
         
         // Create sql statement for delete
-        NSString *sql = [NSString stringWithFormat:@"DELETE FROM image WHERE image_id = '%@')", imageId];
+        NSString *sql = [NSString stringWithFormat:@"DELETE FROM image WHERE id = '%@'", imageId];
         DDLogDebug(@"SQL Statement : %@", sql);
         char *error;
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
@@ -155,7 +156,17 @@ NSString *dbimagename = @"image.db";
         DDLogError(@"Database open error : %s", sqlite3_errmsg(db));
     }
     
-    sqlite3_close(db);
+//    sqlite3_close(db);
+    return ret;
+}
+
++ (BOOL)openDatabase {
+    BOOL ret = NO;
+    if (db) {
+        ret = YES;
+    } else {
+        if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) ret = YES;
+    }
     return ret;
 }
 @end

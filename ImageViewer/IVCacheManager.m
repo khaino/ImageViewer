@@ -10,13 +10,22 @@
 #import "ImageInfoManager.h"
 #import "ImageInfo.h"
 
+@interface IVCacheManager()
+
+/** Is cache cleaning is in progress */
+@property(nonatomic) BOOL cleanProgress;
+
+@end
+
 @implementation IVCacheManager
+
 
 + (instancetype)defaultManager {
     
     static IVCacheManager *cacheManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        cacheManager.cleanProgress = NO;
         cacheManager = [[IVCacheManager alloc] init];
     });
     return cacheManager;
@@ -85,21 +94,24 @@
 
 - (void)cleanImageCache {
     
-    int thumpnailMax = 20;
-    int normalMax = 50;
+    if (self.cleanProgress) return;
+    self.cleanProgress = YES;
+    
+    int thumpnailMax = 150;
+    int normalMax = 75;
     
     NSArray *k60ImgArr = [[ImageInfoManager defaultManager] getAllImageInfoWithType:k60];
     if (k60ImgArr.count > thumpnailMax) {
         DDLogDebug(@"Clean Cache For Thumpnail");
-        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAcess"
-                                                                     ascending:NO];
+    
+        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAccess" ascending:YES];
         k60ImgArr = [k60ImgArr sortedArrayUsingDescriptors:@[descriptor]];
         NSArray *toDelete = [k60ImgArr subarrayWithRange:NSMakeRange(0, k60ImgArr.count - thumpnailMax)];
         
         for (ImageInfo *imageInfo in toDelete) {
-            [self deleteImageCachedForTrackId:imageInfo.trackId imageType:k60];
-            [[ImageInfoManager defaultManager]deleteImageInfo:imageInfo.imageId];
-            
+            if ([self deleteImageCachedForTrackId:imageInfo.trackId imageType:k60]) {
+                [[ImageInfoManager defaultManager]deleteImageInfo:imageInfo.imageId];
+            }
         }
     }
     
@@ -107,17 +119,17 @@
     
     if (k600ImgArr.count > normalMax) {
         DDLogDebug(@"Clean Cache For Normal Image");
-        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAcess"
-                                                                     ascending:NO];
+        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAccess" ascending:YES];
         k600ImgArr = [k600ImgArr sortedArrayUsingDescriptors:@[descriptor]];
         NSArray *toDelete = [k600ImgArr subarrayWithRange:NSMakeRange(0, k600ImgArr.count - normalMax)];
         
         for (ImageInfo *imageInfo in toDelete) {
-            [self deleteImageCachedForTrackId:imageInfo.trackId imageType:k600];
-            [[ImageInfoManager defaultManager]deleteImageInfo:imageInfo.imageId];
-            
+            if ([self deleteImageCachedForTrackId:imageInfo.trackId imageType:k600]) {
+                [[ImageInfoManager defaultManager]deleteImageInfo:imageInfo.imageId];
+            }
         }
     }
+    self.cleanProgress = NO;
 }
 
 
@@ -125,14 +137,16 @@
 - (BOOL)deleteImageCachedForTrackId:(NSString*)trackId imageType:(ImageType)imageType {
     
     BOOL ret = NO;
-    NSURL *imgUrl = [self imageDirForTrackId:trackId imageType:k60];
+    NSURL *imgUrl = [self imageDirForTrackId:trackId imageType:imageType];
+    NSString *imgPath =[imgUrl path];
     NSFileManager *fm = [NSFileManager defaultManager];
-    if (![fm fileExistsAtPath:[imgUrl path]]) {
+    if ([fm fileExistsAtPath:imgPath]) {
         NSError *error;
         [fm removeItemAtPath:[imgUrl path] error:&error];
         if (error) {
-            DDLogError(@"Error in deletion trackId : %@", trackId);
+            DDLogError(@"Error in cache deletion trackId : %@", trackId);
         } else {
+            DDLogDebug(@"Remove from cache image  id: %@ type: %ld", trackId, (long)imageType);
             ret = YES;
         }
     }
