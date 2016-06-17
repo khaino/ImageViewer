@@ -52,7 +52,6 @@ NSString *dbPodcast = @"podcast.db";
     NSMutableDictionary *allPodcast = [NSMutableDictionary dictionary];
     if (sqlite3_open([[PodcastDAO getDBPath:dbPodcast] UTF8String], &db) == SQLITE_OK) {
         NSString *sql = @"SELECT track_id, collection_name, artist_name, image_small, image_large, insert_date FROM podcast ORDER BY id asc";
-        NSLog(@"Select query: %@", sql);
         sqlite3_stmt *stmt;
         if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, NULL) == SQLITE_OK) {
             while (sqlite3_step(stmt) == SQLITE_ROW) {

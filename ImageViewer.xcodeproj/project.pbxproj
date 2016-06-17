@@ -33,6 +33,8 @@
 		CE49393C1CE33A860096AC44 /* Podcast.m in Sources */ = {isa = PBXBuildFile; fileRef = CE49393A1CE33A860096AC44 /* Podcast.m */; };
 		CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */; };
 		CE4939401CE33B4E0096AC44 /* IVList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE49393F1CE33B4E0096AC44 /* IVList.storyboard */; };
+		CEC0680D1D13BF8E0043CD8A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC0680C1D13BF8E0043CD8A /* SystemConfiguration.framework */; };
+		CEC068101D13C2B40043CD8A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0680F1D13C2B40043CD8A /* Reachability.m */; };
 		CEC9EFDF1D0EBA8300A99B31 /* IVSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */; };
 		CEDCBBD41D06A83600FEC1DA /* IVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */; };
 		CEE192581D1145A500C623EE /* IVSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE192571D1145A500C623EE /* IVSearchView.m */; };
@@ -90,6 +92,9 @@
 		CE49393A1CE33A860096AC44 /* Podcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Podcast.m; sourceTree = "<group>"; };
 		CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CE49393F1CE33B4E0096AC44 /* IVList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVList.storyboard; sourceTree = "<group>"; };
+		CEC0680C1D13BF8E0043CD8A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CEC0680E1D13C2B40043CD8A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		CEC0680F1D13C2B40043CD8A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		CEC9EFDE1D0EBA8300A99B31 /* IVSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IVSearch.storyboard; sourceTree = "<group>"; };
 		CEDCBBD21D06A83600FEC1DA /* IVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVCollectionViewCell.h; sourceTree = "<group>"; };
 		CEDCBBD31D06A83600FEC1DA /* IVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVCollectionViewCell.m; sourceTree = "<group>"; };
@@ -110,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC0680D1D13BF8E0043CD8A /* SystemConfiguration.framework in Frameworks */,
 				CE49393E1CE33ABF0096AC44 /* libsqlite3.tbd in Frameworks */,
 				227283A31D0AA0A600FF53C4 /* CocoaLumberjack.framework in Frameworks */,
 			);
@@ -123,6 +129,7 @@
 			children = (
 				227283A61D0AA61500FF53C4 /* PrefixHeader.pch */,
 				CE49393D1CE33ABF0096AC44 /* libsqlite3.tbd */,
+				CEC0680C1D13BF8E0043CD8A /* SystemConfiguration.framework */,
 				227283A21D0AA0A600FF53C4 /* CocoaLumberjack.framework */,
 				223709BC1CE2CCF600A54881 /* ImageViewer */,
 				223709BB1CE2CCF600A54881 /* Products */,
@@ -237,6 +244,8 @@
 				2209BDF21CE2FACE001FBAC7 /* IVImageDownload.m */,
 				22C1BFF01CED81EE00288149 /* DownloadJSON.h */,
 				22C1BFF11CED81EE00288149 /* DownloadJSON.m */,
+				CEC0680E1D13C2B40043CD8A /* Reachability.h */,
+				CEC0680F1D13C2B40043CD8A /* Reachability.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -391,6 +400,7 @@
 				22C1C00F1CED81EE00288149 /* PodcastDBManager.m in Sources */,
 				22F60D811CF447A800D8BA03 /* EnumType.m in Sources */,
 				CEF80C301CFD5261009AD81A /* IVTableViewCell.m in Sources */,
+				CEC068101D13C2B40043CD8A /* Reachability.m in Sources */,
 				CE49393C1CE33A860096AC44 /* Podcast.m in Sources */,
 				CEF80C311CFD5261009AD81A /* MyViewController.m in Sources */,
 				22C1C0071CED81EE00288149 /* ImageDatabase.m in Sources */,

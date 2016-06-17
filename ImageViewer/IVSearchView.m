@@ -11,6 +11,7 @@
 #import "Podcast.h"
 #import "IVImageDownload.h"
 #import "PodcastDBManager.h"
+#import "Reachability.h"
 
 @interface IVSearchView ()
 @property (strong, nonatomic) NSURLSession *session;
@@ -24,15 +25,63 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Search Podcast";
+    
+    // Test internet connection
+    [self testConnection];
+    
     // Show Keyboard
     [self.searchBar becomeFirstResponder];
-}
+    
+   }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Private method
+
+/*
+ * @brief Test internet connection
+ * @return none
+ */
+- (void)testConnection{
+    
+    // Create alert view
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Connection"
+                                                                   message:@"Please check your network connection"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Action for alert
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action){}];
+    [alert addAction:defaultAction];
+    
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        [self presentViewController:alert animated:YES completion:nil];
+        DDLogDebug(@"Please check your network connection");
+    } else {
+        Reachability *reachability = [Reachability reachabilityForInternetConnection];
+        [reachability startNotifier];
+        NetworkStatus status = [reachability currentReachabilityStatus];
+        if(status == NotReachable){
+            
+            //No internet
+            [self presentViewController:alert animated:YES completion:nil];
+            DDLogDebug(@"Please check your network connection");
+        } else if (status == ReachableViaWiFi) {
+            
+            //Connected to WiFi
+            DDLogDebug(@"WiFi connection");
+        } else if (status == ReachableViaWWAN) {
+            
+            //Connected to 3G
+            DDLogDebug(@"3G connection");
+        }
+    }
+}
 
 /*
  * @brief When scroll, keyboard is hidden.
@@ -135,6 +184,7 @@
  * @return none
  */
 - (void)performSearch {
+    [self testConnection];
     NSString *query = self.searchBar.text;
     
     if (self.dataTask) {
@@ -225,11 +275,23 @@
 
 #pragma mark - ActionMethods 
 
+/*
+ * @brief When save button is pressed, data is save to database.
+ * @param sender
+ * @return none
+ */
 - (IBAction)saveAction:(id)sender {
-    [[PodcastDBManager defaultManager] insertPodcast:self.podcasts];
+    if (self.podcasts || self.podcasts.count) {
+        [[PodcastDBManager defaultManager] insertPodcast:self.podcasts];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+/*
+ * @brief When back button is pressed, go back to previous controller.
+ * @param sender
+ * @return none
+ */
 - (IBAction)backAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
