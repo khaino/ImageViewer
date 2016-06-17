@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.title = @"Search Podcast";
     // Show Keyboard
     [self.searchBar becomeFirstResponder];
 }

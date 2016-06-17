@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.title = @"Podcasts";
     // Load data from database when application start
     [self.tableView reloadData];
 }
