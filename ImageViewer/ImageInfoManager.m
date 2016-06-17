@@ -12,6 +12,7 @@
 
 @interface ImageInfoManager()
 
+/** Dictionary of all image info */
 @property(strong, nonatomic) NSMutableDictionary *allImageInfo;
 
 @end
@@ -65,7 +66,7 @@ static ImageInfoManager *imageInfoManager;
             NSString *imageId = [ImageDatabase getLastInsertRowIdImageInfo:imageInfo];
             [self.allImageInfo setObject:imageInfo forKey:imageId];
             ret = YES;
-            DDLogDebug(@"Insert image id %@", imageInfo.imageId);
+            DDLogDebug(@"Insert image : %@", imageInfo);
         }
     }
     return ret;

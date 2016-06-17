@@ -7,6 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/** This class is to show images in grid format */
 @interface IVGridViewController : UICollectionViewController
 @end

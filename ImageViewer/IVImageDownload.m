@@ -27,7 +27,7 @@
 
 @implementation IVImageDownload
 
-#pragma setter
+#pragma mark- setter
 
 /*
  * @brief Setter for session property.
@@ -42,7 +42,7 @@
     return _session;
 }
 
-#pragma public method implementation
+#pragma mark- public method implementation
 
 - (void)downloadImage:(NSURL*)url
               trackId:(NSString*)trackId
@@ -74,7 +74,7 @@
     }
 }
 
-#pragma private methods
+#pragma mark- private methods
 
 /*
  * @brief Get image dir for given track id.
@@ -102,7 +102,7 @@
 }
 
 
-#pragma delegate methods
+#pragma mark- URLSession delegate methods
 
 /*
  * @brief Callback when download completed.

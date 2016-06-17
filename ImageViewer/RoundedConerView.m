@@ -10,6 +10,11 @@
 
 @implementation RoundedConerView
 
+/*
+ * @brief Setter of cornerRadius.
+ * @param cornerRadius corner radius value.
+ * @return none.
+ */
 - (void)setCornerRadius:(CGFloat)cornerRadius {
     _cornerRadius = cornerRadius;
     self.layer.cornerRadius = cornerRadius;

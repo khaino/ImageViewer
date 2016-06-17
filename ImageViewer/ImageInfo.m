@@ -48,14 +48,22 @@
     return self;
 }
 
-- (void)setImageId:(NSString *)imageId {
-    if (imageId != nil && imageId != _imageId) {
-        _imageId = imageId;
-    }
-}
+
 
 
 #pragma setters
+
+/*
+ * @brief Setter for Image Id
+ * @param imageId image id.
+ * @return none.
+ */
+- (void)setImageId:(NSString *)imageId {
+    if (imageId != nil && imageId != _imageId) {
+        _imageId = imageId;
+        [[ImageInfoManager defaultManager] updateImageInfo:self];
+    }
+}
 
 /*
  * @brief Setter of download completed field

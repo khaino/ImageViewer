@@ -28,6 +28,8 @@
                    completion:(myCompletion)completionHandler
 {
 
+    
+    
     NSURL *cacheUrl = [self imageDirForTrackId:trackId imageType:imageType];
     NSFileManager *fm = [NSFileManager defaultManager];
     
@@ -52,6 +54,8 @@
     }
     
     [self cleanImageCache];
+    
+    
 }
 
 - (BOOL)isImageCached:(NSString*)trackId
@@ -81,7 +85,7 @@
 
 - (void)cleanImageCache {
     
-    int thumpnailMax = 100;
+    int thumpnailMax = 20;
     int normalMax = 50;
     
     NSArray *k60ImgArr = [[ImageInfoManager defaultManager] getAllImageInfoWithType:k60];
@@ -105,8 +109,8 @@
         DDLogDebug(@"Clean Cache For Normal Image");
         NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAcess"
                                                                      ascending:NO];
-        k60ImgArr = [k60ImgArr sortedArrayUsingDescriptors:@[descriptor]];
-        NSArray *toDelete = [k60ImgArr subarrayWithRange:NSMakeRange(0, k600ImgArr.count - normalMax)];
+        k600ImgArr = [k600ImgArr sortedArrayUsingDescriptors:@[descriptor]];
+        NSArray *toDelete = [k600ImgArr subarrayWithRange:NSMakeRange(0, k600ImgArr.count - normalMax)];
         
         for (ImageInfo *imageInfo in toDelete) {
             [self deleteImageCachedForTrackId:imageInfo.trackId imageType:k600];

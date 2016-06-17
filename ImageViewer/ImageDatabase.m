@@ -142,7 +142,7 @@ NSString *dbimagename = @"image.db";
     if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
         
         // Create sql statement for delete
-        NSString *sql = [NSString stringWithFormat:@"DELETE FROM image WHERE imageId = '%@')", imageId];
+        NSString *sql = [NSString stringWithFormat:@"DELETE FROM image WHERE image_id = '%@')", imageId];
         DDLogDebug(@"SQL Statement : %@", sql);
         char *error;
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {

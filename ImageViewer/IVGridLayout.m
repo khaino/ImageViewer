@@ -10,24 +10,35 @@
 
 @interface IVGridLayout()
 
+/** Cache to store collection layout attributes */
 @property(strong, nonatomic)NSMutableArray *cache;
+/** Value for cell padding */
 @property(nonatomic)CGFloat cellPadding;
+/** Value for content height */
 @property(nonatomic)CGFloat contentHeight;
+/** Value for content width*/
 @property(nonatomic)CGFloat contentWidth;
+/** Value for frame padding */
 @property(nonatomic)CGFloat framePadding;
 
 @end
 
 @implementation IVGridLayout
 
-// ContentWidth setter
+/*
+ * @brief Getter for content width
+ * @return content width.
+ */
 - (CGFloat)contentWidth {
     
     UIEdgeInsets inset = self.collectionView.contentInset;
     return CGRectGetWidth(self.collectionView.bounds) - (inset.left + inset.right);
 }
 
-// Override Layout method
+/*
+ * @brief This method calculate attributes for all the cells
+ * @return none.
+ */
 -(void)prepareLayout {
     
     [self calculateColNo];
@@ -82,10 +93,20 @@
     }
 }
 
+/*
+ * @brief Get collection view content
+ * @return size of content.
+ */
 - (CGSize)collectionViewContentSize {
     return CGSizeMake(self.contentWidth, self.contentHeight);
 }
 
+
+/*
+ * @brief Get attibutes all element items
+ * @param rect collection view.
+ * @return layout attributes.
+ */
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect{
     
     NSMutableArray<UICollectionViewLayoutAttributes *> *layoutAttributes = [NSMutableArray array];
@@ -102,6 +123,10 @@
     return layoutAttributes;
 }
 
+/*
+ * @brief Calcuate number of column and padding
+ * @return none.
+ */
 - (void)calculateColNo {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;

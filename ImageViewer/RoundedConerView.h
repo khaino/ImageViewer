@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 IB_DESIGNABLE
+
+/** This class is to make rounded rectangle */
 @interface RoundedConerView : UIView
 
+/** Corner radius */
 @property(nonatomic)IBInspectable CGFloat cornerRadius;
 
 @end
