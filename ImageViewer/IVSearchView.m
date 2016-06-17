@@ -13,6 +13,20 @@
 #import "PodcastDBManager.h"
 #import "Reachability.h"
 
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
 @interface IVSearchView ()
 @property (strong, nonatomic) NSURLSession *session;
 @property (strong, nonatomic) NSURLSessionDataTask *dataTask;
@@ -95,13 +109,22 @@
 }
 
 /*
- * @brief Change table row height with respect to screen size
+ * @brief Change table row height with respect to screen size.
  * @param tableView
  * @param indexPath
- * @return Return calculated size of table row
+ * @return Return calculated table row height.
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return tableView.frame.size.width/5;
+    CGFloat rowHeight;
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5 || IS_IPHONE_6) {
+        rowHeight = 90;
+    } else if (IS_IPHONE_6P) {
+        rowHeight = 110;
+    } else if (IS_IPAD) {
+        rowHeight = 130;
+    }
+    //    return tableView.frame.size.width/5;
+    return rowHeight;
 }
 
 #pragma mark - Table view data source
@@ -137,9 +160,9 @@
     self.thumbnail = [UIImage animatedImageNamed:@"spinner_" duration:1.0f];
     cell.smallImageView.image = self.thumbnail;
     IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
-    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
+    [imageDownloader downloadImage:[NSURL URLWithString:podcast.smallImage]
                            trackId:podcast.trackID
-                         imageType:k600
+                         imageType:k60
                  completionHandler:^(NSURL *url){
                      dispatch_async(dispatch_get_main_queue(), ^{
                          self.thumbnail = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
@@ -150,6 +173,13 @@
     cell.subtitleLabel.text = podcast.artistName;
     cell.smallImageView.layer.cornerRadius = 20;
     cell.smallImageView.clipsToBounds = YES;
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5 || IS_IPHONE_6) {
+        [cell.smallImageView setFrame:CGRectMake(0, 0, 80, 80)];
+    } else if (IS_IPHONE_6P) {
+        [cell.smallImageView setFrame:CGRectMake(0, 0, 100, 100)];
+    } else if (IS_IPAD) {
+        [cell.smallImageView setFrame:CGRectMake(0, 0, 120, 120)];
+    }
     return cell;
 }
 
@@ -163,7 +193,7 @@
  */
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (!searchText) return;
-    if (searchText.length <= 3) {
+    if (searchText.length < 3) {
         [self resetSearch];
     } else {
         [self performSearch];

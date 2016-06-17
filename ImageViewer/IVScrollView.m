@@ -239,9 +239,9 @@ static NSString * const reuseIdentifier = @"Cell";
     IVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     Podcast *podcast = [self.contentList objectAtIndex:indexPath.row];
     IVImageDownload *imageDownloader = [[IVImageDownload alloc]init];
-    [imageDownloader downloadImage:[NSURL URLWithString:podcast.largeImage]
+    [imageDownloader downloadImage:[NSURL URLWithString:podcast.smallImage]
                            trackId:podcast.trackID
-                         imageType:k600
+                         imageType:k60
                  completionHandler:^(NSURL *url){
                      dispatch_async(dispatch_get_main_queue(), ^{
                          UIImage *image= [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
