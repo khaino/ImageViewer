@@ -85,11 +85,28 @@ NSString *dbPodcast = @"podcast.db";
     NSString *query =@"INSERT OR REPLACE INTO podcast (id, track_id, collection_name, artist_name, image_small, image_large, insert_date) VALUES ((SELECT IFNULL(MAX(id), 0) + 1 FROM podcast), \"%@\", \"%@\", \"%@\", \"%@\", \"%@\" , \"%@\")";
     if (sqlite3_open([[PodcastDAO getDBPath:dbPodcast] UTF8String], &db) == SQLITE_OK) {
         NSString *sql = [NSString stringWithFormat:query, podcast.trackID, podcast.collectionName, podcast.artistName, podcast.smallImage, podcast.largeImage, podcast.insertDate];
-        DDLogDebug(@"Query: %@", query);
         char *error;
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
             ret = YES;
-            DDLogDebug(@"Podcast info inserted.");
+        } else {
+            DDLogError(@"Error: %s", error);
+        }
+    } else {
+        DDLogError(@"Database open error : %s", sqlite3_errmsg(db));
+    }
+    sqlite3_close(db);
+    return ret;
+}
+
++ (BOOL)deleteRedundantRows {
+    BOOL ret = NO;
+    sqlite3 *db;
+    NSString *sql = @"DELETE FROM podcast where id NOT IN (SELECT id from podcast ORDER BY insert_date DESC LIMIT 150)";
+    if (sqlite3_open([[PodcastDAO getDBPath:dbPodcast] UTF8String], &db) == SQLITE_OK) {
+        char *error;
+        if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &error) == SQLITE_OK) {
+            ret = YES;
+            DDLogDebug(@"Deleted redundant rows.");
         } else {
             DDLogError(@"Error: %s", error);
         }

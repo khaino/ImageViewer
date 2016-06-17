@@ -12,5 +12,5 @@
 @interface PodcastDBManager : NSObject
 + (instancetype)defaultManager;
 - (NSArray *)getAllPodcast;
-- (BOOL)insertPodcast:(Podcast *)podcast;
+- (BOOL)insertPodcast:(NSArray *)podcasts;
 @end

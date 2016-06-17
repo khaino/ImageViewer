@@ -26,7 +26,6 @@
     [super viewDidLoad];
     
     // Load data from database when application start
-    self.podcasts = [[NSMutableArray alloc]initWithArray:[[PodcastDBManager defaultManager] getAllPodcast]];
     [self.tableView reloadData];
 }
 

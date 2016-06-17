@@ -31,19 +31,20 @@ static PodcastDBManager *podcastDBManager;
     // Set sort pattern on database results with insert date
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"insertDate" ascending:NO];
     NSArray *sortDescriptors = @[descriptor];
-    
+    self.podcastDict = [PodcastDAO loadDB];
     return [[self.podcastDict allValues] sortedArrayUsingDescriptors:sortDescriptors];
 }
 
-- (BOOL)insertPodcast:(Podcast *)podcast {
-    if (podcast != nil) {
-        if ([PodcastDAO insertOrUpdatePodcast:podcast]) {
-            [self.podcastDict setObject:podcast forKey:podcast.trackID];
-            return YES;
+- (BOOL)insertPodcast:(NSArray *)podcasts {
+    if (podcasts != nil) {
+        for (Podcast *podcast in podcasts) {
+            [PodcastDAO insertOrUpdatePodcast:podcast];
+//            [self.podcastDict setObject:podcast forKey:podcast.trackID];
         }
+        [PodcastDAO deleteRedundantRows];
+        return YES;
     }
     return NO;
 }
-
 
 @end

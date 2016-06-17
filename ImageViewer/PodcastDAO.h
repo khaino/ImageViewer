@@ -15,5 +15,6 @@
 + (BOOL) createDB;
 + (NSMutableDictionary *)loadDB;
 + (BOOL)insertOrUpdatePodcast: (Podcast *) podcast;
++ (BOOL)deleteRedundantRows;
 
 @end

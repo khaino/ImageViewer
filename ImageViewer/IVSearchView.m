@@ -226,9 +226,7 @@
 #pragma mark - ActionMethods 
 
 - (IBAction)saveAction:(id)sender {
-    for (Podcast *podcast in self.podcasts) {
-        [[PodcastDBManager defaultManager] insertPodcast:podcast];
-    }
+    [[PodcastDBManager defaultManager] insertPodcast:self.podcasts];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
