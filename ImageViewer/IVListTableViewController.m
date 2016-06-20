@@ -104,7 +104,7 @@
     
     cell.titleLabel.text = podcast.collectionName;
     cell.subtitleLabel.text = podcast.artistName;
-    cell.smallImageView.layer.cornerRadius = 20;
+    cell.smallImageView.layer.cornerRadius = 5;
     cell.smallImageView.clipsToBounds = YES;
     if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5 || IS_IPHONE_6) {
         [cell.smallImageView setFrame:CGRectMake(0, 0, 80, 80)];

@@ -248,7 +248,7 @@ static NSString * const reuseIdentifier = @"Cell";
                          cell.imageView.image = image;
                      });
                  }];
-    cell.imageView.layer.cornerRadius = 20;
+    cell.imageView.layer.cornerRadius = 5;
     cell.imageView.clipsToBounds = YES;
     return cell;
 }
