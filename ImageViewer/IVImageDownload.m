@@ -52,16 +52,33 @@
     self.trackId = trackId;
     self.completionHandler = completion;
     self.imageType = imageType;
-    
+    NSDate *date = [NSDate date];
     IVCacheManager *cacheManager = [IVCacheManager defaultManager];
     if ([cacheManager isImageCached:trackId imageType:imageType]) {
         NSURL *imgUrl = [cacheManager imageDirForTrackId:trackId imageType:imageType];
+        //-----------------------------------------------------------------
+        // Insert new Image Info if not exists in db else update lastAccess
+        //-----------------------------------------------------------------
+        ImageInfo *imageInfo = [[ImageInfoManager defaultManager] getImageInfoWithTrackId:trackId andType:imageType];
+        if (imageInfo == nil) {
+            self.imageInfo = [[ImageInfo alloc]initWithTrackId:self.trackId
+                                                   isThumpnail:(imageType == k60)?YES:NO
+                                             downloadCompleted:NO
+                                                        locUrl:nil
+                                                     lassAcess:[date description]];
+            [[ImageInfoManager defaultManager] insertImageInfo:imageInfo];
+            imageInfo.imageId = [[ImageInfoManager defaultManager] getLastInsertRowIdWithImageInfo:self.imageInfo];
+        } else {
+            imageInfo.lastAccess = [date description];
+            [[ImageInfoManager defaultManager] updateImageInfo:imageInfo];
+            DDLogDebug(@"Update last access for image id %@", imageInfo.imageId);
+        }
+
         self.completionHandler(imgUrl);
     } else {
 
         [[self.session downloadTaskWithURL:url] resume];
         BOOL isThumpnail = (imageType == k60)? YES : NO;
-        NSDate *date = [NSDate date];
         self.imageInfo = [[ImageInfo alloc]initWithTrackId:self.trackId
                                                               isThumpnail:isThumpnail
                                                         downloadCompleted:NO

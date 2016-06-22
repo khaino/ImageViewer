@@ -74,7 +74,7 @@ static ImageInfoManager *imageInfoManager;
 
 - (BOOL)updateImageInfo:(ImageInfo*)imageInfo {
     BOOL ret = NO;
-    if (imageInfo != nil && imageInfo.imageId != nil) {
+    if (imageInfo != nil && imageInfo.imageId != nil) {        
         if ([ImageDatabase insertOrUpdateImageInfo:imageInfo]) {
             [self.allImageInfo setObject:imageInfo forKey:imageInfo.imageId];
             ret = YES;
@@ -87,6 +87,7 @@ static ImageInfoManager *imageInfoManager;
 - (BOOL)deleteImageInfo:(NSString*)imageId {
     BOOL ret = NO;
     if ([ImageDatabase deleteImageInfo:imageId]){
+        [self.allImageInfo removeObjectForKey:imageId];
         ret = YES;
         DDLogDebug(@"Delete image : %@", imageId);
     }
@@ -95,6 +96,15 @@ static ImageInfoManager *imageInfoManager;
 
 - (NSString*)getLastInsertRowIdWithImageInfo:(ImageInfo*)imageInfo {
     return [ImageDatabase getLastInsertRowIdImageInfo:imageInfo];
+}
+
+
+- (ImageInfo*) getImageInfoWithTrackId:(NSString*)trackId andType:(ImageType)imageType {
+    BOOL isThumpnail = NO;
+    if (imageType == k60) {
+        isThumpnail = YES;
+    }    
+    return [ImageDatabase getImageInfoWithTrackId:trackId andIsThumpnail:isThumpnail];
 }
 
 @end

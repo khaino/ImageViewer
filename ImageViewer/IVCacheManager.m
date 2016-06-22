@@ -17,6 +17,10 @@
 
 @end
 
+#define MAX_NUMBER_OF_THUMPNAIL 20
+#define MAX_NUMBER_OF_NORMAL 15
+
+/** Is cache cleaning is in progress */
 @implementation IVCacheManager
 
 
@@ -97,36 +101,32 @@
     if (self.cleanProgress) return;
     self.cleanProgress = YES;
     
-    int thumpnailMax = 150;
-    int normalMax = 75;
-    
     NSArray *k60ImgArr = [[ImageInfoManager defaultManager] getAllImageInfoWithType:k60];
-    if (k60ImgArr.count > thumpnailMax) {
+    if (k60ImgArr.count > MAX_NUMBER_OF_THUMPNAIL + 5) {
         DDLogDebug(@"Clean Cache For Thumpnail");
     
         NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAccess" ascending:YES];
         k60ImgArr = [k60ImgArr sortedArrayUsingDescriptors:@[descriptor]];
-        NSArray *toDelete = [k60ImgArr subarrayWithRange:NSMakeRange(0, k60ImgArr.count - thumpnailMax)];
+        NSArray *toDelete = [k60ImgArr subarrayWithRange:NSMakeRange(0, k60ImgArr.count - MAX_NUMBER_OF_THUMPNAIL)];
         
         for (ImageInfo *imageInfo in toDelete) {
-            if ([self deleteImageCachedForTrackId:imageInfo.trackId imageType:k60]) {
-                [[ImageInfoManager defaultManager]deleteImageInfo:imageInfo.imageId];
-            }
+            [self deleteImageCachedForTrackId:imageInfo.trackId imageType:k60];
+            [[ImageInfoManager defaultManager]deleteImageInfo:imageInfo.imageId];
         }
     }
     
     NSArray *k600ImgArr = [[ImageInfoManager defaultManager] getAllImageInfoWithType:k600];
     
-    if (k600ImgArr.count > normalMax) {
+    if (k600ImgArr.count > MAX_NUMBER_OF_NORMAL + 3) {
         DDLogDebug(@"Clean Cache For Normal Image");
         NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastAccess" ascending:YES];
         k600ImgArr = [k600ImgArr sortedArrayUsingDescriptors:@[descriptor]];
-        NSArray *toDelete = [k600ImgArr subarrayWithRange:NSMakeRange(0, k600ImgArr.count - normalMax)];
+        NSArray *toDelete = [k600ImgArr subarrayWithRange:NSMakeRange(0, k600ImgArr.count - MAX_NUMBER_OF_NORMAL)];
         
         for (ImageInfo *imageInfo in toDelete) {
-            if ([self deleteImageCachedForTrackId:imageInfo.trackId imageType:k600]) {
-                [[ImageInfoManager defaultManager]deleteImageInfo:imageInfo.imageId];
-            }
+            [self deleteImageCachedForTrackId:imageInfo.trackId imageType:k600];
+            [[ImageInfoManager defaultManager]deleteImageInfo:imageInfo.imageId];
+            
         }
     }
     self.cleanProgress = NO;

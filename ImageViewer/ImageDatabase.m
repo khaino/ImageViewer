@@ -11,7 +11,7 @@
 
 
 NSString *dbimagename = @"image.db";
-static sqlite3 *db;
+//static sqlite3 *db;
 
 @implementation ImageDatabase
 
@@ -19,12 +19,12 @@ static sqlite3 *db;
 + (BOOL) createDB {
     
     BOOL ret = NO;
-
+    sqlite3 *db;
     NSString *dbPath = [self getDBPath:dbimagename];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath]) {
         
-        if (sqlite3_open([dbPath UTF8String], &db) == SQLITE_OK) {
+        if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
             
             NSString *sql= @"CREATE TABLE IF NOT EXISTS image (id INTEGER PRIMARY KEY AUTOINCREMENT, track_id TEXT, is_thumpnail BOOL, download_completed BOOL, loc_url TEXT, last_access DATE, UNIQUE (track_id, is_thumpnail) ON CONFLICT REPLACE)";
             DDLogDebug(@"SQL Statement : %@", sql);
@@ -36,7 +36,7 @@ static sqlite3 *db;
                 DDLogError(@"Error: %s", error);
             }
         }
-//        sqlite3_close(db);
+        sqlite3_close(db);
     }
     return ret;
 }
@@ -53,12 +53,12 @@ static sqlite3 *db;
 
 + (NSMutableDictionary*)getAllImageInfo {
     
-//    sqlite3 *db;
+    sqlite3 *db;
     NSMutableDictionary *allImageInfo = [NSMutableDictionary dictionary];
     
-    if ([self openDatabase]) {
+    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
         
-        NSString *sql = @"SELECT id, track_id, is_thumpnail, download_completed, loc_url, last_access image ORDER BY id asc";
+        NSString *sql = @"SELECT id, track_id, is_thumpnail, download_completed, loc_url, last_access FROM image ORDER BY id asc";
         DDLogDebug(@"SQL Statement : %@", sql);
         sqlite3_stmt *stmt;
         if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, NULL) == SQLITE_OK) {
@@ -84,7 +84,7 @@ static sqlite3 *db;
         }
         sqlite3_finalize(stmt);
     }
-//    sqlite3_close(db);
+    sqlite3_close(db);
     
     return allImageInfo;
 }
@@ -92,9 +92,9 @@ static sqlite3 *db;
 
 + (NSString*)getLastInsertRowIdImageInfo:(ImageInfo*)imageInfo {
     
-//    sqlite3 *db;
+    sqlite3 *db;
     NSString *imageId;
-    if ([self openDatabase]) {
+    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
         NSString *sql = [NSString stringWithFormat:@"SELECT id FROM image WHERE track_id = '%@' AND is_thumpnail = '%d'", imageInfo.trackId, imageInfo.isThumpnail];
         DDLogDebug(@"SQL Statement : %@", sql);
         sqlite3_stmt *stmt;
@@ -107,7 +107,7 @@ static sqlite3 *db;
         }
         sqlite3_finalize(stmt);
     }
-//    sqlite3_close(db);
+    sqlite3_close(db);
     
     return imageId;
 }
@@ -115,8 +115,8 @@ static sqlite3 *db;
 + (BOOL)insertOrUpdateImageInfo: (ImageInfo*) imageInfo {
     
     BOOL ret = NO;
-//    sqlite3 *db;
-    if ([self openDatabase]) {
+    sqlite3 *db;
+    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
         
         // Create sql statement for insert
         NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO image (track_id, is_thumpnail, download_completed, loc_url, last_access) VALUES ('%@', '%d', '%d', '%@', '%@')", imageInfo.trackId, imageInfo.isThumpnail, imageInfo.downloadCompleted, imageInfo.locUrl.path, imageInfo.lastAccess];
@@ -132,15 +132,15 @@ static sqlite3 *db;
         DDLogError(@"Database open error : %s", sqlite3_errmsg(db));
     }
     
-//    sqlite3_close(db);
+    sqlite3_close(db);
     return ret;
 }
 
 + (BOOL)deleteImageInfo:(NSString*)imageId {
 
     BOOL ret = NO;
-//    sqlite3 *db;
-    if ([self openDatabase]) {
+    sqlite3 *db;
+    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
         
         // Create sql statement for delete
         NSString *sql = [NSString stringWithFormat:@"DELETE FROM image WHERE id = '%@'", imageId];
@@ -156,17 +156,43 @@ static sqlite3 *db;
         DDLogError(@"Database open error : %s", sqlite3_errmsg(db));
     }
     
-//    sqlite3_close(db);
+    sqlite3_close(db);
     return ret;
 }
 
-+ (BOOL)openDatabase {
-    BOOL ret = NO;
-    if (db) {
-        ret = YES;
-    } else {
-        if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) ret = YES;
++ (ImageInfo*) getImageInfoWithTrackId:(NSString*)trackId andIsThumpnail:(BOOL)isThumpnail {
+    
+    sqlite3 *db;
+    ImageInfo *imageInfo;
+    if (sqlite3_open([[self getDBPath:dbimagename] UTF8String], &db) == SQLITE_OK) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT id, track_id, is_thumpnail, download_completed, loc_url, last_access FROM image WHERE track_id = '%@' AND is_thumpnail = '%d'", trackId, isThumpnail];
+        DDLogDebug(@"SQL Statement : %@", sql);
+        sqlite3_stmt *stmt;
+        if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, NULL) == SQLITE_OK) {
+            while (sqlite3_step(stmt) == SQLITE_ROW) {
+                
+                NSString *imageId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(stmt, 0)];
+                NSString *trackId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(stmt, 1)];
+                BOOL isThumpnail  = (BOOL)sqlite3_column_int(stmt, 2);
+                BOOL downloadCompleted = (BOOL)sqlite3_column_int(stmt, 3);
+                NSString *locUrl = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(stmt, 4)];
+                NSString *lastAccess = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(stmt, 5)];
+                
+                
+                imageInfo = [[ImageInfo alloc]initWithImageId:imageId
+                                                                 trackId:trackId
+                                                             isThumpnail:isThumpnail
+                                                       downloadCompleted:downloadCompleted
+                                                                  locUrl:[NSURL URLWithString:locUrl]
+                                                               lassAcess:lastAccess];
+                
+            }
+        }
+        sqlite3_finalize(stmt);
     }
-    return ret;
+    sqlite3_close(db);
+    
+    return imageInfo;
 }
+
 @end

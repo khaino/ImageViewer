@@ -44,4 +44,12 @@
  */
 + (BOOL)deleteImageInfo:(NSString*)imageId;
 
+/*
+ * @brief Get image info with trackId and type.
+ * @param trackId track id.
+ * @param isThumpnail is image is thumpnail.
+ * @return ImageInfo image info.
+ */
++ (ImageInfo*) getImageInfoWithTrackId:(NSString*)trackId andIsThumpnail:(BOOL)isThumpnail;
+
 @end

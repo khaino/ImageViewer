@@ -9,7 +9,13 @@
 #import "ImageInfo.h"
 #import "ImageInfoManager.h"
 
+
 @implementation ImageInfo
+
+@synthesize imageId = _imageId;
+@synthesize downloadCompleted = _downloadCompleted;
+@synthesize locUrl = _locUrl;
+@synthesize lastAccess = _lastAccess;
 
 - (instancetype)initWithTrackId:(NSString*)trackId
                     isThumpnail:(BOOL)isThumpnail
@@ -61,6 +67,7 @@
 - (void)setImageId:(NSString *)imageId {
     if (imageId != nil && imageId != _imageId) {
         _imageId = imageId;
+        _lastAccess = [[NSDate date] description];
         [[ImageInfoManager defaultManager] updateImageInfo:self];
     }
 }
@@ -73,6 +80,7 @@
 - (void)setDownloadCompleted:(BOOL)downloadCompleted {
     if (downloadCompleted != _downloadCompleted) {
         _downloadCompleted = downloadCompleted;
+        _lastAccess = [[NSDate date] description];
         [[ImageInfoManager defaultManager] updateImageInfo:self];
     }
 }
@@ -85,6 +93,7 @@
 - (void)setLocUrl:(NSURL *)locUrl {
     if (locUrl != nil && locUrl != _locUrl) {
         _locUrl = locUrl;
+        _lastAccess = [[NSDate date] description];
         [[ImageInfoManager defaultManager] updateImageInfo:self];
     }
 }
@@ -100,5 +109,6 @@
         [[ImageInfoManager defaultManager] updateImageInfo:self];
     }
 }
+
 
 @end

@@ -60,4 +60,13 @@
  */
 - (NSString*)getLastInsertRowIdWithImageInfo:(ImageInfo*)imageInfo;
 
+
+/*
+ * @brief Get image info with trackId and type.
+ * @param trackId track id.
+ * @param imageType image type.
+ * @return ImageInfo image info.
+ */
+- (ImageInfo*) getImageInfoWithTrackId:(NSString*)trackId andType:(ImageType)imageType;
+
 @end
